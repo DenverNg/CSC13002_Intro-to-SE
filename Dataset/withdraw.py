@@ -1,70 +1,70 @@
-import json
-import random
+import re
 from datetime import datetime, timedelta
+import random
 
-file_path = 'name.json'
-with open(file_path, 'r', encoding='utf-8') as file:
-    data = json.load(file)
+def random_withdraw_amount(balance):
+    """Generate a random withdraw amount up to the account balance."""
+    return round(random.uniform(0, balance) / 1000) * 1000
 
-locations = ['Quận 1', 'Quận 2', 'Quận 3', 'Quận 4', 'Quận 5', 'Quận 6', 'Quận 7',
-             'Quận 8', 'Quận 9', 'Quận 10', 'Quận 11', 'Quận 12', 'Quận Bình Thạnh', 'Quận Gò Vấp', 'Quận Phú Nhuận',
-             'Quận Tân Bình', 'Quận Tân Phú', 'Quận Thủ Đức', 'Huyện Bình Chánh', 'Huyện Cần Giờ', 'Huyện Củ Chi',
-             'Huyện Hóc Môn', 'Huyện Nhà Bè', 'Huyện Bình Tân', '227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',]
+def generate_withdraw_commands(file_path):
+    withdraw_commands = []
 
+    # Regex pattern to extract ma_so, ky_han, ngay_mo, and so_tien
+    pattern = re.compile(
+        r"CALL MOSOTIETKIEM\('([^']*)',\s*'([^']*)',\s*'[^']*',\s*'[^']*',\s*'[^']*',\s*'([^']*)',\s*(\d+)\);", re.IGNORECASE)
 
-def generate_random_date(month):
-    """Generate a random date within the specified month of 2024."""
-    if month == 2:
-        start_date = datetime(2024, 2, 1)
-        # February in 2024 has 29 days (leap year)
-        end_date = datetime(2024, 2, 29)
-    elif month == 5:
-        start_date = datetime(2024, 5, 1)
-        end_date = datetime(2024, 5, 31)
-    elif month == 8:
-        start_date = datetime(2024, 8, 1)
-        end_date = datetime(2024, 8, 31)
-    else:
-        raise ValueError("Only months 2, 5, and 8 are supported.")
+    accounts = []  # To store the first 300 account information
 
-    random_days = random.randint(0, (end_date - start_date).days)
-    return start_date + timedelta(days=random_days)
+    with open(file_path, 'r', encoding='utf-8') as file:
+        for line in file:
+            match = pattern.search(line)
+            if match:
+                ma_so = match.group(1)
+                ky_han = match.group(2)
+                ngay_mo = datetime.strptime(match.group(3), '%Y-%m-%d')
+                balance = int(match.group(4))
 
+                # Collect first 300 accounts
+                if len(accounts) < 300:
+                    accounts.append((ma_so, ky_han, ngay_mo, balance))
 
-def generate_unique_number(existing_numbers):
-    """Generate a unique 12-digit number."""
-    while True:
-        number = ''.join(random.choices('0123456789', k=12))
-        if number not in existing_numbers:
-            existing_numbers.add(number)
-            return number
+    # Randomly select 50 unique accounts from the first 300
+    selected_accounts = random.sample(accounts, 70)
 
+    for ma_so, ky_han, ngay_mo, balance in selected_accounts:
+        if ky_han == 'Không kỳ hạn':
+            # Withdrawals allowed 15 days after opening
+            withdraw_date_start = ngay_mo + timedelta(days=16)
+            withdraw_date_end = datetime(2024, 12, 31)  # Arbitrary end date
+            if withdraw_date_start <= withdraw_date_end:
+                withdraw_date = random_date(withdraw_date_start, withdraw_date_end).strftime('%Y-%m-%d')
+                withdraw_amount = random_withdraw_amount(balance)
+                withdraw_commands.append(f"CALL LAPPHIEURUT('{ma_so}', '{withdraw_date}', {withdraw_amount});\n")
 
-# Set to keep track of unique numbers
-existing_numbers = set()
+        elif ky_han == 'Kỳ hạn 3 tháng':
+            # Withdraw only exactly at 3 months after opening (30 * 3 days)
+            three_months_date = ngay_mo + timedelta(days=32 * 3)
+            if three_months_date <= datetime(2024, 12, 31):
+                withdraw_commands.append(f"CALL LAPPHIEURUT('{ma_so}', '{three_months_date.strftime('%Y-%m-%d')}', {balance});\n")
 
-with open('createBook.txt', 'w', encoding='utf-8') as output_file:
-    for i, member in enumerate(data):
-        # Cycle through the months 2, 5, 8 in each block of 200 accounts
-        if i % 200 < 67:  # First ~1/3 of 200 accounts
-            month = 2
-        elif i % 200 < 134:  # Second ~1/3 of 200 accounts
-            month = 5
-        else:  # Last ~1/3 of 200 accounts
-            month = 8
+        elif ky_han == 'Kỳ hạn 6 tháng':
+            # Withdraw allowed exactly at 6 months after opening
+            six_months_date = ngay_mo + timedelta(days=6 * 32)
+            if six_months_date <= datetime(2024, 12, 31):
+                withdraw_commands.append(f"CALL LAPPHIEURUT('{ma_so}', '{six_months_date.strftime('%Y-%m-%d')}', {balance});\n")
 
-        # Alternate between 0, 3, 6 in sequence
-        random_number = [0, 3, 6][i % 3]
+    return withdraw_commands
 
-        full_name = member.get('full_name')
-        unique_number = generate_unique_number(existing_numbers)
-        location = random.choice(locations)
-        random_date = generate_random_date(month).strftime('%Y-%m-%d')
-        amount = random.randint(100001, 2000000)
-        amount = round(amount, -3)
+def random_date(start_date, end_date):
+    """Generate a random date between start_date and end_date."""
+    return start_date + timedelta(days=random.randint(0, (end_date - start_date).days))
 
-        sql_command = f"CALL MOSOTIETKIEM({random_number}, '{full_name}', '{
-            unique_number}', '{location}', '{random_date}', {amount});\n"
-        output_file.write(sql_command)
+# Generate withdraw commands
+file_path = 'createBook.txt'
+commands = generate_withdraw_commands(file_path)
 
-print("SQL commands have been written to createBook.txt.")
+# Write the commands to a new file
+with open('withdraw.txt', 'w', encoding='utf-8') as output_file:
+    output_file.writelines(commands)
+
+print("SQL commands have been written to withdraw.txt.")
