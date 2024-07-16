@@ -1,0 +1,1 @@
+export { StyleBold } from "./StyleBold";
