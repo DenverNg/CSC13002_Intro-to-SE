@@ -1,0 +1,1411 @@
+.dashboard-frame {
+  background-color: #edecff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.dashboard-frame .div {
+  background-color: #edecff;
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+}
+
+.dashboard-frame .menu-asset {
+  position: absolute;
+  width: 279px;
+  height: 1080px;
+  top: 0;
+  left: 0;
+  background-image: url(./img/menu-1.svg);
+  background-size: 100% 100%;
+}
+
+.dashboard-frame .transaction {
+  position: absolute;
+  width: 207px;
+  height: 30px;
+  top: 527px;
+  left: 64px;
+  box-shadow: 0px 3.38px 2.12px #00000040;
+  opacity: 0.7;
+}
+
+.dashboard-frame .text-wrapper {
+  position: absolute;
+  width: 200px;
+  top: 3px;
+  left: 47px;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: var(--background);
+  font-size: 18.8px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .chat-search-fill {
+  position: absolute;
+  width: 32px;
+  height: 30px;
+  top: 0;
+  left: 0;
+}
+
+.dashboard-frame .report {
+  position: absolute;
+  width: 162px;
+  height: 27px;
+  top: 617px;
+  left: 67px;
+  box-shadow: 0px 3.38px 2.12px #00000040;
+  opacity: 0.7;
+}
+
+.dashboard-frame .report-2 {
+  position: absolute;
+  width: 129px;
+  top: 4px;
+  left: 33px;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: var(--background);
+  font-size: 18.8px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .subtract {
+  position: absolute;
+  width: 22px;
+  height: 27px;
+  top: 0;
+  left: 0;
+}
+
+.dashboard-frame .dashboard {
+  position: absolute;
+  width: 216px;
+  height: 40px;
+  top: 429px;
+  left: 57px;
+}
+
+.dashboard-frame .text-wrapper-2 {
+  position: absolute;
+  width: 165px;
+  top: 5px;
+  left: 51px;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: var(--accent);
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .chart-fill {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 0;
+  left: 0;
+}
+
+.dashboard-frame .logo {
+  position: absolute;
+  width: 173px;
+  height: 250px;
+  top: 61px;
+  left: 57px;
+}
+
+.dashboard-frame .overlap-group {
+  position: absolute;
+  width: 159px;
+  height: 208px;
+  top: -1px;
+  left: -2px;
+}
+
+.dashboard-frame .text-wrapper-3 {
+  position: absolute;
+  width: 135px;
+  top: 168px;
+  left: 15px;
+  text-shadow: 0px 4.27px 2.67px #00000040;
+  font-family: "Inter", Helvetica;
+  font-weight: 800;
+  color: var(--background);
+  font-size: 33px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .img {
+  position: absolute;
+  width: 159px;
+  height: 170px;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.dashboard-frame .text-wrapper-4 {
+  position: absolute;
+  width: 169px;
+  top: 214px;
+  left: 0;
+  text-shadow: 0px 5.32px 3.32px #00000040;
+  opacity: 0.8;
+  font-family: "Inter", Helvetica;
+  font-weight: 600;
+  color: var(--background);
+  font-size: 19px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .setting {
+  position: absolute;
+  width: 169px;
+  height: 32px;
+  top: 704px;
+  left: 64px;
+  box-shadow: 0px 3.38px 2.12px #00000040;
+  opacity: 0.7;
+}
+
+.dashboard-frame .text-wrapper-5 {
+  position: absolute;
+  width: 129px;
+  top: 4px;
+  left: 40px;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: var(--background);
+  font-size: 18.8px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .setting-fill {
+  position: absolute;
+  width: 31px;
+  height: 31px;
+  top: 0;
+  left: -2px;
+}
+
+.dashboard-frame .text-wrapper-6 {
+  position: absolute;
+  top: 51px;
+  left: 365px;
+  font-family: "Inter", Helvetica;
+  font-weight: 900;
+  color: var(--text);
+  font-size: 55.5px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .overlap {
+  position: absolute;
+  width: 300px;
+  height: 168px;
+  top: 185px;
+  left: 381px;
+  background-color: #ffffff;
+  border-radius: 25.07px;
+  box-shadow: 0px 3.86px 35.78px -18px #7065d2;
+}
+
+.dashboard-frame .p {
+  position: absolute;
+  top: 21px;
+  left: 23px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 700;
+  color: transparent;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .rectangle {
+  width: 213px;
+  height: 2px;
+  top: 46px;
+  left: 23px;
+  border-radius: 2.61px;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+}
+
+.dashboard-frame .text-wrapper-7 {
+  position: absolute;
+  top: 50px;
+  left: 38px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 800;
+  color: transparent;
+  font-size: 71.7px;
+  letter-spacing: 0;
+  line-height: 86.8px;
+  white-space: nowrap;
+}
+
+.dashboard-frame .overlap-2 {
+  position: absolute;
+  width: 639px;
+  height: 168px;
+  top: 185px;
+  left: 697px;
+  background-color: #ffffff;
+  border-radius: 25.07px;
+  box-shadow: 0px 3.86px 35.78px -18px #7065d2;
+}
+
+.dashboard-frame .coin {
+  position: absolute;
+  width: 41px;
+  height: 41px;
+  top: 10px;
+  left: 569px;
+}
+
+.dashboard-frame .overlap-3 {
+  position: absolute;
+  width: 445px;
+  height: 87px;
+  top: 50px;
+  left: 41px;
+}
+
+.dashboard-frame .text-wrapper-8 {
+  width: 416px;
+  top: 0;
+  left: 0;
+  font-weight: 800;
+  font-size: 71.7px;
+  line-height: 86.8px;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+}
+
+.dashboard-frame .text-wrapper-9 {
+  position: absolute;
+  top: 51px;
+  left: 401px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: transparent;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .text-wrapper-10 {
+  position: absolute;
+  top: 21px;
+  left: 41px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 700;
+  color: transparent;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .rectangle-2 {
+  width: 223px;
+  height: 2px;
+  top: 46px;
+  left: 41px;
+  border-radius: 2.61px;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+}
+
+.dashboard-frame .overlap-4 {
+  position: absolute;
+  width: 465px;
+  height: 818px;
+  top: 185px;
+  left: 1361px;
+  background-color: #ffffff;
+  border-radius: 25.07px;
+  box-shadow: 0px 3.86px 35.78px -18px #7065d2;
+}
+
+.dashboard-frame .text-wrapper-11 {
+  position: absolute;
+  top: 29px;
+  left: 29px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 700;
+  color: transparent;
+  font-size: 25px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .overlap-5 {
+  position: absolute;
+  width: 367px;
+  height: 367px;
+  top: 113px;
+  left: 51px;
+}
+
+.dashboard-frame .ellipse {
+  position: absolute;
+  width: 325px;
+  height: 178px;
+  top: 0;
+  left: 40px;
+}
+
+.dashboard-frame .ellipse-2 {
+  position: absolute;
+  width: 152px;
+  height: 270px;
+  top: 85px;
+  left: 0;
+}
+
+.dashboard-frame .ellipse-3 {
+  position: absolute;
+  width: 231px;
+  height: 187px;
+  top: 180px;
+  left: 136px;
+}
+
+.dashboard-frame .text-wrapper-12 {
+  position: absolute;
+  width: 84px;
+  top: 32px;
+  left: 182px;
+  font-family: "Inter", Helvetica;
+  font-weight: 900;
+  color: #ffffff;
+  font-size: 33.4px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-13 {
+  top: 201px;
+  left: 17px;
+  position: absolute;
+  width: 66px;
+  font-family: "Inter", Helvetica;
+  font-weight: 900;
+  color: #ffffff;
+  font-size: 26.3px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-14 {
+  top: 280px;
+  left: 224px;
+  position: absolute;
+  width: 66px;
+  font-family: "Inter", Helvetica;
+  font-weight: 900;
+  color: #ffffff;
+  font-size: 26.3px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .rectangle-3 {
+  width: 332px;
+  height: 4px;
+  top: 63px;
+  left: 29px;
+  border-radius: 5px;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+}
+
+.dashboard-frame .text-wrapper-15 {
+  position: absolute;
+  top: 71px;
+  left: 29px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: transparent;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .frame {
+  position: absolute;
+  width: 380px;
+  height: 300px;
+  top: 498px;
+  left: 45px;
+  border-radius: 20px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.dashboard-frame .ellipse-4 {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 289px;
+  left: 4px;
+  background-color: #c4455f;
+  border-radius: 15px;
+  box-shadow: inset 0px 4.36px 43.56px -10.89px #4e40c3;
+}
+
+.dashboard-frame .ellipse-5 {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 353px;
+  left: 4px;
+  background-color: #8c253b;
+  border-radius: 15px;
+  box-shadow: inset 0px 4.36px 43.56px -10.89px #4e40c3;
+}
+
+.dashboard-frame .text-wrapper-16 {
+  position: absolute;
+  top: 286px;
+  left: 45px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: transparent;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-17 {
+  top: 286px;
+  left: 294px;
+  font-weight: 500;
+  font-size: 24px;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-18 {
+  position: absolute;
+  top: 349px;
+  left: 45px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: transparent;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-19 {
+  top: 349px;
+  left: 294px;
+  font-weight: 500;
+  font-size: 24px;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-20 {
+  position: absolute;
+  top: 88px;
+  left: 45px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: transparent;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-21 {
+  top: 88px;
+  left: 285px;
+  font-weight: 500;
+  font-size: 24px;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-22 {
+  position: absolute;
+  top: 154px;
+  left: 45px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: transparent;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-23 {
+  top: 154px;
+  left: 285px;
+  font-weight: 500;
+  font-size: 24px;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-24 {
+  position: absolute;
+  top: 220px;
+  left: 45px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: transparent;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-25 {
+  top: 220px;
+  left: 285px;
+  font-weight: 500;
+  font-size: 24px;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-26 {
+  position: absolute;
+  top: 27px;
+  left: 86px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 900;
+  color: transparent;
+  font-size: 28.9px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-27 {
+  top: 25px;
+  left: 229px;
+  font-weight: 900;
+  font-size: 28.9px;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .ellipse-6 {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 92px;
+  left: 4px;
+  background-color: #5e58c3;
+  border-radius: 15px;
+  box-shadow: inset 0px 4.36px 43.56px -10.89px #3a3375;
+}
+
+.dashboard-frame .ellipse-7 {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 157px;
+  left: 4px;
+  background-color: #9e72d7;
+  border-radius: 15px;
+  box-shadow: inset 0px 4.36px 43.56px -10.89px #794cb3;
+}
+
+.dashboard-frame .ellipse-8 {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 224px;
+  left: 4px;
+  background-color: #8c83e1;
+  border-radius: 15px;
+  box-shadow: inset 0px 4.36px 43.56px -10.89px #4e40c3;
+}
+
+.dashboard-frame .text-wrapper-28 {
+  position: absolute;
+  width: 420px;
+  top: 127px;
+  left: 368px;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: #7065d2;
+  font-size: 23.3px;
+  letter-spacing: 0;
+  line-height: 28.2px;
+  white-space: nowrap;
+}
+
+.dashboard-frame .graph-last-week {
+  position: absolute;
+  width: 991px;
+  height: 646px;
+  top: 373px;
+  left: 356px;
+}
+
+.dashboard-frame .overlap-6 {
+  position: relative;
+  width: 955px;
+  height: 607px;
+  top: 14px;
+  left: 25px;
+  background-color: #ffffff;
+  border-radius: 25.07px;
+  box-shadow: 0px 3.86px 35.78px -18px #7065d2;
+}
+
+.dashboard-frame .text-wrapper-29 {
+  position: absolute;
+  top: 17px;
+  left: 444px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 700;
+  color: transparent;
+  font-size: 25px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .rectangle-4 {
+  width: 492px;
+  height: 4px;
+  top: 48px;
+  left: 426px;
+  border-radius: 5px;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+}
+
+.dashboard-frame .component {
+  position: absolute;
+  width: 835px;
+  height: 500px;
+  top: 63px;
+  left: 66px;
+}
+
+.dashboard-frame .overlap-7 {
+  position: absolute;
+  width: 72px;
+  height: 40px;
+  top: 461px;
+  left: 28px;
+}
+
+.dashboard-frame .text-wrapper-30 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: transparent;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .text-wrapper-31 {
+  top: 19px;
+  left: 5px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: normal;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+}
+
+.dashboard-frame .overlap-8 {
+  position: absolute;
+  width: 68px;
+  height: 40px;
+  top: 461px;
+  left: 162px;
+}
+
+.dashboard-frame .text-wrapper-32 {
+  position: absolute;
+  top: 19px;
+  left: 4px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: transparent;
+  font-size: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .overlap-9 {
+  position: absolute;
+  width: 64px;
+  height: 40px;
+  top: 461px;
+  left: 289px;
+}
+
+.dashboard-frame .text-wrapper-33 {
+  top: 19px;
+  left: 10px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: normal;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+}
+
+.dashboard-frame .overlap-10 {
+  position: absolute;
+  width: 85px;
+  height: 40px;
+  top: 461px;
+  left: 423px;
+}
+
+.dashboard-frame .text-wrapper-34 {
+  top: 19px;
+  left: 8px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: normal;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+}
+
+.dashboard-frame .overlap-11 {
+  position: absolute;
+  width: 78px;
+  height: 40px;
+  top: 462px;
+  left: 558px;
+}
+
+.dashboard-frame .text-wrapper-35 {
+  top: 19px;
+  left: 0;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: normal;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+}
+
+.dashboard-frame .overlap-12 {
+  position: absolute;
+  width: 79px;
+  height: 40px;
+  top: 461px;
+  left: 675px;
+}
+
+.dashboard-frame .overlap-13 {
+  position: absolute;
+  width: 87px;
+  height: 40px;
+  top: 461px;
+  left: 799px;
+}
+
+.dashboard-frame .text-wrapper-36 {
+  top: 19px;
+  left: 3px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: normal;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+}
+
+.dashboard-frame .overlap-14 {
+  position: absolute;
+  width: 786px;
+  height: 455px;
+  top: -1px;
+  left: 43px;
+}
+
+.dashboard-frame .overlap-group-2 {
+  position: absolute;
+  width: 779px;
+  height: 443px;
+  top: 12px;
+  left: 0;
+}
+
+.dashboard-frame .vector {
+  position: absolute;
+  width: 765px;
+  height: 2px;
+  top: 370px;
+  left: 7px;
+}
+
+.dashboard-frame .vector-2 {
+  position: absolute;
+  width: 765px;
+  height: 2px;
+  top: 301px;
+  left: 7px;
+}
+
+.dashboard-frame .vector-3 {
+  position: absolute;
+  width: 765px;
+  height: 2px;
+  top: 232px;
+  left: 9px;
+}
+
+.dashboard-frame .vector-4 {
+  position: absolute;
+  width: 765px;
+  height: 2px;
+  top: 162px;
+  left: 8px;
+}
+
+.dashboard-frame .vector-5 {
+  position: absolute;
+  width: 765px;
+  height: 2px;
+  top: 94px;
+  left: 8px;
+}
+
+.dashboard-frame .vector-6 {
+  position: absolute;
+  width: 765px;
+  height: 168px;
+  top: 174px;
+  left: 6px;
+}
+
+.dashboard-frame .group {
+  width: 774px;
+  height: 183px;
+  top: 168px;
+  position: absolute;
+  left: 0;
+}
+
+.dashboard-frame .ellipse-9 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 167px;
+  left: 0;
+  background-color: #c4455f;
+  border-radius: 8.81px/7.98px;
+  opacity: 0.7;
+}
+
+.dashboard-frame .ellipse-10 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 98px;
+  left: 118px;
+  background-color: #c4455f;
+  border-radius: 8.81px/7.98px;
+  opacity: 0.7;
+}
+
+.dashboard-frame .ellipse-11 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 159px;
+  left: 241px;
+  background-color: #c4455f;
+  border-radius: 8.81px/7.98px;
+  opacity: 0.7;
+}
+
+.dashboard-frame .ellipse-12 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 46px;
+  left: 384px;
+  background-color: #c4455f;
+  border-radius: 8.81px/7.98px;
+  opacity: 0.7;
+}
+
+.dashboard-frame .ellipse-13 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 92px;
+  left: 507px;
+  background-color: #c4455f;
+  border-radius: 8.81px/7.98px;
+  opacity: 0.7;
+}
+
+.dashboard-frame .ellipse-14 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 0;
+  left: 632px;
+  background-color: #c4455f;
+  border-radius: 8.81px/7.98px;
+  opacity: 0.7;
+}
+
+.dashboard-frame .ellipse-15 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 90px;
+  left: 757px;
+  background-color: #c4455f;
+  border-radius: 8.81px/7.98px;
+  opacity: 0.7;
+}
+
+.dashboard-frame .vector-7 {
+  position: absolute;
+  width: 765px;
+  height: 283px;
+  top: 45px;
+  left: 6px;
+}
+
+.dashboard-frame .group-2 {
+  width: 779px;
+  height: 296px;
+  top: 39px;
+  position: absolute;
+  left: 0;
+}
+
+.dashboard-frame .ellipse-16 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 227px;
+  left: 0;
+  background-color: #008575b2;
+  border-radius: 8.81px/7.98px;
+}
+
+.dashboard-frame .ellipse-17 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 131px;
+  left: 384px;
+  background-color: #008575b2;
+  border-radius: 8.81px/7.98px;
+}
+
+.dashboard-frame .ellipse-18 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 159px;
+  left: 118px;
+  background-color: #008575b2;
+  border-radius: 8.81px/7.98px;
+}
+
+.dashboard-frame .ellipse-19 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 280px;
+  left: 510px;
+  background-color: #008575b2;
+  border-radius: 8.81px/7.98px;
+}
+
+.dashboard-frame .ellipse-20 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 83px;
+  left: 630px;
+  background-color: #008575b2;
+  border-radius: 8.81px/7.98px;
+}
+
+.dashboard-frame .ellipse-21 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 278px;
+  left: 762px;
+  background-color: #008575b2;
+  border-radius: 8.81px/7.98px;
+}
+
+.dashboard-frame .ellipse-22 {
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 0;
+  left: 241px;
+  background-color: #008575b2;
+  border-radius: 8.81px/7.98px;
+}
+
+.dashboard-frame .vector-8 {
+  position: absolute;
+  width: 3px;
+  height: 442px;
+  top: 0;
+  left: 5px;
+}
+
+.dashboard-frame .vector-9 {
+  position: absolute;
+  width: 765px;
+  height: 3px;
+  top: 440px;
+  left: 6px;
+}
+
+.dashboard-frame .vector-10 {
+  position: absolute;
+  width: 765px;
+  height: 2px;
+  top: 36px;
+  left: 10px;
+}
+
+.dashboard-frame .text-wrapper-37 {
+  position: absolute;
+  top: 0;
+  left: 667px;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: transparent;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.dashboard-frame .text-wrapper-38 {
+  top: 0;
+  left: 772px;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: normal;
+  white-space: nowrap;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+}
+
+.dashboard-frame .text-wrapper-39 {
+  top: 370px;
+  left: 7px;
+  font-weight: 500;
+  font-size: 20px;
+  white-space: nowrap;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-40 {
+  top: 301px;
+  left: 2px;
+  font-weight: 500;
+  font-size: 20px;
+  white-space: nowrap;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-41 {
+  top: 163px;
+  left: 0;
+  font-weight: 500;
+  font-size: 20px;
+  white-space: nowrap;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-42 {
+  top: 232px;
+  left: 2px;
+  font-weight: 500;
+  font-size: 20px;
+  white-space: nowrap;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-43 {
+  top: 94px;
+  left: 1px;
+  font-weight: 500;
+  font-size: 20px;
+  white-space: nowrap;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.dashboard-frame .text-wrapper-44 {
+  top: 25px;
+  left: 0;
+  font-weight: 500;
+  font-size: 20px;
+  white-space: nowrap;
+  position: absolute;
+  background: linear-gradient(180deg, rgb(112, 101, 210) 0%, rgb(164.92, 79.2, 205.26) 100%);
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Inter", Helvetica;
+  color: transparent;
+  letter-spacing: 0;
+  line-height: normal;
+}
