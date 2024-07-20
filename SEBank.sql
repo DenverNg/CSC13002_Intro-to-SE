@@ -91,8 +91,8 @@ GO
 INSERT LOAI_SOTK(MALOAI, KYHAN, LAISUAT)
 VALUES
 	(0, N'KHÔNG KỲ HẠN', 0.0015),
-	(3, N'3 THÁNG', 0.005),
-	(6, N'6 THÁNG', 0.0055)
+	(3, N'KỲ HẠN 3 THÁNG', 0.005),
+	(6, N'KỲ HẠN 6 THÁNG', 0.0055)
 --Thêm các đơn vị tối thiểu
 INSERT DONVI_TOITHIEU(TEN, GIATRI)
 VALUES
@@ -330,25 +330,79 @@ BEGIN
 	ON L.MALOAI = TONGCHI.LOAI;
 END
 GO
+--Báo cáo tháng
 CREATE OR ALTER PROCEDURE BAOCAO_THANG --BÁO CÁO SỐ SỞ MỞ VÀ SỐ SỔ ĐÓNG VÀ CHÊNH LỆCH TRONG 1 THÁNG (GROUP BY THEO NGÀY)
 	@THANG INT,
 	@LOAI_STK NVARCHAR(50)
 AS
 BEGIN
-	
+ -- Biến để lưu trữ năm hiện tại
+    DECLARE @NAM INT = YEAR(GETDATE());
+
+    -- Tạo bảng tạm để lưu trữ kết quả
+    CREATE TABLE #BaoCaoThang (
+        Ngay DATE,
+        SoMo INT,
+        SoDong INT,
+        ChenhLech INT
+    );
+
+	DECLARE @LOAI INT = (SELECT MALOAI FROM LOAI_SOTK WHERE @LOAI_STK = KYHAN)
+    -- Chèn dữ liệu vào bảng tạm
+    INSERT INTO #BaoCaoThang (Ngay, SoMo, SoDong, ChenhLech)
+    SELECT 
+        Ngay,
+        ISNULL(SUM(SoMo), 0) AS SoMo,
+        ISNULL(SUM(SoDong), 0) AS SoDong,
+        ISNULL(SUM(SoMo), 0) - ISNULL(SUM(SoDong), 0) AS ChenhLech
+    FROM (
+        SELECT 
+            CAST(DATEADD(DAY, daynum - 1, DATEFROMPARTS(@NAM, @THANG, 1)) AS DATE) AS Ngay,
+            CASE WHEN STK.TRANGTHAI = 1 THEN 1 ELSE 0 END AS SoMo,
+            0 AS SoDong
+        FROM 
+            (SELECT DISTINCT number + 1 AS daynum
+             FROM master..spt_values
+             WHERE type = 'P' AND number < DAY(EOMONTH(DATEFROMPARTS(@NAM, @THANG, 1)))) AS Days
+        LEFT JOIN 
+            SOTIETKIEM STK ON DAY(STK.NGAYMOSO) = Days.daynum AND MONTH(STK.NGAYMOSO) = @THANG AND YEAR(STK.NGAYMOSO) = @NAM
+            AND STK.LOAI = @LOAI
+        
+        UNION ALL
+        
+        SELECT 
+            CAST(DATEADD(DAY, daynum - 1, DATEFROMPARTS(@NAM, @THANG, 1)) AS DATE) AS Ngay,
+            0 AS SoMo,
+            CASE WHEN STK.TRANGTHAI = 0 THEN 1 ELSE 0 END AS SoDong
+        FROM 
+            (SELECT DISTINCT number + 1 AS daynum
+             FROM master..spt_values
+             WHERE type = 'P' AND number < DAY(EOMONTH(DATEFROMPARTS(@NAM, @THANG, 1)))) AS Days
+        LEFT JOIN 
+            SOTIETKIEM STK ON DAY(STK.NGAYDONGSO) = Days.daynum AND MONTH(STK.NGAYDONGSO) = @THANG AND YEAR(STK.NGAYDONGSO) = @NAM
+            AND STK.LOAI = @LOAI
+    ) AS BaoCao
+    GROUP BY Ngay;
+
+    -- Chọn dữ liệu từ bảng tạm để trả về kết quả
+    SELECT * FROM #BaoCaoThang ORDER BY Ngay;
+
+    -- Xóa bảng tạm
+    DROP TABLE #BaoCaoThang;
 END
 
 
 --TEST
-EXEC MOSOTIETKIEM 3,N'cường','01112122','aBC','19/07/2024',1000000
-EXEC MOSOTIETKIEM 0,N'DUY','0123123','aAC','20/07/2024',1000000
+EXEC MOSOTIETKIEM 3,N'cường','1234','aBC','22/08/2024',1000000
+EXEC MOSOTIETKIEM 0,N'Anh','22082004','aAC','20/08/2024',1000000
 EXEC MOSOTIETKIEM 0,N'CƯỜNG','523123','aC','30/07/2024',1000000
-EXEC LAPPHIEUGUI 'MS000000', 0, '20/07/2024',200000
 EXEC LAPPHIEUGUI 'MS000001', 1, '20/07/2024',500000
 EXEC LAPPHIEURUT 'MS000000', 0, '18/10/2024',1000000
 EXEC LAPPHIEURUT 'MS000001', 1, '20/08/2024',500000
 EXEC TRACUUSO N'CƯỜNG'
 EXEC BAOCAO_NGAY '18/10/2024'
+EXEC BAOCAO_THANG 8, N'3 tháng'
+
 
 SELECT * FROM DONVI_TOITHIEU
 SELECT * FROM LOAI_SOTK
