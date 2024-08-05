@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Form</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="/css/input.css">
+        <script src="input.js"></script>
+        <script src="validator.js"></script>
+        <style> 
+           
+        </style>
+    </head>
+
+    <body>
+        <div id="form">
+            <form action="/guitien" method="post">
+                <fieldset>
+                        <legend>Thông tin gửi tiền</legend>
+                    <div onclick="inputClicked({
+                            id: 'input-MASO',
+                            inputType: 'text'})"
+                        id="input-MASO" class="form-group">
+                        <input id="MASO" class="form-group__input" type="text" name="MASO">
+                        <div class="form-group__title form-control">Nhập mã sổ</div>
+                        <span id="input-name-message" class="form-group__message"></span>
+                    </div>
+
+                    <div onclick="inputClicked({
+                            id: 'input-SOTIEN',
+                            inputType: 'int'})"
+                        id="input-SOTIEN" class="form-group">
+                        <input id="SOTIEN" class="form-group__input" type="text" name="SOTIEN">
+                        <div class="form-group__title">Nhập số tiền gửi</div>
+                        <span id="input-name-message" class="form-group__message"></span>
+                    </div>
+
+                    <div onclick="inputClicked({
+                            id: 'input-Ngay',
+                            inputType: 'text'})"
+                        id="input-Ngay" class="form-group">
+                        <input id="NGAY" class="form-group__input" type="text" name="NGAY">
+                        <div class="form-group__title">Nhập ngày gửi</div>
+                        <span id="input-name-message" class="form-group__message"></span>
+                    </div>
+
+                    <div class = '.form-add ' >
+                        <button class="form-group__button">Gửi tiền</button>
+                    </div>
+                </fieldset>
+            </form>
+        
+        </div>
+
+    </body>
+</html>
