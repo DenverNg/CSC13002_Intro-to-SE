@@ -1,21 +1,18 @@
 const connection = require('../config/database');
+const {getAllBooks} = require('../services/CRUD');
 //Dashboard
 const getDashboard = (req, res) => {
-    res.send('Dashboard');
+    res.render('Dashboard.ejs');
 }
 
 //Transaction
 const getTransactions = async(req, res) => {
-    connection.query(
-        'SELECT * FROM SOTIETKIEM',
-        function (err, results) {
-          return res.send(results)
-        }
-      );
+    const results = await getAllBooks();
+    res.render('Transactions.ejs', {listBooks: results});
 }
 const getCreateBookForm = async(req, res) => {
     res.render('CreateBook_form.ejs');
-}
+} 
 const postCreateBookForm = async(req, res) => {
     let type = req.body.LOAI;
     let CustomerName = req.body.TENKH;
@@ -25,10 +22,8 @@ const postCreateBookForm = async(req, res) => {
     let Balance = req.body.SOTIEN;
 
     const query = 'CALL MOSOTIETKIEM(? ,?, ?, ?, ?, ?);'
-    connection.query(query, [type, CustomerName, CustomerID, Address, OpenDate, Balance], (err, result) => {
-        console.log(query);
-        res.send(req.body);
-    })
+    let [result,fields] = await connection.query(query, [type, CustomerName, CustomerID, Address, OpenDate, Balance]);
+    res.send(req.body);
 
 }
 
