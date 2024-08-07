@@ -1,13 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     const listItems = document.querySelectorAll('.sidebar-links li');
-  
+    const contentSections = document.querySelectorAll('.content');
+
     if (listItems.length > 0) {
       listItems[0].classList.add('active');
-  
+      contentSections[0].classList.add('active');
       listItems.forEach(listItem => {
         listItem.addEventListener('click', () => {
           listItems.forEach(item => item.classList.remove('active'));
           listItem.classList.add('active');
+          const contentId = listItem.dataset.content;
+               const activeContent = document.getElementById(contentId);
+         
+               if (activeContent) {
+                 contentSections.forEach(section => section.classList.remove('active'));
+                 activeContent.classList.add('active');
+               }
         });
       });
     } else {
@@ -23,8 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
     sidebar.addEventListener('mouseout', () => {
-    mainToggle.classList.remove('active');  
-  });
+    mainToggle.classList.remove('active');
+    });
+  
 
   /*--chart--*/
  
@@ -75,7 +84,7 @@ const trafficChart = new Chart(ctx1, {
   type: 'doughnut',
   data: trafficData,
   options: {
-    responsive: true
+  responsive: true
   }
 });
 
@@ -83,7 +92,8 @@ const earningChart = new Chart(ctx2, {
   type: 'line',
   data: earningData,
   options: {
-    responsive: true}
+  }
 });
-  });
-  
+
+}); 
+
