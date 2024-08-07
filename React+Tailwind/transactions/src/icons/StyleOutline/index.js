@@ -1,1 +1,0 @@
-export { StyleOutline } from "./StyleOutline";

@@ -1,1 +1,0 @@
-export { ReportFrameMonthly } from "./ReportFrameMonthly";

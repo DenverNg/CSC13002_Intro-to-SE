@@ -1,1 +1,0 @@
-export { StyleBold } from "./StyleBold";

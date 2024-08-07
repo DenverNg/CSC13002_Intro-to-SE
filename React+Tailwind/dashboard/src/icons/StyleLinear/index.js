@@ -1,1 +1,0 @@
-export { StyleLinear } from "./StyleLinear";

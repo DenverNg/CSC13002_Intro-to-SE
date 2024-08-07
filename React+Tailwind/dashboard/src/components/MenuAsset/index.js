@@ -1,1 +1,0 @@
-export { MenuAsset } from "./MenuAsset";
