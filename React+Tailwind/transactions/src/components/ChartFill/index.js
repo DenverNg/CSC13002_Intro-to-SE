@@ -1,1 +1,0 @@
-export { ChartFill } from "./ChartFill";

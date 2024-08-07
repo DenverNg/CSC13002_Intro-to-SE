@@ -1,1 +1,0 @@
-export { SettingFill } from "./SettingFill";

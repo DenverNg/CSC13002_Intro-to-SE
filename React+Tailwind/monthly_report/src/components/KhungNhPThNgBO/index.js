@@ -1,1 +1,0 @@
-export { KhungNhPThNgBO } from "./KhungNhPThNgBO";

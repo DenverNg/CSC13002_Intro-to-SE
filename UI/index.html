@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Web - Learning</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="main.css">
+        <script src="func.js"></script>
+		<link rel="stylesheet" href="table.css">
+        <script src="table.js"></script>
+        <!-- Linking Google Font Link for Icon -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <div class="container">
+        <aside class="sidebar">
+        <img src="images/SEBank.png" alt="logo-hover" class="sidebar-img-default" />
+        <img src="images/Logo.png" alt="logo-hover" class="sidebar-img-hover" />
+        <ul class="sidebar-links">
+            <li data-content="Dashboard">
+                <a href="#">
+                    <span class="material-icons" style="font-size: 35px">
+                        home
+                    </span> Trang chủ
+                </a>
+            </li>
+            <li data-content="Manage">
+                <a href="#">
+                    <span class="material-icons" style="font-size: 35px">
+                        manage_search
+                        </span>Quản lý sổ
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="material-icons" style="font-size: 35px">
+                        description
+                    </span> Báo cáo
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="material-icons" style="font-size: 35px">
+                    settings
+                    </span> Cài đặt
+                </a>
+            </li>
+        </ul>
+       </aside>
+
+	  <div class = "main">
+       <!-- Dashboard -->
+		<div class="content" id="Dashboard">
+			<div class="topbar">
+				Trang chủ
+			</div>
+			<p class="date" id="Dashboard-date"></p>
+			<!-- cards -->
+			<div class="cardBox">
+				<div class="card">
+					<div>
+						<div class="numbers">1,504</div>
+						<div class="cardName">Daily Views</div>
+					</div>
+					<div class="iconBx">
+						<ion-icon name="eye-outline"></ion-icon>
+					</div>
+				</div>
+				<div class="card">
+					<div>
+						<div class="numbers">80</div>
+						<div class="cardName">Sales</div>
+					</div>
+					<div class="iconBx">
+						<ion-icon name="cart-outline"></ion-icon>
+					</div>
+				</div>
+				<div class="card">
+					<div>
+						<div class="numbers">284</div>
+						<div class="cardName">Comments</div>
+					</div>
+					<div class="iconBx">
+						<ion-icon name="chatbubbles-outline"></ion-icon>
+					</div>
+				</div>
+				<div class="card">
+					<div>
+						<div class="numbers">$7,842</div>
+						<div class="cardName">Earning</div>
+					</div>
+					<div class="iconBx">
+						<ion-icon name="cash-outline"></ion-icon>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Add Charts -->
+			<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+			<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
+			<div class="graphBox">
+				<div class="box">
+					<canvas id="earning"></canvas>
+				</div>
+				<div class="box">
+					<canvas id="myChart"></canvas>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Quản lý sổ -->
+		<div class="content" id="Manage">
+			<div class="table__header">
+				<div>
+					<div class="topbar">
+					Quản lý sổ
+					</div>
+					<p class="date" id="Manage-date"></p>
+				</div>
+				<div class="input-group">
+					<input type="search" placeholder="Search Data...">
+				</div>
+			</div>
+			<section class="table__body">
+				<table>
+						<thead>
+							<tr>
+								<th> Id <span class="icon-arrow">&UpArrow;</span></th>
+								<th> Customer <span class="icon-arrow">&UpArrow;</span></th>
+								<th> Location <span class="icon-arrow">&UpArrow;</span></th>
+								<th> Status <span class="icon-arrow">&UpArrow;</span></th>
+								<th> Amount <span class="icon-arrow">&UpArrow;</span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td> 1 </td>
+								<td> Zinzu Chan Lee</td>
+								<td> Seoul </td>
+								<td>
+									<p class="status delivered">Delivered</p>
+								</td>
+								<td> <strong> $128.90 </strong></td>
+							</tr>
+							<tr>
+								<td> 2 </td>
+								<td>Jeet Saru </td>
+								<td> Kathmandu </td>
+								<td>
+									<p class="status cancelled">Cancelled</p>
+								</td>
+								<td> <strong>$5350.50</strong> </td>
+							</tr>
+							<tr>
+								<td> 3</td>
+								<td> Sonal Gharti </td>
+								<td> Tokyo </td>
+								<td>
+									<p class="status shipped">Shipped</p>
+								</td>
+								<td> <strong>$210.40</strong> </td>
+							</tr>
+							<tr>
+								<td> 4</td>
+								<td> Alson GC </td>
+								<td> New Delhi </td>
+								<td>
+									<p class="status delivered">Delivered</p>
+								</td>
+								<td> <strong>$149.70</strong> </td>
+							</tr>
+							<tr>
+								<td> 5</td>
+								<td> Sarita Limbu </td>
+								<td> Paris </td>
+								<td>
+									<p class="status pending">Pending</p>
+								</td>
+								<td> <strong>$399.99</strong> </td>
+							</tr>
+							<tr>
+								<td> 6</td>
+								<td>Alex Gonley </td>
+								<td> London </td>
+								<td>
+									<p class="status cancelled">Cancelled</p>
+								</td>
+								<td> <strong>$399.99</strong> </td>
+							</tr>
+							<tr>
+								<td> 7</td>
+								<td> Jeet Saru </td>
+								<td> New York </td>
+								<td>
+									<p class="status delivered">Delivered</p>
+								</td>
+								<td> <strong>$399.99</strong> </td>
+							</tr>
+							<tr>
+								<td> 8</td>
+								<td>Aayat Ali Khan </td>
+								<td> Islamabad </td>
+								<td>
+									<p class="status pending">Pending</p>
+								</td>
+								<td> <strong>$149.70</strong> </td>
+							</tr>
+							<tr>
+								<td> 9</td>
+								<td> Alson GC </td>
+								<td> Dhaka </td>
+								<td>
+									<p class="status cancelled">Cancelled</p>
+								</td>
+								<td> <strong>$249.99</strong> </td>
+							</tr>
+							<tr>
+								<td> 9</td>
+								<td> Alson GC </td>
+								<td> Dhaka </td>
+								<td>
+									<p class="status cancelled">Cancelled</p>
+								</td>
+								<td> <strong>$249.99</strong> </td>
+							</tr>
+							<tr>
+								<td> 10</td>
+								<td> Alson GC </td>
+								<td> Dhaka </td>
+								<td>
+									<p class="status cancelled">Cancelled</p>
+								</td>
+								<td> <strong>$249.99</strong> </td>
+							</tr>
+							<tr>
+								<td> 11</td>
+								<td>Alson GC </td>
+								<td> Dhaka </td>
+								<td>
+									<p class="status cancelled">Cancelled</p>
+								</td>
+								<td> <strong>$249.99</strong> </td>
+							</tr>
+							<tr>
+								<td> 12</td>
+								<td> Alson GC </td>
+								<td> Dhaka </td>
+								<td>
+									<p class="status cancelled">Cancelled</p>
+								</td>
+								<td> <strong>$249.99</strong> </td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+       </div>
+	</div>
+	<script src="date.js"></script>
+ 		<script>
+    		const currentDayDashboard = document.getElementById('Dashboard-date');
+			const currentDayManage = document.getElementById('Manage-date');
+    		currentDayDashboard.textContent = getCurrentDate();
+			currentDayManage.textContent = getCurrentDate();
+  		</script>
+    </body>
+</html>
