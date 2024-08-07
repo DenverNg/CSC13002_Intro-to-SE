@@ -1,11 +1,37 @@
 const connection = require('../config/database');
-
+//Dashboard
 const getDashboard = (req, res) => {
     res.send('Dashboard');
 }
+
+//Transaction
 const getTransactions = async(req, res) => {
-    return res.send('Transactions'); 
+    connection.query(
+        'SELECT * FROM SOTIETKIEM',
+        function (err, results) {
+          return res.send(results)
+        }
+      );
 }
+const getCreateBookForm = async(req, res) => {
+    res.render('CreateBook_form.ejs');
+}
+const postCreateBookForm = async(req, res) => {
+    let type = req.body.LOAI;
+    let CustomerName = req.body.TENKH;
+    let CustomerID = req.body.CMND;
+    let Address = req.body.DIACHI;
+    let OpenDate = req.body.NGAY;
+    let Balance = req.body.SOTIEN;
+
+    const query = 'CALL MOSOTIETKIEM(? ,?, ?, ?, ?, ?);'
+    connection.query(query, [type, CustomerName, CustomerID, Address, OpenDate, Balance], (err, result) => {
+        console.log(query);
+        res.send(req.body);
+    })
+
+}
+
 const getDailyReports = async(req, res) => {
     res.send('Daily Reports');
 }
@@ -15,18 +41,15 @@ const getMonthlyReports = async(req, res) => {
 const getSettings = async(req, res) => {
     res.send('Settings');
 }
-const getForm = async(req, res) => {
-    res.render('guitien_form.ejs');
+const getDepositForm = async(req, res) => {
+    res.render('Deposit_form.ejs');
 }
-const postDeposit_Form = async(req, res) => {
-    const ma = 999;
+const postDepositForm = async(req, res) => {
     const maso = req.body.MASO;
     const ngaygui = req.body.NGAY;
     const sotien = req.body.SOTIEN;
-    console.log(maso, ngaygui, sotien);
-    //const query = `CALL LAPPHIEUGUI('${maso}', ${ngaygui}, '${sotien})`;
-    const query = `INSERT INTO PHIEUGUITIEN(MAPHIEUGUI, MASO, NGAYGUI, SOTIEN) VALUES(?, ?, ?, ?)`;
-    connection.query(query, [ma, maso, ngaygui, sotien], (err, result) => {
+    const query = 'CALL LAPPHIEUGUI(? ,?, ?);'
+    connection.query(query, [maso, ngaygui, sotien], (err, result) => {
         res.send(req.body);
     })
 }
@@ -36,6 +59,8 @@ module.exports = {
     getDailyReports,
     getMonthlyReports,
     getSettings,
-    getForm,
-    postDeposit_Form
+    getDepositForm,
+    postDepositForm,
+    getCreateBookForm, 
+    postCreateBookForm
 }
