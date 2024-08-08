@@ -3,7 +3,9 @@
   - DBeaver: https://dbeaver.io/download/
   - Docker: https://docs.docker.com/desktop/install/windows-install/
   - Nodejs: https://nodejs.org/en/download/package-manager
+
 **Bước 2:** Pull code về: `git pull origin main`
+
 **Bước 3:** Tạo database MYSQL với docker
 - Vào folder Test/docker chạy câu lệnh: `docker compose -f mysql.yml -p nodejs-sql up -d` 
     - `-f`: file name
