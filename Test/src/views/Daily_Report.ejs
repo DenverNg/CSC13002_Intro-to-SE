@@ -48,12 +48,12 @@
        	</aside>
 
 	  <div class = "main">
-		<!-- Quản lý sổ -->
+		<!-- Báo cáo ngày -->
 		<div class="content" id="Manage">
 			<div class="table__header">
 				<div>
 					<div class="topbar">
-					Quản lý sổ
+					Báo cáo doanh số hoạt động ngày
 					</div>
 					<p class="date" id="Manage-date"></p>
 				</div>
@@ -61,66 +61,67 @@
 					<input type="search" placeholder="Search Data...">
 				</div>
 			</div>
+
+            <!-- select a date, default is today -->
+            <div class="input-date">
+                <label>Chọn ngày: </label>
+                <input id="date1" name="date1" value="<%= `${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}-${new Date().getFullYear()}` %>">
+            </div>
+            <style>
+                .form-group__button {
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 14px 20px;
+                    margin: 0 auto;
+                    border: none;
+                    cursor: pointer;
+                    width: 250;
+                }
+                .form-group__button:hover {
+                    opacity: 0.8;
+                }
+            </style>
+            <div class="form-group">
+                <button class="form-group__button" onclick="window.location.href='/bao_cao_thang'">Báo cáo tháng</button>
+            </div>
+ 
 			<section class="table__body">
 				<table>
 						<thead>
 							<tr>
 								<th> STT <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Mã sổ <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Khách hàng <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Loại tiết kiệm <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Số dư <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Loại tiết kiệm <span class="icon-arrow">&UpArrow;</span></th>
+								<th> Tổng thu <span class="icon-arrow">&UpArrow;</span></th>
+								<th> Tổng chi <span class="icon-arrow">&UpArrow;</span></th>
+								<th> Chênh lệch <span class="icon-arrow">&UpArrow;</span></th>
 							</tr>
 						</thead>
 						<tbody>
-							<% for (let i = 0; i < listBooks.length; i++) { %>
+							<% for (let i = 0; i < listDailyRP.length; i++) { %>
 								<tr>
-									<td><%=i+1%></td>
-									<td><%= listBooks[i].MASO %></td>
-									<td><%= listBooks[i].HOTEN %></td>
-									<% if (listBooks[i].LOAI == 0) { %>
+                                    <td><%=i+1%></td>
+									<td><%=listDailyRP[i].KYHAN%></td>
+									<td><%= listDailyRP[i].TONGTHU %></td>
+									<td><%= listDailyRP[i].TONGCHI %></td>
+									<% if (listDailyRP[i].CHENHLECH > 0) { %>
 										<td>
-										  <p class="status delivered">Không kỳ hạn</p>
+                                            <p style="color: rgb(73, 155, 73);"><%=listDailyRP[i].CHENHLECH%></p>
 										</td>
-									<% } else if (listBooks[i].LOAI == 3) { %>
+									<% } else if (listDailyRP[i].CHENHLECH == 0) { %>
 										<td>
-											<p class="status pending">Kỳ hạn 3 tháng</p>
-										</td>
-									<% } else if (listBooks[i].LOAI == 6) { %>
-										<td>
-											<p class="status shipped">Kỳ hạn 6 tháng</p>
+											<p style="color: black;"><%=listDailyRP[i].CHENHLECH%></p>
 										</td>
 									<% } else { %>
 										<td>
-										  <p class="status cancelled">Kỳ hạn <%listBooks[i].LOAI%> tháng</p>
+                                            <p style="color: red;"><%=listDailyRP[i].CHENHLECH%></p>
 										</td>
-									<% } %>
-									<td><%= listBooks[i].SODU %></td>
+                                    <% } %>
 								</tr>
 							<% } %>
 						</tbody>
 					</table>
 			</section>
        	</div>
-
-		<!--Ai đó sửa code css thành file riêng nha-->
-		<style>
-			.form-group__button {
-				background-color: #4CAF50;
-				color: white;
-				padding: 14px 20px;
-				margin: center;
-				border: none;
-				cursor: pointer;
-				width: 350;
-			}
-			.form-group__button:hover {
-				opacity: 0.8;
-			}
-		</style>
-		<div class="form-group">
-			<button class="form-group__button" onclick="window.location.href='/taoso_form'">Tạo sổ mới</button>
-		</div>
 	</div>
 	<script src="date.js"></script>
  		<script>
