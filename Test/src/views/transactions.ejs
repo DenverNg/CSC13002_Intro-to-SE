@@ -79,7 +79,7 @@
 									<td><%= listBooks[i].HOTEN %></td>
 									<% if (listBooks[i].TRANGTHAI == 1) { %>
 										<td>
-										  <p class="status shipped">Đang hoạt động</p>
+										  <p class="status delivered">Đang hoạt động</p>
 										</td>
 									<% } else { %>
 										<td>
@@ -94,7 +94,6 @@
 			</section>
        	</div>
 
-		<!--code css for button-->
 		<style>
 			.form-group__button {
 				background-color: #4CAF50;
@@ -109,7 +108,6 @@
 				opacity: 0.8;
 			}
 		</style>
-		<!--Click button navigate to CreateBook-->
 		<div class="form-group">
 			<button class="form-group__button" onclick="window.location.href='/taoso_form'">Tạo sổ mới</button>
 		</div>
