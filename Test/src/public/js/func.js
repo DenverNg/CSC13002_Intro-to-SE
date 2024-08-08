@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const listItems = document.querySelectorAll('.sidebar-links li');
+    //print the first item
+    console.log(listItems[0]);
     const contentSections = document.querySelectorAll('.content');
 
     if (listItems.length > 0) {
-      listItems[0].classList.add('active');
+      //listItems[0].classList.add('active');
       contentSections[0].classList.add('active');
       listItems.forEach(listItem => {
         listItem.addEventListener('click', () => {

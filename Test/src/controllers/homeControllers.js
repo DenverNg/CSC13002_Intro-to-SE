@@ -1,5 +1,5 @@
 const connection = require('../config/database');
-const {getAllBooks} = require('../services/CRUD');
+const {getAllBooks, getDailyRP, getMonthlyRP} = require('../services/CRUD');
 //Dashboard
 const getDashboard = (req, res) => {
     res.render('Dashboard.ejs');
@@ -23,15 +23,20 @@ const postCreateBookForm = async(req, res) => {
 
     const query = 'CALL MOSOTIETKIEM(? ,?, ?, ?, ?, ?);'
     let [result,fields] = await connection.query(query, [type, CustomerName, CustomerID, Address, OpenDate, Balance]);
-    res.send(req.body);
+    res.send("Success");
 
 }
-
+//Reports
 const getDailyReports = async(req, res) => {
-    res.send('Daily Reports');
+    //let date = req.body.NGAY;
+    const results = await getDailyRP('2024-10-18'); //Chưa lấy được ngày từ user
+    res.render('Daily_Report.ejs', {listDailyRP: results});
+    console.log(results);  
 }
 const getMonthlyReports = async(req, res) => {
-    res.send('Monthly Reports');
+    // const results = await getMonthlyRP('2024-10-18'); //Chưa lấy được ngày từ user
+    // res.render('Monthly_Report.ejs');
+    res.send('Monthly Report');
 }
 const getSettings = async(req, res) => {
     res.send('Settings');
