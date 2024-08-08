@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>SEBANK</title>
+        <title>Web - Learning</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="/css/main.css">
         <script src="/js/func.js"></script>
@@ -11,19 +11,19 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <div class="container">
-        <aside class="sidebar">
+		<aside class="sidebar">
         <img src="/images/SEBank.png" alt="logo-hover" class="sidebar-img-default" />
         <img src="/images/Logo.png" alt="logo-hover" class="sidebar-img-hover" />
         <ul class="sidebar-links">
             <li data-content="Dashboard">
-                <a href="/#">
+                <a href="/">
                     <span class="material-icons" style="font-size: 35px">
                         home
                     </span> Trang chủ
                 </a>
             </li>
             <li data-content="Manage">
-                <a href="/quan_ly_so">
+                <a href="/quan_ly_so#">
                     <span class="material-icons" style="font-size: 35px">
                         manage_search
                         </span>Quản lý sổ
@@ -44,76 +44,71 @@
                 </a>
             </li>
         </ul>
-       	</aside>
+		</aside>
 
 	  <div class = "main">
-		<!-- Quản lý sổ -->
-		<div class="content" id="Manage">
-			<div class="table__header">
-				<div>
-					<div class="topbar">
-					Quản lý sổ
+       <!-- Dashboard -->
+		<div class="content" id="Dashboard">
+			<div class="topbar">
+				Trang chủ
+			</div>
+			<p class="date" id="Dashboard-date"></p>
+			<!-- cards -->
+			<div class="cardBox">
+				<div class="card">
+					<div>
+						<div class="numbers">1,504</div>
+						<div class="cardName">Daily Views</div>
 					</div>
-					<p class="date" id="Manage-date"></p>
+					<div class="iconBx">
+						<ion-icon name="eye-outline"></ion-icon>
+					</div>
 				</div>
-				<div class="input-group">
-					<input type="search" placeholder="Search Data...">
+				<div class="card">
+					<div>
+						<div class="numbers">80</div>
+						<div class="cardName">Sales</div>
+					</div>
+					<div class="iconBx">
+						<ion-icon name="cart-outline"></ion-icon>
+					</div>
+				</div>
+				<div class="card">
+					<div>
+						<div class="numbers">284</div>
+						<div class="cardName">Comments</div>
+					</div>
+					<div class="iconBx">
+						<ion-icon name="chatbubbles-outline"></ion-icon>
+					</div>
+				</div>
+				<div class="card">
+					<div>
+						<div class="numbers">$7,842</div>
+						<div class="cardName">Earning</div>
+					</div>
+					<div class="iconBx">
+						<ion-icon name="cash-outline"></ion-icon>
+					</div>
 				</div>
 			</div>
-			<section class="table__body">
-				<table>
-						<thead>
-							<tr>
-								<th> STT <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Mã sổ <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Khách hàng <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Trạng thái <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Số dư <span class="icon-arrow">&UpArrow;</span></th>
-							</tr>
-						</thead>
-						<tbody>
-							<% for (let i = 0; i < listBooks.length; i++) { %>
-								<tr>
-									<td><%=i%></td>
-									<td><%= listBooks[i].MASO %></td>
-									<td><%= listBooks[i].HOTEN %></td>
-									<% if (listBooks[i].TRANGTHAI == 1) { %>
-										<td>
-										  <p class="status shipped">Đang hoạt động</p>
-										</td>
-									<% } else { %>
-										<td>
-										  <p class="status cancelled">Đã đóng</p>
-										</td>
-									<% } %>
-									<td><%= listBooks[i].SODU %></td>
-								</tr>
-							<% } %>
-						</tbody>
-					</table>
-			</section>
-       	</div>
 
-		<!--code css for button-->
-		<style>
-			.form-group__button {
-				background-color: #4CAF50;
-				color: white;
-				padding: 14px 20px;
-				margin: center;
-				border: none;
-				cursor: pointer;
-				width: 350;
-			}
-			.form-group__button:hover {
-				opacity: 0.8;
-			}
-		</style>
-		<!--Click button navigate to CreateBook-->
-		<div class="form-group">
-			<button class="form-group__button" onclick="window.location.href='/taoso_form'">Tạo sổ mới</button>
+
+			<!-- Add Charts -->
+			<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+			<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
+			<div class="graphBox">
+				<div class="box">
+					<canvas id="earning"></canvas>
+				</div>
+				<div class="box">
+					<canvas id="myChart"></canvas>
+				</div>
+			</div>
 		</div>
-	</div>
 	<script src="date.js"></script>
  		<script>
     		const currentDayDashboard = document.getElementById('Dashboard-date');
