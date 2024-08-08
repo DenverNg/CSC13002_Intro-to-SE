@@ -12,6 +12,19 @@
 - Tạo connection trong DBeaver --> Test connection (Download driver nếu cần) --> OK: Config như ảnh (Port: 3307 - Password: 123456)
     ![image](/Config_DBeaver.png) 
 
-**Bước 4:** Khởi chạy docker 
+**Bước 4:** Tải các package:
 
-**Bước 5:** Vào folder Test chạy câu lệnh: `npm run dev`. Truy cập đường link và trải nghiệm SEBank.
+`npm i ejs`
+
+`npm i --save-exact express`
+
+`npm i --save-exact mysql2`
+
+`npm i --save-dev nodemon`
+
+**Bước 5:** Khởi chạy docker
+
+
+**Bước 6:** Vào folder Test chạy câu lệnh: `npm run dev`. Truy cập đường link và trải nghiệm SEBank.
+
+**Lưu ý:** Từ những lần chạy sau chỉ cần chạy bước 5 và bước 6
