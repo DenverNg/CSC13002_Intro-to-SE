@@ -2,6 +2,7 @@ const connection = require('../config/database');
 const { notify } = require('../routes/web');
 const {getAllBooks, getDailyRP, getMonthlyRP} = require('../services/CRUD');
 const {getCurrentDate} = require('../public/js/date');
+const { set } = require('express/lib/response');
 
 const getNextMaSo = async () => {
     // Query to get the maximum existing MaSo
@@ -42,33 +43,44 @@ const getCreateBookForm = async(req, res) => {
     res.render('CreateBook_form.ejs', {newMaSo: newMaSo});
 } 
 
-const postCreateBookForm = async (req, res) => {
-    if (req.body.confirm === 'true') {
-        // If the confirmation is true, save the data to the database
-        let type = req.body.LOAI;
-        let CustomerName = req.body.TENKH;
-        let CustomerID = req.body.CMND;
-        let Address = req.body.DIACHI;
-        let OpenDate = req.body.NGAY;
-        let Balance = req.body.SOTIEN;
-
-        const query = 'CALL MOSOTIETKIEM(? ,?, ?, ?, ?, ?);';
-        await connection.query(query, [type, CustomerName, CustomerID, Address, OpenDate, Balance]);
-        
-        // After saving, you might want to redirect to another page, like a success page or back to the dashboard
-        res.send("Success");
-    } else {
-        // Pass the form data to the verification page
-        res.render('CreateBook_Verify.ejs', {
-            newMaSo: req.body.MASO,
-            type: req.body.LOAI,
-            CustomerName: req.body.TENKH,
-            CustomerID: req.body.CMND,
-            Address: req.body.DIACHI,
-            OpenDate: req.body.NGAY,
-            Balance: req.body.SOTIEN
-        });
+const saveBook = async (MASO, LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN) => {
+    const query = 'CALL MOSOTIETKIEM(?, ?, ?, ?, ?, ?)';
+    try {
+        await connection.query(query, [LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN]);
+        console.log('Book saved successfully:', MASO);
+    } catch (error) {
+        console.error('Error executing query:', error);
+        throw error;
     }
+};
+
+
+const postCreateBookForm = async (req, res) => {
+    res.render('CreateBook_Verify.ejs', {
+            MASO: newMaSo,
+            LOAI: req.body.LOAI,
+            TENKH: req.body.TENKH,
+            CMND: req.body.CMND,
+            DIACHI: req.body.DIACHI,
+            SOTIEN: req.body.SOTIEN,
+            NGAY: req.body.NGAY
+        });
+
+    const action = req.body.action;
+
+    if (action === 'confirm') {
+        // Save data to the database
+        const { MASO, LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN } = req.body;
+        const query = 'CALL MOSOTIETKIEM(?, ?, ?, ?, ?, ?)';
+        try {
+        await connection.query(query, [LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN]);
+        // Redirect to management page or dashboard
+        res.redirect('/quan_ly_so');
+        } catch (error) {
+            console.error('Error executing query:', error);
+            res.status(500).send('An error occurred while saving the data');
+        }
+    } 
 };
 
 //Reports
