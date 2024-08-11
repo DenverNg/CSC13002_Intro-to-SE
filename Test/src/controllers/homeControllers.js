@@ -1,6 +1,7 @@
 const connection = require('../config/database');
 const { notify } = require('../routes/web');
 const {getAllBooks, getDailyRP, getMonthlyRP} = require('../services/CRUD');
+const {getCurrentDate} = require('../public/js/date');
 
 const getNextMaSo = async () => {
     // Query to get the maximum existing MaSo
@@ -26,13 +27,15 @@ const getNextMaSo = async () => {
 
 //Dashboard
 const getDashboard = (req, res) => {
-    res.render('Dashboard.ejs');
+    res.render('Dashboard.ejs', {currentDate: getCurrentDate()});
 }
 
 //Transaction
 const getTransactions = async(req, res) => {
     const results = await getAllBooks();
-    res.render('Transactions.ejs', {listBooks: results});
+    res.render('Transactions.ejs', {
+        listBooks: results,
+        currentDate: getCurrentDate()});
 }
 const getCreateBookForm = async(req, res) => {
     newMaSo = await getNextMaSo();
