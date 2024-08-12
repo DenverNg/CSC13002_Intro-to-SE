@@ -1,3 +1,6 @@
+const e = require("express");
+const { get } = require("express/lib/response");
+
 /* --- get date --- */
 function getCurrentDate() {
     const currentDate = new Date();
@@ -17,3 +20,5 @@ function getCurrentDate() {
   
     return formattedDate;
   }
+
+module.exports = {getCurrentDate};

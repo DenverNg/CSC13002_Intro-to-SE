@@ -14,12 +14,12 @@
 
     <body>
         <div id="form">
-            <form action="/taoso_xacnhan" method="post">
+            <form action="/taoso_form/xacnhan" method="post">
                 <fieldset>
                     <legend>Thông tin sổ mới</legend>
-                    <div id="input-MASO" class="form-group" >
-                        <input id="MASO" class="form-group__input" type="text" name="MASO" disabled>
-                        <div class="form-group__title form-control">MSxxxxxx</div>
+                    <div id="input-MASO" class="form-group">
+                        <label for="MASO" class="form-group__title">Mã sổ mới:</label>
+                        <input id="MASO" class="form-group__input" type="text" name="MASO" value="<%= newMaSo %>" disabled>
                         <span id="input-name-message" class="form-group__message"></span>
                     </div>
         
@@ -76,7 +76,7 @@
                     </div>
 
                     <div class = '.form-add ' >
-                        <button class="form-group__button">Gửi tiền</button>
+                        <button class="form-group__button">Tạo sổ</button>
                     </div>
                 </fieldset>
             </form>

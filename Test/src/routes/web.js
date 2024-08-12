@@ -11,7 +11,7 @@ router.get('/bao_cao_thang', getMonthlyReports);
 router.get('/cai_dat', getSettings);
 
 router.get('/taoso_form', getCreateBookForm);
-router.post('/taoso_xacnhan', postCreateBookForm);
+router.post('/taoso_form/xacnhan', postCreateBookForm);
 
 router.get('/guitien_form', getDepositForm);
 router.post('/guitien_xacnhan', postDepositForm);
