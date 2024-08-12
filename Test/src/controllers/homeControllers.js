@@ -56,8 +56,12 @@ const saveBook = async (MASO, LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN) => {
 
 
 const postCreateBookForm = async (req, res) => {
-    res.render('CreateBook_Verify.ejs', {
-            MASO: newMaSo,
+    const action = req.body.action;
+
+    if (!action) {
+        // Initial rendering of the verification page
+        res.render('CreateBook_Verify.ejs', {
+            MASO: req.body.MASO,
             LOAI: req.body.LOAI,
             TENKH: req.body.TENKH,
             CMND: req.body.CMND,
@@ -65,22 +69,21 @@ const postCreateBookForm = async (req, res) => {
             SOTIEN: req.body.SOTIEN,
             NGAY: req.body.NGAY
         });
-
-    const action = req.body.action;
-
-    if (action === 'confirm') {
+    } else if (action === 'confirm') {
         // Save data to the database
         const { MASO, LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN } = req.body;
         const query = 'CALL MOSOTIETKIEM(?, ?, ?, ?, ?, ?)';
         try {
-        await connection.query(query, [LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN]);
-        // Redirect to management page or dashboard
-        res.redirect('/quan_ly_so');
+            await connection.query(query, [LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN]);
+            res.redirect('/quan_ly_so');
         } catch (error) {
             console.error('Error executing query:', error);
             res.status(500).send('An error occurred while saving the data');
         }
-    } 
+    } else if (action === 'cancel') {
+        // Go back to the form without saving
+        res.redirect('/taoso_form');
+    }
 };
 
 //Reports
