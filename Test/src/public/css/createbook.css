@@ -1,0 +1,87 @@
+#createbook{
+    width: 900px;
+    background-color: #EEECFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-left-radius: 30px 30px;
+    border-bottom-right-radius: 30px 30px;
+    border-top-left-radius: 10px 10px;
+    border-top-right-radius: 10px 10px;
+}
+
+#createbook__title{
+    width: 100%;
+    height: 50px;
+    color: #FFFF;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.6);
+    line-height: 50px;
+    padding-left: 50px;
+    margin-bottom: 40px;
+    background-image: linear-gradient(90deg, #31076d, #8613adbf, #a00050be);
+    border-top-left-radius: 10px 10px;
+    border-top-right-radius: 10px 10px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+#createbook__group0{
+    width: 880px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#createbook__group3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#SOTIEN{
+    width: 790px;
+}
+
+.inp-createbook{
+    max-width: 800px;
+}
+
+.inp-createbook__input{
+    width: 350px;
+    height: 60px;
+    font-size: 20px;
+}
+
+.inp-createbook__title{
+    font-size: 20px;
+    top: calc(30% + 1px);
+}
+
+@keyframes inputTitleMoveUp_createbook {
+    to {
+        font-size: 14px;
+        top: calc(5.5%);
+        left: 15px;
+        background-image: linear-gradient(0, #FFFF,#EEECFF);
+    }
+}
+
+@keyframes inputTitleMoveDown_createbook {
+    to {
+        font-size: 20px;
+        top: calc(30% + 1px);
+        left: 0;
+        background-image: none;
+    }
+}
+
+#next-button{
+    width: 250px;
+    font-weight: bold;
+    margin-right: 45px;
+    border: none;
+    background-image: linear-gradient(90deg, #51B072, #059436);
+    align-self: end;
+}

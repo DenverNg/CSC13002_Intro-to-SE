@@ -52,7 +52,7 @@
 			<div class="topbar">
 				Trang chủ
 			</div>
-			<p class="date" id="Dashboard-date"></p>
+			<p class="date"><%= currentDate %></p>
 			<!-- cards -->
 			<div class="cardBox">
 				<div class="card">
@@ -109,13 +109,14 @@
 				</div>
 			</div>
 		</div>
-	<script src="date.js"></script>
+	</div>
+	<!-- <script src="date.js"></script>
  		<script>
     		const currentDayDashboard = document.getElementById('Dashboard-date');
-			const currentDayManage = document.getElementById('Manage-date');
+			//const currentDayManage = document.getElementById('Manage-date');
+			console.log(getCurrentDate());
     		currentDayDashboard.textContent = getCurrentDate();
-			currentDayManage.textContent = getCurrentDate();
-  		</script>
-	</script>
+			//currentDayManage.textContent = getCurrentDate();
+  		</script> -->
     </body>
 </html>
