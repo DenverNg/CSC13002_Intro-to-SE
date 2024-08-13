@@ -1,6 +1,6 @@
 const connection = require('../config/database');
 const { notify } = require('../routes/web');
-const {getAllBooks, getDailyRP, getMonthlyRP} = require('../services/CRUD');
+const {getAllBooks, getDailyRP, getMonthlyRP, getTermDeposit} = require('../services/CRUD');
 const {getCurrentDate} = require('../public/js/date');
 const { set } = require('express/lib/response');
 
@@ -88,8 +88,65 @@ const getMonthlyReports = async(req, res) => {
     res.send('Monthly Report');
 }
 const getSettings = async(req, res) => {
-    res.send('Settings');
+    const results = await getTermDeposit();
+    res.render('Settings.ejs', {listTerm: results});
 }
+// const postSettings = async(req, res) => {
+//     const action = req.body.action;
+
+//     if (!action) {
+//         // Initial rendering of the verification page
+//         res.render('CreateBook_Verify.ejs', {
+//             MASO: req.body.MASO,
+//             LOAI: req.body.LOAI,
+//             TENKH: req.body.TENKH,
+//             CMND: req.body.CMND,
+//             DIACHI: req.body.DIACHI,
+//             SOTIEN: req.body.SOTIEN,
+//             NGAY: req.body.NGAY
+//         });
+
+//     // Save data to the database
+//     const { MASO, LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN } = req.body;
+//     const query = 'CALL MOSOTIETKIEM(?, ?, ?, ?, ?, ?)';
+//     try {
+//     await connection.query(query, [LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN]);
+//     // Redirect to management page or dashboard
+//     res.redirect('/quan_ly_so');
+//         await connection.query(query, [LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN]);
+//         res.redirect('/quan_ly_so');
+//     } catch (error) {
+//         console.error('Error executing query:', error);
+//         res.status(500).send('An error occurred while saving the data');
+//     }
+//     } else if (action === 'cancel') {
+//         // Go back to the form without saving
+//         res.redirect('/taoso_form');
+//     }
+// };
+// const postSettings_Add = async(req, res) => {
+//     const action = req.body.action;
+//      // Initial rendering of the verification page
+//     if (!action) {        
+//          res.render('Settings_Add.ejs');
+//     }
+// }
+
+// const postSettings_Moddify = async(req, res) => {
+//     res.render("Settings_Modify.ejs");
+// }
+const getSettings_Delete = async(req, res) => {
+    const action = req.body.action;
+     // Initial rendering of the verification page
+    if (!action) {        
+        const results = await getTermDeposit();
+         res.render('Settings_Delete.ejs', {listTerm: results});
+    }
+}
+
+
+
+
 const getDepositForm = async(req, res) => {
     res.render('Deposit_form.ejs');
 }
@@ -108,6 +165,9 @@ module.exports = {
     getDailyReports,
     getMonthlyReports,
     getSettings,
+    //postSettings_Add,
+    getSettings_Delete,
+    //postSettings_Moddify,
     getDepositForm,
     postDepositForm,
     getCreateBookForm, 
