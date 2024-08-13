@@ -5,6 +5,126 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="/css/input.css">
+        <link rel="stylesheet" href="/css/createbook.css">
+        <script src="/js/input.js"></script>
+        <script src="/js/validator.js"></script>
+        <style> 
+           
+        </style>
+    </head>
+
+    <body>
+        <div id="createbook">
+            <div id="createbook__title">Sổ tiết kiệm</div>
+            <form action="/taoso_xacnhan" method="post">
+                <div id="createbook__group0">
+                    <div id="createbook__group1">
+                        <div id="input-MASO" class="form-group inp-createbook" >
+                            <input id="MASO" class="form-group__input inp-createbook__input" type="text" name="MASO" disabled>
+                            <div class="form-group__title inp-createbook__title form-control">MSxxxxxx</div>
+                            <span id="input-name-message" class="form-group__message"></span>
+                        </div>
+    
+                        <div onclick="inputClicked({
+                                id: 'input-TENKH',
+                                fontSize: '14px',
+                                top: '5.5%',
+                                animation: 'inputTitleMoveUp_createbook'})"
+                            id="input-TENKH" class="form-group inp-createbook">
+                            <input id="TENKH" class="form-group__input inp-createbook__input" type="text"name="TENKH">
+                            <div class="form-group__title inp-createbook__title">Nhập tên khách hàng</div>
+                            <span id="input-name-message" class="form-group__message"></span>
+                        </div>
+    
+                        <div onclick="inputClicked({
+                                id: 'input-DIACHI',
+                                fontSize: '14px',
+                                top: '5.5%',
+                                animation: 'inputTitleMoveUp_createbook'})"
+                            id="input-DIACHI" class="form-group inp-createbook">
+                            <input id="DIACHI" class="form-group__input inp-createbook__input" type="text"name="DIACHI">
+                            <div class="form-group__title inp-createbook__title">Nhập địa chỉ</div>
+                            <span id="input-name-message" class="form-group__message"></span>
+                        </div>
+                    </div>
+    
+                    <div id="createbook__group2">
+                        <div onclick="inputClicked({
+                                id: 'input-LOAI',
+                                inputType: 'number',
+                                fontSize: '14px',
+                                top: '5.5%',
+                                animation: 'inputTitleMoveUp_createbook'})"
+                            id="input-LOAI" class="form-group inp-createbook">
+                            <input id="LOAI" class="form-group__input inp-createbook__input" type="text" name="LOAI">
+                            <div class="form-group__title inp-createbook__title">Nhập loại sổ</div>
+                            <span id="input-name-message" class="form-group__message"></span>
+                        </div>
+            
+                        <div onclick="inputClicked({
+                                id: 'input-CMND',
+                                inputType: 'int',
+                                fontSize: '14px',
+                                top: '5.5%',
+                                animation: 'inputTitleMoveUp_createbook'})"
+                            id="input-CMND" class="form-group inp-createbook">
+                            <input id="CMND" class="form-group__input inp-createbook__input" type="text"name='CMND'>
+                            <div class="form-group__title inp-createbook__title">Nhập CMND</div>
+                            <span id="input-name-message" class="form-group__message"></span>
+                        </div>
+    
+                        <div onclick="inputClicked({
+                                id: 'input-date',
+                                inputType: 'date',
+                                fontSize: '14px',
+                                top: '5.5%',
+                                animation: 'inputTitleMoveUp_createbook'})"
+                            id="input-date" class="form-group inp-createbook">
+                            <input id="date" class="form-group__input inp-createbook__input" type="text" name="NGAY">
+                            <div class="form-group__title inp-createbook__title">Ngày tạo sổ</div>
+                            <span id="input-name-message" class="form-group__message"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="createbook__group3">
+                    <div onclick="inputClicked({
+                            id: 'input-SOTIEN',
+                            inputType: 'int',
+                            fontSize: '14px',
+                            top: '5.5%',
+                            animation: 'inputTitleMoveUp_createbook'})"
+                        id="input-SOTIEN" class="form-group inp-createbook">
+                        <input id="SOTIEN" class="form-group__input inp-createbook__input" type="text" name="SOTIEN">
+                        <div class="form-group__title inp-createbook__title">Nhập số tiền gửi</div>
+                        <span id="input-name-message" class="form-group__message"></span>
+                    </div>
+
+                    <button id='next-button' class="form-group__button">Tiếp tục</button>
+                </div>
+            </form>
+        </div>
+
+        <script>
+            Validator({
+                form: '#form',
+                errorSelector: '.form-group__message',
+                rules: [
+                    Validator.isRequired('#TENKH', 'Nhập lại tên đi nha'),
+                    Validator.isRequired('#password'),
+                    Validator.isRequired('#date')
+                    ]
+            })
+        </script>
+
+    </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Tạo sổ mới</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="/css/input.css">
         <script src="/js/input.js"></script>
         <script src="/js/validator.js"></script>
         <style> 
