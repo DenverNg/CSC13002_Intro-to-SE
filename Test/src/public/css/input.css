@@ -9,7 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: "Helvetica Neue";
-    background-color: #EEECFF;
+    background-color: #000;
 }
 
 body > div {
@@ -34,7 +34,7 @@ body > div {
 }
 
 .form-group + .form-group {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .form-group__input {
