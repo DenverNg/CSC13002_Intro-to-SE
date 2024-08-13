@@ -43,18 +43,6 @@ const getCreateBookForm = async(req, res) => {
     res.render('CreateBook_form.ejs', {newMaSo: newMaSo});
 } 
 
-// const saveBook = async (MASO, LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN) => {
-//     const query = 'CALL MOSOTIETKIEM(?, ?, ?, ?, ?, ?)';
-//     try {
-//         await connection.query(query, [LOAI, TENKH, CMND, DIACHI, NGAY, SOTIEN]);
-//         console.log('Book saved successfully:', MASO);
-//     } catch (error) {
-//         console.error('Error executing query:', error);
-//         throw error;
-//     }
-// };
-
-
 const postCreateBookForm = async (req, res) => {
     const action = req.body.action;
     MASO = newMaSo;
