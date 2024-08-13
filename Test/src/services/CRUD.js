@@ -15,8 +15,14 @@ const getMonthlyRP = async(month, type) => {
         'CALL BAOCAO_THANG(?,?)', [month, type]);
     return results;
 }
+const getTermDeposit = async() => {
+    const [results, fields] = await connection.query(
+        'SELECT KYHAN , MALOAI, LAISUAT FROM LOAI_SOTK');
+    return results;
+}
 module.exports = {
     getAllBooks,
     getDailyRP,
-    getMonthlyRP
+    getMonthlyRP,
+    getTermDeposit
 }
