@@ -7,89 +7,60 @@
     <title>Xác nhận thông tin sổ mới</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="/css/input.css">
-    <style>
-        .form-group__title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .form-group__value {
-            margin-bottom: 15px;
-        }
-
-        .form-buttons {
-            margin-top: 20px;
-        }
-
-        .form-buttons button {
-            margin-right: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/createbook.css">
 </head>
 
 <body>
-    <div id="form">
-        <h2>Xác nhận thông tin sổ mới</h2>
-        <form action="/taoso_form/xacnhan" method="post">
-            <div id="input-MASO" class="form-group">
-                <div class="form-group__title">Mã số</div>
-                <div class="form-group__value">
-                    <%= MASO %>
+    <div id="createbook-verify" class="createbook">
+        <div id="createbook__title">Sổ tiết kiệm</div>
+        <form action="/taoso_form/xacnhan" method="post" class="form-verify">
+            <div class="verify__group0">
+                <div id="MASO" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Mã sổ</div>
+                    <div class="form-group__title verify-createbook__value"><%= MASO %></div>
+                    <input type="hidden" name="MASO" value="<%= MASO %>">
                 </div>
-                <input type="hidden" name="MASO" value="<%= MASO %>">
-            </div>
 
-            <div id="input-LOAI" class="form-group">
-                <div class="form-group__title">Loại sổ</div>
-                <div class="form-group__value">
-                    <%= LOAI %>
+                <div id="LOAI" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Loại sổ</div>
+                    <div class="form-group__title verify-createbook__value"><%= LOAI %></div>
+                    <input type="hidden" name="LOAI" value="<%= LOAI %>">
                 </div>
-                <input type="hidden" name="LOAI" value="<%= LOAI %>">
-            </div>
 
-            <div id="input-TENKH" class="form-group">
-                <div class="form-group__title">Tên khách hàng</div>
-                <div class="form-group__value">
-                    <%= TENKH %>
+                <div id="TENKH" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Khách hàng</div>
+                    <div class="form-group__title verify-createbook__value"><%= TENKH %></div>
+                    <input type="hidden" name="TENKH" value="<%= TENKH %>">
                 </div>
-                <input type="hidden" name="TENKH" value="<%= TENKH %>">
-            </div>
 
-            <div id="input-CMND" class="form-group">
-                <div class="form-group__title">CMND</div>
-                <div class="form-group__value">
-                    <%= CMND %>
+                <div id="CMND" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">CMND</div>
+                    <div class="form-group__title verify-createbook__value"><%= CMND %></div>
+                    <input type="hidden" name="CMND" value="<%= CMND %>">
                 </div>
-                <input type="hidden" name="CMND" value="<%= CMND %>">
-            </div>
 
-            <div id="input-DIACHI" class="form-group">
-                <div class="form-group__title">Địa chỉ</div>
-                <div class="form-group__value">
-                    <%= DIACHI %>
+                <div id="DIACHI" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Địa chỉ</div>
+                    <div class="form-group__title verify-createbook__value"><%= DIACHI %></div>
+                    <input type="hidden" name="DIACHI" value="<%= DIACHI %>">
                 </div>
-                <input type="hidden" name="DIACHI" value="<%= DIACHI %>">
-            </div>
 
-            <div id="input-SOTIEN" class="form-group">
-                <div class="form-group__title">Số tiền gửi</div>
-                <div class="form-group__value">
-                    <%= SOTIEN %>
+                <div id="NGAYMO" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Ngày mở sổ</div>
+                    <div class="form-group__title verify-createbook__value"><%= NGAY %></div>
+                    <input type="hidden" name="NGAYMO" value="<%= NGAY %>">
                 </div>
-                <input type="hidden" name="SOTIEN" value="<%= SOTIEN %>">
-            </div>
 
-            <div id="input-date" class="form-group">
-                <div class="form-group__title">Ngày mở sổ</div>
-                <div class="form-group__value">
-                    <%= NGAY %>
+                <div id="SOTIEN" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Số tiền gửi</div>
+                    <div class="form-group__title verify-createbook__value"><%= SOTIEN %></div>
+                    <input type="hidden" name="SOTIEN" value="<%= SOTIEN %>">
                 </div>
-                <input type="hidden" name="NGAY" value="<%= NGAY %>">
             </div>
-
-            <div class="form-buttons">
-                <button type="submit" class="form-group__button" name="action" value="confirm">Xác nhận</button>
-                <button type="button" class="form-group__button" onclick="window.history.back()">Quay lại</button>
+    
+            <div class="verify__group1">
+                <button type="button" class="form-group__button back-button" onclick="window.history.back()">Quay lại</button>
+                <button type="submit" class="form-group__button submit-button" name="action" value="confirm">Xác nhận</button>
             </div>
         </form>
     </div>
