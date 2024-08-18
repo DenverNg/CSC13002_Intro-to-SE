@@ -121,6 +121,34 @@ const postDepositForm = async(req, res) => {
     })
 }
 
+//Add new term deposit
+const getAddTermDeposit = async(req, res) => {
+    const action = req.body.action;
+     // Initial rendering of the verification page
+    if (!action) {        
+        const resultsTerm = await getAllTermDeposit();
+        const resultMininum = await getMininum();
+        res.render('Settings_Add.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+    }
+}
+const postAddTermDeposit = async(req, res) => {
+    const action = req.body.action;
+    if (action === 'confirm') {
+        const {TENKYHAN,THOIGIANDAOHAN,LAISUAT} = req.body;
+        const query = 'INSERT INTO LOAI_SOTK(MALOAI, KYHAN, LAISUAT,TRANGTHAI)\
+        VALUES (?,?,?,?)';
+        try {
+            await connection.query(query, [THOIGIANDAOHAN, TENKYHAN, LAISUAT, 1]);
+            res.redirect('/cai_dat');
+        } catch (error) {
+            console.error('Error executing query:', error);
+            res.status(500).send('An error occurred while saving the data');
+        }
+    } else if (action === 'cancel') {
+        res.redirect('/cai_dat');
+    }
+}
+
 module.exports = {
     getDashboard,
     getTransactions,
@@ -134,5 +162,7 @@ module.exports = {
     getDepositForm,
     postDepositForm,
     getCreateBookForm, 
-    postCreateBookForm
+    postCreateBookForm,
+    postAddTermDeposit,
+    getAddTermDeposit
 }

@@ -37,6 +37,7 @@ const deleteTermDeposit = async(nameTerm) =>{
         WHERE KYHAN = ?', [nameTerm]);
     console.log(results);
 }
+
 module.exports = {
     getAllBooks,
     getDailyRP,
