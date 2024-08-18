@@ -13,7 +13,7 @@ router.get('/bao_cao_thang', getMonthlyReports);
 router.get('/cai_dat', getSettings);
 
 router.get('/cai_dat/xoa', getSettings_Delete);
-//router.post('/cai_dat/xoa/xoa_kyhan', postDeleteTermDeposit);
+router.post('/cai_dat/xoa/xacnhan', postDeleteTermDeposit);
 
 router.get('/cai_dat/them', getAddTermDeposit);
 router.post('/cai_dat/them/xacnhan', postAddTermDeposit);
