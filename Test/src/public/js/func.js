@@ -27,13 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sidebar = document.querySelector('.sidebar');
     const mainToggle = document.querySelector('.main');
+    const tabToggle = document.querySelector('.tab-pane');
+
 
     sidebar.addEventListener('mouseover', () => {
     mainToggle.classList.add('active');
+    //tabToggle.classList.add('active');
+
   });
 
     sidebar.addEventListener('mouseout', () => {
+   // tabToggle.classList.remove('active');
     mainToggle.classList.remove('active');
+
     });
   
 

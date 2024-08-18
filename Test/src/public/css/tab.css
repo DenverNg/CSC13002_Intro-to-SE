@@ -1,0 +1,97 @@
+.tabs {
+    display: flex;
+    position: relative;
+  }
+  .tabs .line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 6px;
+    border-radius: 15px;
+    background: linear-gradient(to right,#6234a3,#8613adbf);
+    transition: all 0.2s ease;
+  }
+  .tab-item {
+    padding: 30px 40px 11px 40px;
+    font-size: 25px;
+    text-align: center;
+    color:#6234a3;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 5px solid transparent;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+  
+  .tab-item:hover {
+    opacity: 1;
+    background-color:#7065d22d;
+    border-color: #7065d24f;
+  }
+  .tab-item.active {
+    opacity: 1;
+  }
+  .tab-content {
+    padding: 28px 0;
+    position: relative;
+  }
+  .tab-pane {
+    color: #333;
+    display: none;
+  }
+  .tab-pane.active {
+    display: block; 
+    position: relative;
+  }
+  .tab-pane h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+
+  .subheader{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 90%;
+    position: relative;
+  }
+
+  .subheader .form-group, .subheader .wrapper{
+    transform: scale(0.8);
+  }
+
+  .EnterValue{
+    display: flex;
+    justify-content:flex-start;
+    flex-direction: row;
+  }
+
+  .Function{
+    width: 100%;
+    position:relative;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    gap: 20%;
+  }
+
+  .icon{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    color:#7065D2;
+    font-weight: 500px;
+    opacity: 90%;
+  }
+
+  .icon:hover{
+    opacity:100%;
+    transform: scale(1.25);
+    transition: all 0.3s;
+  }
