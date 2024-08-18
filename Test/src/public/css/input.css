@@ -9,7 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: "Helvetica Neue";
-    background-color: #EEECFF;
+    background-color: #000;
 }
 
 body > div {
@@ -24,7 +24,6 @@ body > div {
 .form-group {
     display: flex;
     position: relative;
-    /* align-items: center; */
     max-width: 380px;
     flex-flow: column;
 }
@@ -34,7 +33,7 @@ body > div {
 }
 
 .form-group + .form-group {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .form-group__input {
@@ -102,16 +101,20 @@ body > div {
    color: #d1637a;
 }
 .form-group__button{
-    width: 380px;
+    max-width: 300px;
     height: 60px;
-    font-size: 28px;
+    font-size: 25px;
     font-weight: 500;
     border: #7065D2 solid;
     border-width: 1px;
     border-radius: 10px;
     color: #7065D2;
-    padding: 0 10px;
-    margin: 15px 0 25px;
+    padding: 0 40px;
+    margin: 15px 0 25px 0;
     background-color: #7065D2;
     color: white;
+}
+
+.form-group__button + .form-group__button{
+    margin-left: 40px;
 }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác nhận thông tin sổ mới</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/input.css">
+    <link rel="stylesheet" href="/css/createbook.css">
+</head>
+
+<body>
+    <div id="createbook-verify" class="createbook">
+        <div id="createbook__title">Sổ tiết kiệm</div>
+        <form action="/taoso_form/xacnhan" method="post" class="form-verify">
+            <div class="verify__group0">
+                <div id="MASO" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Mã sổ</div>
+                    <div class="form-group__title verify-createbook__value"><%= MASO %></div>
+                    <input type="hidden" name="MASO" value="<%= MASO %>">
+                </div>
+
+                <div id="LOAI" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Loại sổ</div>
+                    <div class="form-group__title verify-createbook__value"><%= LOAI %></div>
+                    <input type="hidden" name="LOAI" value="<%= LOAI %>">
+                </div>
+
+                <div id="TENKH" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Khách hàng</div>
+                    <div class="form-group__title verify-createbook__value"><%= TENKH %></div>
+                    <input type="hidden" name="TENKH" value="<%= TENKH %>">
+                </div>
+
+                <div id="CMND" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">CMND</div>
+                    <div class="form-group__title verify-createbook__value"><%= CMND %></div>
+                    <input type="hidden" name="CMND" value="<%= CMND %>">
+                </div>
+
+                <div id="DIACHI" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Địa chỉ</div>
+                    <div class="form-group__title verify-createbook__value"><%= DIACHI %></div>
+                    <input type="hidden" name="DIACHI" value="<%= DIACHI %>">
+                </div>
+
+                <div id="NGAYMO" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Ngày mở sổ</div>
+                    <div class="form-group__title verify-createbook__value"><%= NGAY %></div>
+                    <input type="hidden" name="NGAYMO" value="<%= NGAY %>">
+                </div>
+
+                <div id="SOTIEN" class="form-group verify-row">
+                    <div class="form-group__title verify-createbook__title">Số tiền gửi</div>
+                    <div class="form-group__title verify-createbook__value"><%= SOTIEN %></div>
+                    <input type="hidden" name="SOTIEN" value="<%= SOTIEN %>">
+                </div>
+            </div>
+    
+            <div class="verify__group1">
+                <button type="button" class="form-group__button back-button" onclick="window.history.back()">Quay lại</button>
+                <button type="submit" class="form-group__button submit-button" name="action" value="confirm">Xác nhận</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -25,6 +25,11 @@ const getActiveTermDeposit = async() => {
         'SELECT KYHAN , MALOAI, LAISUAT FROM LOAI_SOTK WHERE TRANGTHAI = 1');
     return results;
 }
+const getMininum = async() => {
+    const [results, fields] = await connection.query(
+        'SELECT * FROM DONVI_TOITHIEU');
+    return results;
+}
 const deleteTermDeposit = async(nameTerm) =>{
     const [results, fields] = await connection.query(
         'UPDATE LOAI_SOTK\
@@ -38,5 +43,6 @@ module.exports = {
     getMonthlyRP,
     getAllTermDeposit,
     getActiveTermDeposit,
-    deleteTermDeposit
+    deleteTermDeposit,
+    getMininum
 }
