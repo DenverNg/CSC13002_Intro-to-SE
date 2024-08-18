@@ -21,10 +21,13 @@ function undoBlurAll() {
 }
 // Function to get values of the first column from blurred rows as a string
 function getBlurredFirstColumnValuesString() {
-    // Lấy tất cả giá trị của cột đầu tiên từ các hàng bị blur và nối chúng thành một chuỗi
-    return Array.from(blurredRows.values())
-        .map(row => row.firstColumnValue)
-        .join(', '); // Các giá trị cách nhau bởi dấu phẩy và khoảng trắng
+    const values = [];
+    for (const index of blurredRows) {
+        const row = document.getElementById(`term-${index}`);
+        const firstColumnValue = row.children[0].textContent;
+        values.push(firstColumnValue);
+    }
+    return values.join(', ');
 }
 
 // Example usage: log values of the first column from blurred rows as a string

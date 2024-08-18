@@ -1,5 +1,5 @@
 const express = require('express');
-const {getDashboard, getTransactions, getDailyReports, getMonthlyReports, getSettings, getCreateBookForm, postCreateBookForm, getDepositForm, postDepositForm,  getSettings_Delete} = require('../controllers/homeControllers');
+const {getDashboard, getTransactions, getDailyReports, getMonthlyReports, getSettings, getCreateBookForm, postCreateBookForm, getDepositForm, postDepositForm,  getSettings_Delete, deleteTermDeposit} = require('../controllers/homeControllers');
 const router = express.Router();
 
 
@@ -10,6 +10,7 @@ router.get('/bao_cao_ngay', getDailyReports);
 router.get('/bao_cao_thang', getMonthlyReports);
 router.get('/cai_dat', getSettings);
 router.get('/cai_dat/xoa', getSettings_Delete);
+router.post('/cai_dat/xoa/xoa_kyhan', deleteTermDeposit);
 //router.post('/cai_dat/them', postSettings_Add);
 //router.post('/cai_dat/sua', postSettings_Moddify);
 

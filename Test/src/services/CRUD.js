@@ -15,14 +15,28 @@ const getMonthlyRP = async(month, type) => {
         'CALL BAOCAO_THANG(?,?)', [month, type]);
     return results;
 }
-const getTermDeposit = async() => {
+const getAllTermDeposit = async() => {
     const [results, fields] = await connection.query(
         'SELECT KYHAN , MALOAI, LAISUAT FROM LOAI_SOTK');
     return results;
+}
+const getActiveTermDeposit = async() => {
+    const [results, fields] = await connection.query(
+        'SELECT KYHAN , MALOAI, LAISUAT FROM LOAI_SOTK WHERE TRANGTHAI = 1');
+    return results;
+}
+const deleteTermDeposit = async(nameTerm) =>{
+    const [results, fields] = await connection.query(
+        'UPDATE LOAI_SOTK\
+        SET TRANGTHAI = 0\
+        WHERE KYHAN = ?', [nameTerm]);
+    console.log(results);
 }
 module.exports = {
     getAllBooks,
     getDailyRP,
     getMonthlyRP,
-    getTermDeposit
+    getAllTermDeposit,
+    getActiveTermDeposit,
+    deleteTermDeposit
 }

@@ -1,5 +1,5 @@
 const connection = require('../config/database');
-const {getAllBooks, getDailyRP, getMonthlyRP, getTermDeposit} = require('../services/CRUD');
+const {getAllBooks, getDailyRP, getMonthlyRP, getAllTermDeposit, getActiveTermDeposit} = require('../services/CRUD');
 //Dashboard
 const getDashboard = (req, res) => {
     res.render('Dashboard.ejs');
@@ -31,7 +31,6 @@ const getDailyReports = async(req, res) => {
     //let date = req.body.NGAY;
     const results = await getDailyRP('2024-10-18'); //Chưa lấy được ngày từ user
     res.render('Daily_Report.ejs', {listDailyRP: results});
-    console.log(results);  
 }
 const getMonthlyReports = async(req, res) => {
     // const results = await getMonthlyRP('2024-10-18'); //Chưa lấy được ngày từ user
@@ -39,7 +38,7 @@ const getMonthlyReports = async(req, res) => {
     res.send('Monthly Report');
 }
 const getSettings = async(req, res) => {
-    const results = await getTermDeposit();
+    const results = await getAllTermDeposit();
     res.render('Settings.ejs', {listTerm: results});
 }
 // const postSettings = async(req, res) => {
@@ -90,13 +89,18 @@ const getSettings_Delete = async(req, res) => {
     const action = req.body.action;
      // Initial rendering of the verification page
     if (!action) {        
-        const results = await getTermDeposit();
+        const results = await getActiveTermDeposit();
          res.render('Settings_Delete.ejs', {listTerm: results});
     }
 }
-
-
-
+const deleteTermDeposit = async(req, res) => {
+    const action = req.body.action;
+    if (action = 'deleteTerm') {
+        const nameTerm = 'KHÔNG KỲ HẠN';
+        await deleteTermDeposit(nameTerm);
+        res.send('Success');
+    }
+}
 
 const getDepositForm = async(req, res) => {
     res.render('Deposit_form.ejs');
@@ -110,6 +114,7 @@ const postDepositForm = async(req, res) => {
         res.send(req.body);
     })
 }
+
 module.exports = {
     getDashboard,
     getTransactions,
@@ -118,6 +123,7 @@ module.exports = {
     getSettings,
     //postSettings_Add,
     getSettings_Delete,
+    deleteTermDeposit,
     //postSettings_Moddify,
     getDepositForm,
     postDepositForm,
