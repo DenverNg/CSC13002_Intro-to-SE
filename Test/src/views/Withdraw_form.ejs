@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Tạo phiếu gửi tiền</title>
+    <title>Tạo phiếu rút tiền</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -18,7 +18,7 @@
 
 <body>
     <div id="deposit-form" class="deposit">
-        <div id="deposit__title">Phiếu gửi tiền</div>
+        <div id="deposit__title">Phiếu rút tiền</div>
         <form action="/guitien_form/xacnhan" method="post" class="form-input">
             <div id="deposit__group0">
                 <div id="deposit__group1">
@@ -32,13 +32,13 @@
                         <div class="form-group__title inp-deposit__title">Nhập mã sổ</div>
                         <span id="input-name-message" class="form-group__message"></span>
                     </div>
-            
-                    
+
+
                 </div>
-            
+
                 <div id="deposit__group2">
-        
-            
+
+
                     <div onclick="inputClicked({
                                             id: 'input-date',
                                             inputType: 'date',
@@ -47,7 +47,7 @@
                                             animation: 'inputTitleMoveUp_deposit'})" id="input-date"
                         class="form-group inp-deposit">
                         <input id="date" class="form-group__input inp-deposit__input" type="text" name="NGAY">
-                        <div class="form-group__title inp-deposit__title">Ngày gửi</div>
+                        <div class="form-group__title inp-deposit__title">Ngày tạo sổ</div>
                         <span id="input-name-message" class="form-group__message"></span>
                     </div>
                 </div>
@@ -61,10 +61,10 @@
                                         animation: 'inputTitleMoveUp_deposit'})" id="input-SOTIEN"
                     class="form-group inp-deposit">
                     <input id="SOTIEN" class="form-group__input inp-deposit__input" type="text" name="SOTIEN">
-                    <div class="form-group__title inp-deposit__title">Nhập số tiền gửi</div>
+                    <div class="form-group__title inp-deposit__title">Nhập số tiền rút</div>
                     <span id="input-name-message" class="form-group__message"></span>
                 </div>
-            
+
                 <button class="form-group__button next-button">Tiếp tục</button>
             </div>
         </form>

@@ -20,9 +20,33 @@ const getTermDeposit = async() => {
         'SELECT KYHAN , MALOAI, LAISUAT FROM LOAI_SOTK');
     return results;
 }
+
+const getNextMaSo = async () => {
+    // Query to get the maximum existing MaSo
+    const [rows, fields] = await connection.query("SELECT MAX(MASO) as maxMaSo FROM SOTIETKIEM");
+    const maxMaSo = rows[0].maxMaSo;
+
+    if (maxMaSo) {
+        // Extract the numeric part from the maxMaSo, assuming the format is 'MSxxxxxx'
+        const numericPart = parseInt(maxMaSo.slice(2), 10);
+
+        // Increment the numeric part
+        const nextNumericPart = (numericPart + 1).toString().padStart(6, '0');
+
+        // Generate the new MaSo
+        const newMaSo = `MS${nextNumericPart}`;
+
+        return newMaSo;
+    } else {
+        // If no MaSo exists, start with 'MS000000'
+        return 'MS000000';
+    }
+};
+
 module.exports = {
     getAllBooks,
     getDailyRP,
     getMonthlyRP,
-    getTermDeposit
+    getTermDeposit,
+    getNextMaSo
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xác nhận phiếu gửi tiền</title>
+    <title>Xác nhận phiếu rút tiền</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="/css/input.css">
     <link rel="stylesheet" href="/css/deposit.css">
@@ -12,7 +12,7 @@
 
 <body>
     <div id="deposit-verify" class="deposit">
-        <div id="deposit__title">Phiểu gửi tiền</div>
+        <div id="deposit__title">Phiểu rút tiền</div>
         <form action="/taoso_form/xacnhan" method="post" class="form-verify">
             <div class="verify__group0">
                 <div id="MASO" class="form-group verify-row">
@@ -22,26 +22,26 @@
                     </div>
                     <input type="hidden" name="MASO" value="<%= MASO %>">
                 </div>
-                
+
                 <div id="NGAYMO" class="form-group verify-row">
-                    <div class="form-group__title verify-deposit__title">Ngày gửi</div>
+                    <div class="form-group__title verify-deposit__title">Ngày rút</div>
                     <div class="form-group__title verify-deposit__value">
                         <%= NGAY %>
                     </div>
                     <input type="hidden" name="NGAYMO" value="<%= NGAY %>">
                 </div>
-                
+
                 <div id="TENKH" class="form-group verify-row">
-                    <div class="form-group__title verify-deposit__title">Người gửi</div>
+                    <div class="form-group__title verify-deposit__title">Người rút</div>
                     <div class="form-group__title verify-deposit__value">
                         <%= TENKH %>
                     </div>
                     <input type="hidden" name="TENKH" value="<%= TENKH %>">
                 </div>
 
-                            
 
-                
+
+
 
                 <div id="SOTIEN" class="form-group verify-row">
                     <div class="form-group__title verify-deposit__title">Số tiền gửi thêm</div>

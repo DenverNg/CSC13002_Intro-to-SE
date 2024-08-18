@@ -1,0 +1,188 @@
+/* For Input form */
+
+.deposit {
+    width: 900px;
+    background-color: #EEECFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-left-radius: 30px 30px;
+    border-bottom-right-radius: 30px 30px;
+    border-top-left-radius: 10px 10px;
+    border-top-right-radius: 10px 10px;
+}
+
+#deposit__title {
+    width: 100%;
+    height: 50px;
+    color: #FFFF;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.6);
+    line-height: 50px;
+    padding-left: 50px;
+    background-image: linear-gradient(90deg, #31076d, #8613adbf, #a00050be);
+    border-top-left-radius: 10px 10px;
+    border-top-right-radius: 10px 10px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+#deposit__group0 {
+    margin-top: 40px;
+    width: 790px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#deposit__group3 {
+    max-width: 790px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    justify-self: center;
+}
+
+#SOTIEN {
+    width: 790px;
+}
+
+.form-input {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inp-deposit {
+    max-width: 800px;
+}
+
+.inp-deposit__input {
+    width: 350px;
+    height: 60px;
+    font-size: 20px;
+}
+
+.inp-deposit__title {
+    font-size: 20px;
+    top: calc(30% + 1px);
+}
+
+@keyframes inputTitleMoveUp_deposit {
+    to {
+        font-size: 14px;
+        top: calc(5.5%);
+        left: 15px;
+        background-image: linear-gradient(0, #FFFF, #EEECFF);
+    }
+}
+
+@keyframes inputTitleMoveDown_deposit {
+    to {
+        font-size: 20px;
+        top: calc(30% + 1px);
+        left: 0;
+        background-image: none;
+    }
+}
+
+/* Buttons */
+
+.next-button {
+    width: 200px;
+    font-weight: bold;
+    border: none;
+    background-image: linear-gradient(90deg, #51B072, #059436);
+    align-self: end;
+}
+
+.next-button:hover {
+    opacity: 0.8;
+}
+
+.back-button {
+    width: 200px;
+    font-weight: bold;
+    border: none;
+    background-image: linear-gradient(90deg, #f1bf4b, #f2d081);
+    align-self: end;
+}
+
+.back-button:hover {
+    opacity: 0.8;
+}
+
+.submit-button {
+    width: 200px;
+    font-weight: bold;
+    border: none;
+    background-image: linear-gradient(90deg, #51B072, #059436);
+    align-self: end;
+}
+
+.submit-button:hover {
+    opacity: 0.8;
+}
+
+/* For Verify form */
+.form-verify {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.verify__buttons {
+    position: absolute;
+}
+
+.verify-row {
+    max-width: 90%;
+    width: 90%;
+    border-bottom: #7065d285 solid;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.verify-row+.verify-row {
+    margin-top: 15px;
+}
+
+.verify-deposit__title {
+    position: unset;
+    font-size: 20px;
+    font-weight: 400;
+    color: #7065D2;
+}
+
+.verify-deposit__value {
+    position: unset;
+    font-size: 25px;
+    font-weight: 500;
+    max-width: 70%;
+    text-align: right;
+    color: #7167CF;
+}
+
+.verify__group0 {
+    width: 90%;
+    background-color: #FFFF;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 20px 15px #FFFF;
+    align-items: center;
+    justify-self: end;
+}
+
+.verify__group1 {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-self: end;
+}

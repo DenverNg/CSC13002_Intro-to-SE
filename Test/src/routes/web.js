@@ -1,5 +1,5 @@
 const express = require('express');
-const {getDashboard, getTransactions, getDailyReports, getMonthlyReports, getSettings, getCreateBookForm, postCreateBookForm, getDepositForm, postDepositForm,  getSettings_Delete} = require('../controllers/homeControllers');
+const {getDashboard, getTransactions, getDailyReports, getMonthlyReports, getSettings, getCreateBookForm, postCreateBookForm, getDepositForm, postDepositForm,  getSettings_Delete, getWithdrawForm, postWithdrawForm} = require('../controllers/homeControllers');
 const router = express.Router();
 
 
@@ -18,10 +18,10 @@ router.get('/taoso_form', getCreateBookForm);
 router.post('/taoso_form/xacnhan', postCreateBookForm);
 
 router.get('/guitien_form', getDepositForm);
-router.post('/guitien_xacnhan', postDepositForm);
+router.post('/guitien_form/xacnhan', postDepositForm);
 
-// router.get('/ruttien_form', getWithdrawForm);
-// router.post('/ruttien_xacnhan', postWithdrawForm);
+router.get('/ruttien_form', getWithdrawForm);
+router.post('/ruttien_xacnhan', postWithdrawForm);
 
 
 
