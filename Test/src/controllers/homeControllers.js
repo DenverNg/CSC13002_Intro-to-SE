@@ -1,6 +1,6 @@
 const connection = require('../config/database');
 const { notify } = require('../routes/web');
-const {getAllBooks, getDailyRP, getMonthlyRP, getAllTermDeposit, getActiveTermDeposit, getMininum} = require('../services/CRUD');
+const {getAllBooks, getDailyRP, getMonthlyRP, getAllTermDeposit, getActiveTermDeposit, getMininum, updateRateDeposit} = require('../services/CRUD');
 const {getCurrentDate} = require('../public/js/date');
 const { set, get } = require('express/lib/response');
 
@@ -92,20 +92,14 @@ const getSettings = async(req, res) => {
     res.render('Settings.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
 }
 const getSettings_Delete = async(req, res) => {
-    const action = req.body.action;
-     // Initial rendering of the verification page
-    if (!action) {        
-        const results = await getActiveTermDeposit();
-         res.render('Settings_Delete.ejs', {listTerm: results});
-    }
+    const results = await getActiveTermDeposit();
+        res.render('Settings_Delete.ejs', {listTerm: results});
+
 }
 const deleteTermDeposit = async(req, res) => {
-    const action = req.body.action;
-    if (action = 'deleteTerm') {
-        const nameTerm = 'KHÔNG KỲ HẠN';
-        await deleteTermDeposit(nameTerm);
-        res.send('Success');
-    }
+    const nameTerm = 'KHÔNG KỲ HẠN';
+    await deleteTermDeposit(nameTerm);
+    res.send('Success');
 }
 
 const getDepositForm = async(req, res) => {
@@ -122,14 +116,11 @@ const postDepositForm = async(req, res) => {
 }
 
 //Add new term deposit
-const getAddTermDeposit = async(req, res) => {
-    const action = req.body.action;
-     // Initial rendering of the verification page
-    if (!action) {        
-        const resultsTerm = await getAllTermDeposit();
-        const resultMininum = await getMininum();
-        res.render('Settings_Add.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
-    }
+const getAddTermDeposit = async(req, res) => {      
+    const resultsTerm = await getAllTermDeposit();
+    const resultMininum = await getMininum();
+    res.render('Settings_Add.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+
 }
 const postAddTermDeposit = async(req, res) => {
     const action = req.body.action;
@@ -148,6 +139,36 @@ const postAddTermDeposit = async(req, res) => {
         res.redirect('/cai_dat');
     }
 }
+const getSettings_Moddify = async(req, res) => {
+    const resultsTerm = await getAllTermDeposit();
+    const resultMininum = await getMininum();
+    res.render('Settings_Modify.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+}
+const postSettings_Moddify = async (req, res) => {
+    const action = req.body.action;
+
+    if (action === 'confirm') {
+        const { MALOAI, LAISUAT } = req.body;
+
+        // Kiểm tra xem MALOAI và LAISUAT có phải là mảng không và chúng có cùng độ dài không
+        if (!Array.isArray(MALOAI) || !Array.isArray(LAISUAT) || MALOAI.length !== LAISUAT.length) {
+            return res.status(400).send('Invalid data format');
+        }
+        try {
+            // Thực hiện cập nhật
+            await updateRateDeposit(LAISUAT, MALOAI);
+            res.redirect('/cai_dat');
+        } catch (error) {
+            console.error('Error executing query:', error);
+            res.status(500).send('An error occurred while saving the data');
+        }
+    } else if (action === 'cancel') {
+        res.redirect('/cai_dat');
+    } else {
+        res.status(400).send('Invalid action');
+    }
+};
+
 
 module.exports = {
     getDashboard,
@@ -155,10 +176,10 @@ module.exports = {
     getDailyReports,
     getMonthlyReports,
     getSettings,
-    //postSettings_Add,
     getSettings_Delete,
     deleteTermDeposit,
-    //postSettings_Moddify,
+    getSettings_Moddify,
+    postSettings_Moddify,
     getDepositForm,
     postDepositForm,
     getCreateBookForm, 

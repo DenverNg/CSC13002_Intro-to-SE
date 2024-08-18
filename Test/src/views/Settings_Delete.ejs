@@ -77,7 +77,7 @@
                                     <tr id="term-<%=i%>">
                                         <td><%=listTerm[i].KYHAN %></td>
                                         <td><%=listTerm[i].MALOAI %> tháng</td>
-                                        <td><%=listTerm[i].LAISUAT %>%</td>
+                                        <td><%=(listTerm[i].LAISUAT*100).toFixed(2) %>%</td>
                                         <td>
                                             <button type="button" class="btn btn-danger" onclick="blurTerm('<%=i%>')">
                                                 <i class="fas fa-times"></i>

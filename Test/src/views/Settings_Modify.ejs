@@ -62,27 +62,32 @@
 						</div>
 					</div>
 					<section class="table__body">
-						<table>
-							<thead>
-								<tr>
-									<th> Tên kỳ hạn <span class="icon-arrow">&UpArrow;</span></th>
-									<th> Thời gian đáo hạn <span class="icon-arrow">&UpArrow;</span></th>
-									<th> Lãi suất <span class="icon-arrow">&UpArrow;</span></th>
-								</tr>
-							</thead>
-							<tbody>
-								<% for (let i = 0; i < listTerm.length; i++) { %>
+						<form action="/cai_dat/sua/xacnhan" method="post" class="form-verify">
+							<table>
+								<thead>
 									<tr>
-										<td><%=listTerm[i].KYHAN %></td>
-										<td><%=listTerm[i].MALOAI %> tháng</td>
-										<td><%=listTerm[i].LAISUAT %>%</td>
+										<th> Tên kỳ hạn <span class="icon-arrow">&UpArrow;</span></th>
+										<th> Thời gian đáo hạn <span class="icon-arrow">&UpArrow;</span></th>
+										<th> Lãi suất <span class="icon-arrow">&UpArrow;</span></th>
 									</tr>
-								<% } %>
-							</tbody>
-						</table>
-						<button class="form-group__button" onclick="window.location.href='/cai_dat/xoa'">Xoá</button>
-						<button class="form-group__button" onclick="window.location.href='/cai_dat/xoa'">Thêm</button>
-						<button class="form-group__button" onclick="window.location.href='/cai_dat/xoa'">Sửa</button>
+								</thead>
+								<tbody>
+									<% for (let i = 0; i < listTerm.length; i++) { %>
+										<tr>
+											<td><%=listTerm[i].KYHAN %></td>
+											<td><%=listTerm[i].MALOAI %> tháng</td>
+											<td>
+												<!-- Thêm trường ẩn để lưu mã định danh -->
+												<input type="hidden" name="MALOAI[]" value="<%= listTerm[i].MALOAI %>" />
+												<input type="text" name="LAISUAT[]" value="<%= (listTerm[i].LAISUAT * 100).toFixed(2) %>" />%
+											</td>
+										</tr>
+									<% } %>
+								</tbody>
+							</table>
+							<button class="form-group__button" name="action" value="confirm">Lưu</button>
+							<button class="form-group__button" name="action" value="cancel">Huỷ thay đổi</button>
+						</form>
 					</section>
 
 					<section class="table__body">

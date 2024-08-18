@@ -37,7 +37,19 @@ const deleteTermDeposit = async(nameTerm) =>{
         WHERE KYHAN = ?', [nameTerm]);
     console.log(results);
 }
+const updateRateDeposit = async (rates, terms) => {
+    // Lặp qua từng cặp giá trị để thực hiện cập nhật
+    for (let i = 0; i < rates.length; i++) {
+        const rate = rates[i];
+        const term = terms[i];
 
+        // Thực hiện cập nhật cho mỗi cặp giá trị
+        await connection.query(
+            'UPDATE LOAI_SOTK SET LAISUAT = ?/100 WHERE MALOAI = ?',
+            [rate, term]
+        );
+    }
+};
 module.exports = {
     getAllBooks,
     getDailyRP,
@@ -45,5 +57,6 @@ module.exports = {
     getAllTermDeposit,
     getActiveTermDeposit,
     deleteTermDeposit,
-    getMininum
+    getMininum,
+    updateRateDeposit
 }
