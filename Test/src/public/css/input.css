@@ -28,14 +28,6 @@ body > div {
     flex-flow: column;
 }
 
-.form-group:hover {
-    cursor: text;
-}
-
-.form-group + .form-group {
-    margin-top: 10px;
-}
-
 .form-group__input {
     width: 380px;
     height: 60px;
@@ -46,7 +38,7 @@ body > div {
     border-radius: 10px;
     color: #7065D2;
     padding: 0 10px;
-    margin: 15px 0 25px;
+    margin: 30px 0 30px;
 }
 
 .form-group__title {
@@ -61,8 +53,23 @@ body > div {
     background-image: none;
 }
 
-.form-group__title::selection {
-    background-color: transparent;
+.form-group__input__title{
+    align-content: center;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.27s ease;
+    margin-left: 10px;
+}
+
+.form-group__input:focus + .form-group__title,
+.form-group__input:not(:placeholder-shown) + .form-group__title {
+    font-size: 17px;
+    top: 25%;
+    left: 15px;
+    padding: 2px 20px;
+    margin-left: 0;
+    background: radial-gradient(closest-side, #ffffff 70%, #ffffff00);
 }
 
 @keyframes inputTitleMoveUp {
@@ -88,7 +95,7 @@ body > div {
     font-style: italic;
     color: #dd0303;
     position: absolute;
-    bottom: 0;
+    top: 80%;
     left: 0px;
 }
 
@@ -100,6 +107,7 @@ body > div {
 .form-group.invalid .form-group__title {
    color: #d1637a;
 }
+
 .form-group__button{
     max-width: 300px;
     height: 60px;

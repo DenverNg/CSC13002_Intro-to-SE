@@ -29,23 +29,22 @@
 
 #createbook__group0{
     margin-top: 40px;
-    width: 790px;
+    width: 780px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
 #createbook__group3{
-    max-width: 790px;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
     justify-self: center;
 }
 
 #SOTIEN{
-    width: 790px;
+    width: 780px;
 }
 
 .form-input{
@@ -61,13 +60,18 @@
 
 .inp-createbook__input{
     width: 350px;
-    height: 60px;
+    height: 50px;
     font-size: 20px;
+    margin: 25px 0 25px;
 }
 
 .inp-createbook__title{
     font-size: 20px;
-    top: calc(30% + 1px);
+}
+
+.inp-createbook__input:focus + .inp-createbook__title,
+.inp-createbook__input:not(:placeholder-shown) + .inp-createbook__title {
+    font-size: 15px;
 }
 
 @keyframes inputTitleMoveUp_createbook {
