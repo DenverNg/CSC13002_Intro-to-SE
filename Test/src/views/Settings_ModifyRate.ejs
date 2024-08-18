@@ -62,7 +62,7 @@
 						</div>
 					</div>
 					<section class="table__body">
-						<form action="/cai_dat/them/xacnhan" method="post" class="form-verify">
+						<form action="/cai_dat/sua/xacnhan" method="post" class="form-verify">
 							<table>
 								<thead>
 									<tr>
@@ -76,24 +76,17 @@
 										<tr>
 											<td><%=listTerm[i].KYHAN %></td>
 											<td><%=listTerm[i].MALOAI %> tháng</td>
-											<td><%=(listTerm[i].LAISUAT*100).toFixed(2) %>%</td>
+											<td>
+												<!-- Thêm trường ẩn để lưu mã định danh -->
+												<input type="hidden" name="MALOAI[]" value="<%= listTerm[i].MALOAI %>" />
+												<input type="text" name="LAISUAT[]" value="<%= (listTerm[i].LAISUAT * 100).toFixed(2) %>" />%
+											</td>
 										</tr>
 									<% } %>
-									<tr>
-										<td>
-											<input type="text" name="TENKYHAN" placeholder="Nhập tên kỳ hạn" %>">
-										</td>
-										<td>
-											<input type="text" name="THOIGIANDAOHAN" placeholder="Nhập thời gian đáo hạn(tháng)" %>">
-										</td>
-										<td>
-											<input type="text" name="LAISUAT" placeholder="Nhập lãi suất" %>">
-										</td>
-									</tr>
 								</tbody>
 							</table>
-							<button class="form-group__button" name="action" value="confirm">Thêm</button>
-							<button class="form-group__button" name="action" value="cancel">Huỷ thêm</button>
+							<button class="form-group__button" name="action" value="confirm">Lưu</button>
+							<button class="form-group__button" name="action" value="cancel">Huỷ thay đổi</button>
 						</form>
 					</section>
 
