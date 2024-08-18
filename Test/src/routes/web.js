@@ -1,6 +1,6 @@
 const express = require('express');
-const {getDashboard, getTransactions, getDailyReports, getMonthlyReports, getSettings, getCreateBookForm, postCreateBookForm, getDepositForm, postDepositForm,  getSettings_Delete, deleteTermDeposit,getAddTermDeposit,postAddTermDeposit,
-    getSettings_Moddify, postSettings_Moddify
+const {getDashboard, getTransactions, getDailyReports, getMonthlyReports, getSettings, getCreateBookForm, postCreateBookForm, getDepositForm, postDepositForm,  getSettings_Delete, postDeleteTermDeposit,getAddTermDeposit,postAddTermDeposit,
+    getModifyTermDeposit, postModifyTermDeposit,getModifyMinValue, postModifyMinValue
 } = require('../controllers/homeControllers');
 const router = express.Router();
 
@@ -13,13 +13,16 @@ router.get('/bao_cao_thang', getMonthlyReports);
 router.get('/cai_dat', getSettings);
 
 router.get('/cai_dat/xoa', getSettings_Delete);
-//router.post('/cai_dat/xoa/xoa_kyhan', deleteTermDeposit);
+//router.post('/cai_dat/xoa/xoa_kyhan', postDeleteTermDeposit);
 
 router.get('/cai_dat/them', getAddTermDeposit);
 router.post('/cai_dat/them/xacnhan', postAddTermDeposit);
 
-router.get('/cai_dat/sua', getSettings_Moddify);
-router.post('/cai_dat/sua/xacnhan', postSettings_Moddify);
+router.get('/cai_dat/sua', getModifyTermDeposit);
+router.post('/cai_dat/sua/xacnhan', postModifyTermDeposit);
+
+router.get('/cai_dat/sua_min', getModifyMinValue);
+router.post('/cai_dat/sua_min/xacnhan', postModifyMinValue);
 
 
 router.get('/taoso_form', getCreateBookForm);

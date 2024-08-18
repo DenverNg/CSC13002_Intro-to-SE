@@ -1,6 +1,6 @@
 const connection = require('../config/database');
 const { notify } = require('../routes/web');
-const {getAllBooks, getDailyRP, getMonthlyRP, getAllTermDeposit, getActiveTermDeposit, getMininum, updateRateDeposit} = require('../services/CRUD');
+const {getAllBooks, getDailyRP, getMonthlyRP, getAllTermDeposit, getActiveTermDeposit, getMininum, updateRateDeposit, updateMininum} = require('../services/CRUD');
 const {getCurrentDate} = require('../public/js/date');
 const { set, get } = require('express/lib/response');
 
@@ -139,12 +139,12 @@ const postAddTermDeposit = async(req, res) => {
         res.redirect('/cai_dat');
     }
 }
-const getSettings_Moddify = async(req, res) => {
+const getModifyTermDeposit = async(req, res) => {
     const resultsTerm = await getAllTermDeposit();
     const resultMininum = await getMininum();
-    res.render('Settings_Modify.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+    res.render('Settings_ModifyRate.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
 }
-const postSettings_Moddify = async (req, res) => {
+const postModifyTermDeposit = async (req, res) => {
     const action = req.body.action;
 
     if (action === 'confirm') {
@@ -168,6 +168,35 @@ const postSettings_Moddify = async (req, res) => {
         res.status(400).send('Invalid action');
     }
 };
+const getModifyMinValue = async(req, res) => {
+    const resultsTerm = await getAllTermDeposit();
+    const resultMininum = await getMininum();
+    res.render('Settings_ModifyMin.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+}
+const postModifyMinValue = async (req, res) => {
+    const action = req.body.action;
+
+    if (action === 'confirm') {
+        const {TEN, GIATRI } = req.body;
+
+        // Kiểm tra xem MALOAI và LAISUAT có phải là mảng không và chúng có cùng độ dài không
+        if (!Array.isArray(TEN) || !Array.isArray(GIATRI) || GIATRI.length !== TEN.length) {
+            return res.status(400).send('Invalid data format');
+        }
+        try {
+            // Thực hiện cập nhật
+            await updateMininum(GIATRI, TEN);
+            res.redirect('/cai_dat');
+        } catch (error) {
+            console.error('Error executing query:', error);
+            res.status(500).send('An error occurred while saving the data');
+        }
+    } else if (action === 'cancel') {
+        res.redirect('/cai_dat');
+    } else {
+        res.status(400).send('Invalid action');
+    }
+};
 
 
 module.exports = {
@@ -178,12 +207,15 @@ module.exports = {
     getSettings,
     getSettings_Delete,
     deleteTermDeposit,
-    getSettings_Moddify,
-    postSettings_Moddify,
+    getModifyTermDeposit,
+    postModifyTermDeposit,
     getDepositForm,
     postDepositForm,
     getCreateBookForm, 
     postCreateBookForm,
     postAddTermDeposit,
-    getAddTermDeposit
+    getAddTermDeposit,
+    getModifyMinValue,
+    postModifyMinValue
+
 }

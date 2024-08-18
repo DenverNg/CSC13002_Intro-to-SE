@@ -50,6 +50,19 @@ const updateRateDeposit = async (rates, terms) => {
         );
     }
 };
+const updateMininum = async (values, names) => {
+    // Lặp qua từng cặp giá trị để thực hiện cập nhật
+    for (let i = 0; i < values.length; i++) {
+        const min = values[i];
+        const name = names[i];
+
+        // Thực hiện cập nhật cho mỗi cặp giá trị
+        await connection.query(
+            'UPDATE DONVI_TOITHIEU SET GIATRI = ? WHERE TEN = ?',
+            [min, name]
+        );
+    }
+}
 module.exports = {
     getAllBooks,
     getDailyRP,
@@ -58,5 +71,6 @@ module.exports = {
     getActiveTermDeposit,
     deleteTermDeposit,
     getMininum,
-    updateRateDeposit
+    updateRateDeposit,
+    updateMininum
 }
