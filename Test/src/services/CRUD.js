@@ -30,12 +30,15 @@ const getMininum = async() => {
         'SELECT * FROM DONVI_TOITHIEU');
     return results;
 }
-const deleteTermDeposit = async(nameTerm) =>{
-    const [results, fields] = await connection.query(
-        'UPDATE LOAI_SOTK\
-        SET TRANGTHAI = 0\
-        WHERE KYHAN = ?', [nameTerm]);
-    console.log(results);
+const deleteTermDeposit = async(listID) =>{
+    for (let i = 0; i < listID.length; i++) {
+        id = listID[i];
+        // Thực hiện cập nhật cho mỗi cặp giá trị
+        await connection.query(
+            'UPDATE LOAI_SOTK\
+            SET TRANGTHAI = 0\
+            WHERE KYHAN = ?', [id]);
+    }
 }
 const updateRateDeposit = async (rates, terms) => {
     // Lặp qua từng cặp giá trị để thực hiện cập nhật

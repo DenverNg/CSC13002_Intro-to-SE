@@ -14,23 +14,26 @@ function undoBlur(index) {
     row.classList.remove('blurred');
     blurredRows.delete(index); // Xóa trạng thái blur
 }
+
+// Restores all blurred rows to their normal state
 function undoBlurAll() {
-    for (const index of blurredRows) {
-        undoBlur(index);
-    }
-}
-// Function to get values of the first column from blurred rows as a string
-function getBlurredFirstColumnValuesString() {
-    const values = [];
-    for (const index of blurredRows) {
-        const row = document.getElementById(`term-${index}`);
-        const firstColumnValue = row.children[0].textContent;
-        values.push(firstColumnValue);
-    }
-    return values.join(', ');
+    blurredRows.forEach(index => undoBlur(index));
 }
 
-// Example usage: log values of the first column from blurred rows as a string
-function logBlurredFirstColumnValues() {
-    console.log(getBlurredFirstColumnValuesString());
+// Submit form with blurred rows information
+function submitDeleteForm() {
+    const form = document.querySelector('.form-verify');
+    
+
+    // Tạo trường ẩn cho mỗi hàng bị mờ
+    blurredRows.forEach(index => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'blurredTerms[]';  // Array để lưu tất cả các KYHAN bị mờ
+        input.value = document.querySelector(`#term-${index} input[name="MALOAI[]"]`).value;
+        input.classList.add('blurredTermInput');
+        form.appendChild(input);
+    });
+    
+    form.submit();
 }
