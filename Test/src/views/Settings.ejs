@@ -10,107 +10,106 @@
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-    <div class="container">
-		<!--Có thể làm các phần tĩnh thành file riêng cho gọn-->
-        <aside class="sidebar">
-        <img src="/images/SEBank.png" alt="logo-hover" class="sidebar-img-default" />
-        <img src="/images/Logo.png" alt="logo-hover" class="sidebar-img-hover" />
-        <ul class="sidebar-links">
-            <li data-content="Dashboard">
-                <a href="/#">
-                    <span class="material-icons" style="font-size: 35px">
-                        home
-                    </span> Trang chủ
-                </a>
-            </li>
-            <li data-content="Manage">
-                <a href="/quan_ly_so#">
-                    <span class="material-icons" style="font-size: 35px">
-                        manage_search
-                        </span>Quản lý sổ
-                </a>
-            </li>
-            <li>
-                <a href="/bao_cao_ngay#">
-                    <span class="material-icons" style="font-size: 35px">
-                        description
-                    </span> Báo cáo
-                </a>
-            </li>
-            <li>
-                <a href="/cai_dat#">
-                    <span class="material-icons" style="font-size: 35px">
-                    settings
-                    </span> Cài đặt
-                </a>
-            </li>
-        </ul>
-       	</aside>
+	</head>
 
-	  <div class = "main">
-		<!-- Thay đổi về loại kỳ hạn -->
-		<div class="content" id="Manage">
-			<div class="table__header">
-				<div>
-					<div class="topbar">
-					Cài đặt
+	<body>
+		<div class="container">
+			<!--Có thể làm các phần tĩnh thành file riêng cho gọn-->
+			<aside class="sidebar">
+			<img src="/images/SEBank.png" alt="logo-hover" class="sidebar-img-default" />
+			<img src="/images/Logo.png" alt="logo-hover" class="sidebar-img-hover" />
+			<ul class="sidebar-links">
+				<li data-content="Dashboard">
+					<a href="/#">
+						<span class="material-icons" style="font-size: 35px">
+							home
+						</span> Trang chủ
+					</a>
+				</li>
+				<li data-content="Manage">
+					<a href="/quan_ly_so#">
+						<span class="material-icons" style="font-size: 35px">
+							manage_search
+							</span>Quản lý sổ
+					</a>
+				</li>
+				<li>
+					<a href="/bao_cao_ngay#">
+						<span class="material-icons" style="font-size: 35px">
+							description
+						</span> Báo cáo
+					</a>
+				</li>
+				<li>
+					<a href="/cai_dat#">
+						<span class="material-icons" style="font-size: 35px">
+						settings
+						</span> Cài đặt
+					</a>
+				</li>
+			</ul>
+			</aside>
+
+			<div class = "main">
+				<!-- Thay đổi về loại kỳ hạn -->
+				<div class="content" id="Settings">
+					<div class="table__header">
+						<div>
+							<div class="topbar">
+							Cài đặt
+							</div>
+							<p class="date" id="Manage-date"></p>
+						</div>
 					</div>
-					<p class="date" id="Manage-date"></p>
+					<section class="table__body">
+						<table>
+							<thead>
+								<tr>
+									<th> Tên kỳ hạn <span class="icon-arrow">&UpArrow;</span></th>
+									<th> Thời gian đáo hạn <span class="icon-arrow">&UpArrow;</span></th>
+									<th> Lãi suất <span class="icon-arrow">&UpArrow;</span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for (let i = 0; i < listTerm.length; i++) { %>
+									<tr>
+										<td><%=listTerm[i].KYHAN %></td>
+										<td><%=listTerm[i].MALOAI %> tháng</td>
+										<td><%=(listTerm[i].LAISUAT*100).toFixed(2) %>%</td>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
+						<button class="form-group__button" onclick="window.location.href='/cai_dat/xoa'">Xoá</button>
+						<button class="form-group__button" onclick="window.location.href='/cai_dat/them'">Thêm</button>
+						<button class="form-group__button" onclick="window.location.href='/cai_dat/sua'">Sửa</button>
+					</section>
+
+					<section class="table__body">
+						<table>
+							<thead>
+								<tr>
+									<th> Tên đại lượng <span class="icon-arrow">&UpArrow;</span></th>
+									<th> Giá trị <span class="icon-arrow">&UpArrow;</span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for (let i = 0; i < listMininum.length; i++) { %>
+									<tr>
+										<%if(listMininum[i].TEN == "SOTIENGUI"){ %>
+											<td>Số tiền gửi tối thiểu</td>
+										<% }else if(listMininum[i].TEN == "THOIGIAN"){ %>
+											<td>Thời gian gửi tối thiểu</td>
+										<% } %>
+										<td><%=listMininum[i].GIATRI %></td>
+									</tr>					
+								<% } %>
+							</tbody>
+						</table>
+						<button class="form-group__button" onclick="window.location.href='/cai_dat/sua_min'">Sửa</button>
+					</section>
 				</div>
 			</div>
-			<section class="table__body">
-				<table>
-						<thead>
-							<tr>
-								<th> Tên kỳ hạn <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Thời gian đáo hạn <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Lãi suất <span class="icon-arrow">&UpArrow;</span></th>
-							</tr>
-						</thead>
-						<tbody>
-							<% for (let i = 0; i < listTerm.length; i++) { %>
-								<tr>
-									<td><%=listTerm[i].KYHAN %></td>
-									<td><%=listTerm[i].MALOAI %> tháng</td>
-									<td><%=listTerm[i].LAISUAT %>%</td>
-								</tr>
-							<% } %>
-						</tbody>
-					</table>
-			</section>
-       	</div>
-
-		<!--Ai đó sửa code css thành file riêng nha-->
-		<style>
-			.form-group__button {
-				background-color: #4CAF50;
-				color: white;
-				padding: 14px 20px;
-				margin: center;
-				border: none;
-				cursor: pointer;
-				width: 350;
-			}
-			.form-group__button:hover {
-				opacity: 0.8;
-			}
-		</style>
-		<div class="form-group">
-			<button class="form-group__button" onclick="window.location.href='/cai_dat/xoa'">Xoá</button>
 		</div>
-		<div class="form-group">
-			<button class="form-group__button" onclick="window.location.href='/taoso_form'">Thêm</button>
-		</div>
-		<div class="form-group">
-			<button class="form-group__button" onclick="window.location.href='/taoso_form'">Thay đổi</button>
-		</div>
-	</div>
-	<script src="date.js"></script>
- 		<script>
-    		const currentDayDashboard = document.getElementById('Dashboard-date');
-			const currentDayManage = document.getElementById('Manage-date');
-    		currentDayDashboard.textContent = getCurrentDate();
-			currentDayManage.textContent = getCurrentDate();
-  		</script>
     </body>
 </html>

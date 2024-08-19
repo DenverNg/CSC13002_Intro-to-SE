@@ -39,6 +39,7 @@ body>div {
     color: #7065D2;
     padding: 0 10px;
     margin: 30px 0 30px;
+    margin: 30px 0 30px;
 }
 
 .form-group__title {
@@ -95,6 +96,7 @@ body>div {
     font-style: italic;
     color: #dd0303;
     position: absolute;
+    top: 80%;
     top: 80%;
     left: 0px;
 }

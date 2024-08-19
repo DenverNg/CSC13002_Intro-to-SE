@@ -1,6 +1,7 @@
 const connection = require('../config/database');
-const {getAllBooks, getDailyRP, getMonthlyRP, getTermDeposit, getNextMaSo, getTenKH, getLoaiTK, checkMaso} = require('../services/CRUD');
+const {getAllBooks, getDailyRP, getMonthlyRP, getAllTermDeposit, getActiveTermDeposit, getMininum, updateRateDeposit, updateMininum, deleteTermDeposit, getNextMaSo, getTenKH, getLoaiTK, checkMaso} = require('../services/CRUD');
 const {getCurrentDate} = require('../public/js/date');
+const { set, get } = require('express/lib/response');
 const { set, get } = require('express/lib/response');
 
 
@@ -57,7 +58,6 @@ const getDailyReports = async(req, res) => {
     //let date = req.body.NGAY;
     const results = await getDailyRP('2024-10-18'); //Chưa lấy được ngày từ user
     res.render('Daily_Report.ejs', {listDailyRP: results});
-    console.log(results);  
 }
 const getMonthlyReports = async(req, res) => {
     // const results = await getMonthlyRP('2024-10-18'); //Chưa lấy được ngày từ user
@@ -65,18 +65,11 @@ const getMonthlyReports = async(req, res) => {
     res.send('Monthly Report');
 }
 const getSettings = async(req, res) => {
-    const results = await getTermDeposit();
-    res.render('Settings.ejs', {listTerm: results});
+    const resultsTerm = await getActiveTermDeposit();
+    const resultMininum = await getMininum();
+    res.render('Settings.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
 }
 
-const getSettings_Delete = async(req, res) => {
-    const action = req.body.action;
-     // Initial rendering of the verification page
-    if (!action) {        
-        const results = await getTermDeposit();
-         res.render('Settings_Delete.ejs', {listTerm: results});
-    }
-}
 
 const getDepositForm = async(req, res) => {
     res.render('Deposit_form.ejs');
@@ -127,19 +120,131 @@ const postWithdrawForm = async(req, res) => {
         res.send(req.body);
     })
 }
+
+//Add new term deposit
+const getAddTermDeposit = async(req, res) => {      
+    const resultsTerm = await getActiveTermDeposit();
+    const resultMininum = await getMininum();
+    res.render('Settings_Add.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+
+}
+const postAddTermDeposit = async(req, res) => {
+    const action = req.body.action;
+    if (action === 'confirm') {
+        const {TENKYHAN,THOIGIANDAOHAN,LAISUAT} = req.body;
+        const query = 'INSERT INTO LOAI_SOTK(MALOAI, KYHAN, LAISUAT,TRANGTHAI)\
+        VALUES (?,?,?,?)';
+        try {
+            await connection.query(query, [THOIGIANDAOHAN, TENKYHAN, LAISUAT, 1]);
+            res.redirect('/cai_dat');
+        } catch (error) {
+            console.error('Error executing query:', error);
+            res.status(500).send('An error occurred while saving the data');
+        }
+    } else if (action === 'cancel') {
+        res.redirect('/cai_dat');
+    }
+}
+const getModifyTermDeposit = async(req, res) => {
+    const resultsTerm = await getActiveTermDeposit();
+    const resultMininum = await getMininum();
+    res.render('Settings_ModifyRate.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+}
+const postModifyTermDeposit = async (req, res) => {
+    const action = req.body.action;
+
+    if (action === 'confirm') {
+        const { MALOAI, LAISUAT } = req.body;
+
+        // Kiểm tra xem MALOAI và LAISUAT có phải là mảng không và chúng có cùng độ dài không
+        if (!Array.isArray(MALOAI) || !Array.isArray(LAISUAT) || MALOAI.length !== LAISUAT.length) {
+            return res.status(400).send('Invalid data format');
+        }
+        try {
+            // Thực hiện cập nhật
+            await updateRateDeposit(LAISUAT, MALOAI);
+            res.redirect('/cai_dat');
+        } catch (error) {
+            console.error('Error executing query:', error);
+            res.status(500).send('An error occurred while saving the data');
+        }
+    } else if (action === 'cancel') {
+        res.redirect('/cai_dat');
+    } else {
+        res.status(400).send('Invalid action');
+    }
+};
+const getModifyMinValue = async(req, res) => {
+    const resultsTerm = await getActiveTermDeposit();
+    const resultMininum = await getMininum();
+    res.render('Settings_ModifyMin.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+}
+const postModifyMinValue = async (req, res) => {
+    const action = req.body.action;
+
+    if (action === 'confirm') {
+        const {TEN, GIATRI } = req.body;
+
+        // Kiểm tra xem MALOAI và LAISUAT có phải là mảng không và chúng có cùng độ dài không
+        if (!Array.isArray(TEN) || !Array.isArray(GIATRI) || GIATRI.length !== TEN.length) {
+            return res.status(400).send('Invalid data format');
+        }
+        try {
+            // Thực hiện cập nhật
+            await updateMininum(GIATRI, TEN);
+            res.redirect('/cai_dat');
+        } catch (error) {
+            console.error('Error executing query:', error);
+            res.status(500).send('An error occurred while saving the data');
+        }
+    } else if (action === 'cancel') {
+        res.redirect('/cai_dat');
+    } else {
+        res.status(400).send('Invalid action');
+    }
+};
+const getSettings_Delete = async(req, res) => {
+    const resultsTerm = await getActiveTermDeposit();
+    const resultMininum = await getMininum();
+    res.render('Settings_Delete.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+
+}
+const postDeleteTermDeposit = async(req, res) => {
+    const action = req.body.action;
+    if (action === 'confirm') {
+        const blurredTerms = req.body.blurredTerms || [];
+        try {
+            // Thực hiện cập nhật
+            await deleteTermDeposit(blurredTerms);
+            res.redirect('/cai_dat');
+        } catch (error) {
+            console.error('Error executing query:', error);
+            res.status(500).send('An error occurred while saving the data');
+        }
+    } else if (action === 'cancel') {
+        res.redirect('/cai_dat');
+    } else {
+        res.status(400).send('Invalid action');
+    }
+}
+
 module.exports = {
     getDashboard,
     getTransactions,
     getDailyReports,
     getMonthlyReports,
     getSettings,
-    //postSettings_Add,
     getSettings_Delete,
-    //postSettings_Moddify,
+    postDeleteTermDeposit,
+    getModifyTermDeposit,
+    postModifyTermDeposit,
     getDepositForm,
     postDepositForm,
     getCreateBookForm, 
     postCreateBookForm,
-    getWithdrawForm,
-    postWithdrawForm
+    postAddTermDeposit,
+    getAddTermDeposit,
+    getModifyMinValue,
+    postModifyMinValue
+
 }
