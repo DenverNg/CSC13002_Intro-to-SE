@@ -3,7 +3,7 @@
     margin: 0;
     box-sizing: border-box;
 }
-  
+
 body {
     height: 100vh;
     display: flex;
@@ -12,7 +12,7 @@ body {
     background-color: #000;
 }
 
-body > div {
+body>div {
     margin: auto;
 }
 
@@ -28,14 +28,6 @@ body > div {
     flex-flow: column;
 }
 
-.form-group:hover {
-    cursor: text;
-}
-
-.form-group + .form-group {
-    margin-top: 10px;
-}
-
 .form-group__input {
     width: 380px;
     height: 60px;
@@ -46,7 +38,7 @@ body > div {
     border-radius: 10px;
     color: #7065D2;
     padding: 0 10px;
-    margin: 15px 0 25px;
+    margin: 30px 0 30px;
 }
 
 .form-group__title {
@@ -61,8 +53,23 @@ body > div {
     background-image: none;
 }
 
-.form-group__title::selection {
-    background-color: transparent;
+.form-group__input__title {
+    align-content: center;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.27s ease;
+    margin-left: 10px;
+}
+
+.form-group__input:focus+.form-group__title,
+.form-group__input:not(:placeholder-shown)+.form-group__title {
+    font-size: 17px;
+    top: 25%;
+    left: 15px;
+    padding: 2px 20px;
+    margin-left: 0;
+    background: radial-gradient(closest-side, #ffffff 70%, #ffffff00);
 }
 
 @keyframes inputTitleMoveUp {
@@ -70,7 +77,7 @@ body > div {
         font-size: 17px;
         top: calc(4%);
         left: 15px;
-        background-image: linear-gradient(0, #FFFF,#EEECFF);
+        background-image: linear-gradient(0, #FFFF, #EEECFF);
     }
 }
 
@@ -88,7 +95,7 @@ body > div {
     font-style: italic;
     color: #dd0303;
     position: absolute;
-    bottom: 0;
+    top: 80%;
     left: 0px;
 }
 
@@ -98,9 +105,10 @@ body > div {
 }
 
 .form-group.invalid .form-group__title {
-   color: #d1637a;
+    color: #d1637a;
 }
-.form-group__button{
+
+.form-group__button {
     max-width: 300px;
     height: 60px;
     font-size: 25px;
@@ -115,6 +123,129 @@ body > div {
     color: white;
 }
 
-.form-group__button + .form-group__button{
+.form-group__button+.form-group__button {
     margin-left: 40px;
+}
+
+.btn {
+    font-size: 20px;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 15px 48px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.btn:hover {
+    opacity: 0.85;
+    box-shadow: 3px 3px 3px 1px rgb(0 0 0 / 20%);
+}
+
+.btn+.btn {
+    margin-left: 16px;
+}
+
+.btn--ok {
+    background-color: rgb(4, 204, 1);
+}
+
+.btn--warn {
+    background-color: rgb(239, 183, 15);
+}
+
+.btn--error {
+    background-color: orangered;
+}
+
+.btn--disabled {
+    background-color: rgb(155, 157, 165);
+    opacity: 1 !important;
+    cursor: default;
+    box-shadow: none !important;
+}
+
+#toast {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    z-index: 1000000;
+}
+
+.toast {
+    width: 400px;
+    background-color: rgb(246, 246, 246);
+    padding: 18px 0px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    border-left: 4px solid;
+    transform: all linear 0.3s;
+}
+
+@keyframes slideFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(calc(100% + 32px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+.toast+.toast {
+    margin-top: 10px;
+}
+
+.toast__icon {
+    font-size: 22px;
+    margin-left: 20px;
+}
+
+.toast__body {
+    max-width: 350px;
+    margin: 0 20px;
+    flex: 1;
+}
+
+.toast__title {
+    line-height: 20px;
+}
+
+.toast__desc {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 5px;
+    color: rgb(105, 105, 105);
+}
+
+.toast--close {
+    font-size: 22px;
+    margin-right: 20px;
+    color: black;
+}
+
+.toast--success {
+    color: #059436;
+}
+
+.toast--error {
+    color: #C54560;
+}
+
+.toast--info {
+    color: #1699E2;
 }

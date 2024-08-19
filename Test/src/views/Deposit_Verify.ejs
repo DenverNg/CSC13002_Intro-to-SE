@@ -8,13 +8,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="/css/input.css">
     <link rel="stylesheet" href="/css/deposit.css">
+    <script src="/js/toast.js"></script>
 </head>
 
 <body>
+    <div id="toast"></div>
     <div id="deposit-verify" class="deposit">
         <div id="deposit__title">Phiểu gửi tiền</div>
-        <form action="/taoso_form/xacnhan" method="post" class="form-verify">
+        <form action="/guitien_form/xacnhan" method="post" class="form-verify">
             <div class="verify__group0">
+                <div id="LOAI" >
+                    <input type="hidden" name="LOAI" value="<%= LOAI %>">
+                </div>
+                <div id="SOLUONG" >
+                    <input type="hidden" name="SOLUONG" value="<%= SOLUONG %>">
+                </div>
                 <div id="MASO" class="form-group verify-row">
                     <div class="form-group__title verify-deposit__title">Mã sổ</div>
                     <div class="form-group__title verify-deposit__value">
@@ -39,10 +47,6 @@
                     <input type="hidden" name="TENKH" value="<%= TENKH %>">
                 </div>
 
-                            
-
-                
-
                 <div id="SOTIEN" class="form-group verify-row">
                     <div class="form-group__title verify-deposit__title">Số tiền gửi thêm</div>
                     <div class="form-group__title verify-deposit__value">
@@ -55,11 +59,63 @@
             <div class="verify__group1">
                 <button type="button" class="form-group__button back-button" onclick="window.history.back()">Quay
                     lại</button>
-                <button type="submit" class="form-group__button submit-button" name="action" value="confirm">Xác
+                <button id ="submit-btn" type="submit" class="form-group__button submit-button" name="action" value="confirm">Xác
                     nhận</button>
             </div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const SOLUONG = "<%= SOLUONG %>"; // Get the SOLUONG value from the server-side variable
+            const LOAI = "<%= LOAI %>"; // Get the LOAI value from the server-side variable
+            const SOTIEN = "<%=SOTIEN %>"; // Get the SOTIEN value from the server-side variable
+            const submit = document.getElementById('submit-btn');
+            let isValid = true;
+
+            if (parseInt(SOLUONG) === 0) {
+                toast({
+                    title: 'Lỗi',
+                    desc: 'MÃ SỔ KHÔNG TỒN TẠI',
+                    type: 'error',
+                    duration: 3000
+                });
+                isValid = false;
+            }
+
+            else if (parseInt(LOAI) != 0){
+                toast({
+                    title: 'Lỗi',
+                    desc: 'SỔ KHÔNG HỢP LỆ. CHỈ GỬI THÊM VÀO SỔ KHÔNG KỲ HẠN',
+                    type: 'error',
+                    duration: 3000
+                });
+                isValid = false;
+            }
+
+            else if (parseInt(SOTIEN) < 100000) {
+                toast({
+                    title: 'Lỗi',
+                    desc: 'SỐ TIỀN GỬI THÊM KHÔNG HỢP LỆ (TỐI THIỂU 100,000 VNĐ)',
+                    type: 'error',
+                    duration: 3000
+                });
+                isValid = false;
+            }
+
+            if (!isValid) {
+                submit.disabled = true;
+            }
+            else {
+                toast({
+                    title: 'Thành công',
+                    desc: 'TẤT CẢ THÔNG TIN ĐỀU HỢP LỆ',
+                    type: 'success',
+                    duration: 3000
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

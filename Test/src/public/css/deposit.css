@@ -29,23 +29,22 @@
 
 #deposit__group0 {
     margin-top: 40px;
-    width: 790px;
+    width: 780px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
 #deposit__group3 {
-    max-width: 790px;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
     justify-self: center;
 }
 
 #SOTIEN {
-    width: 790px;
+    width: 780px;
 }
 
 .form-input {
@@ -61,13 +60,18 @@
 
 .inp-deposit__input {
     width: 350px;
-    height: 60px;
+    height: 50px;
     font-size: 20px;
+    margin: 25px 0 25px;
 }
 
 .inp-deposit__title {
     font-size: 20px;
-    top: calc(30% + 1px);
+}
+
+.inp-deposit__input:focus+.inp-deposit__title,
+.inp-deposit__input:not(:placeholder-shown)+.inp-deposit__title {
+    font-size: 15px;
 }
 
 @keyframes inputTitleMoveUp_deposit {
@@ -114,6 +118,7 @@
     opacity: 0.8;
 }
 
+
 .submit-button {
     width: 200px;
     font-weight: bold;
@@ -124,6 +129,15 @@
 
 .submit-button:hover {
     opacity: 0.8;
+}
+
+.submit-button:disabled{
+    width: 200px;
+    font-weight: bold;
+    border: none;
+    background-image: linear-gradient(90deg, #87968c, #404442);
+    align-self: end;
+    cursor: not-allowed;
 }
 
 /* For Verify form */

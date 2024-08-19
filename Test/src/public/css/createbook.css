@@ -1,6 +1,6 @@
 /* For Input form */
 
-.createbook{
+.createbook {
     width: 900px;
     background-color: #EEECFF;
     display: flex;
@@ -12,7 +12,7 @@
     border-top-right-radius: 10px 10px;
 }
 
-#createbook__title{
+#createbook__title {
     width: 100%;
     height: 50px;
     color: #FFFF;
@@ -27,47 +27,51 @@
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
 }
 
-#createbook__group0{
+#createbook__group0 {
     margin-top: 40px;
-    width: 790px;
+    width: 780px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#createbook__group3{
-    max-width: 790px;
+#createbook__group3 {
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
     justify-self: center;
 }
 
-#SOTIEN{
-    width: 790px;
+#SOTIEN {
+    width: 780px;
 }
 
-.form-input{
+.form-input {
     width: 85%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.inp-createbook{
+.inp-createbook {
     max-width: 800px;
 }
 
-.inp-createbook__input{
+.inp-createbook__input {
     width: 350px;
-    height: 60px;
+    height: 50px;
+    font-size: 20px;
+    margin: 25px 0 25px;
+}
+
+.inp-createbook__title {
     font-size: 20px;
 }
 
-.inp-createbook__title{
-    font-size: 20px;
-    top: calc(30% + 1px);
+.inp-createbook__input:focus+.inp-createbook__title,
+.inp-createbook__input:not(:placeholder-shown)+.inp-createbook__title {
+    font-size: 15px;
 }
 
 @keyframes inputTitleMoveUp_createbook {
@@ -75,7 +79,7 @@
         font-size: 14px;
         top: calc(5.5%);
         left: 15px;
-        background-image: linear-gradient(0, #FFFF,#EEECFF);
+        background-image: linear-gradient(0, #FFFF, #EEECFF);
     }
 }
 
@@ -90,7 +94,7 @@
 
 /* Buttons */
 
-.next-button{
+.next-button {
     width: 200px;
     font-weight: bold;
     border: none;
@@ -98,7 +102,7 @@
     align-self: end;
 }
 
-.back-button{
+.back-button {
     width: 200px;
     font-weight: bold;
     border: none;
@@ -106,7 +110,7 @@
     align-self: end;
 }
 
-.submit-button{
+.submit-button {
     width: 200px;
     font-weight: bold;
     border: none;
@@ -115,18 +119,18 @@
 }
 
 /* For Verify form */
-.form-verify{
+.form-verify {
     width: 85%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.verify__buttons{
+.verify__buttons {
     position: absolute;
 }
 
-.verify-row{
+.verify-row {
     max-width: 90%;
     width: 90%;
     border-bottom: #7065d285 solid;
@@ -136,17 +140,18 @@
     justify-content: space-between;
 }
 
-.verify-row + .verify-row{
+.verify-row+.verify-row {
     margin-top: 15px;
 }
-.verify-createbook__title{
+
+.verify-createbook__title {
     position: unset;
     font-size: 20px;
     font-weight: 400;
     color: #7065D2;
 }
 
-.verify-createbook__value{
+.verify-createbook__value {
     position: unset;
     font-size: 25px;
     font-weight: 500;
@@ -155,7 +160,7 @@
     color: #7167CF;
 }
 
-.verify__group0{
+.verify__group0 {
     width: 90%;
     background-color: #FFFF;
     margin-top: 30px;
@@ -167,7 +172,7 @@
     justify-self: end;
 }
 
-.verify__group1{
+.verify__group1 {
     margin-top: 30px;
     display: flex;
     justify-content: flex-end;

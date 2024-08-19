@@ -43,10 +43,37 @@ const getNextMaSo = async () => {
     }
 };
 
+const getTenKH = async(MASO) => {
+    const [results, fields] = await connection.query(
+        'SELECT KH.HOTEN FROM SOTIETKIEM S JOIN KHACHHANG KH ON S.MAKH = KH.MAKH WHERE S.MASO = ?', [MASO]);
+    if (results.length == 0) {
+        return "";
+    }
+    return results[0].HOTEN;
+}
+
+const getLoaiTK = async(MASO) =>{
+    const [results, fields] = await connection.query(
+        'SELECT LOAI FROM SOTIETKIEM WHERE MASO = ?', [MASO]);
+    if (results.length > 0)
+        return results[0].LOAI;
+    else 
+        return -1;
+}
+
+const checkMaso = async(MASO) => {
+    const [results, fields] = await connection.query(
+        'SELECT COUNT(*) AS COUNT FROM SOTIETKIEM WHERE MASO = ?', [MASO]);
+    return results[0].COUNT;
+}
+
 module.exports = {
     getAllBooks,
     getDailyRP,
     getMonthlyRP,
     getTermDeposit,
-    getNextMaSo
+    getNextMaSo,
+    getTenKH,
+    getLoaiTK,
+    checkMaso
 }
