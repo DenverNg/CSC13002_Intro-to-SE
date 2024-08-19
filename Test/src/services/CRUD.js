@@ -16,6 +16,7 @@ const getMonthlyRP = async(month, type) => {
     return results;
 }
 const getAllTermDeposit = async() => {
+const getAllTermDeposit = async() => {
     const [results, fields] = await connection.query(
         'SELECT KYHAN , MALOAI, LAISUAT FROM LOAI_SOTK');
     return results;
