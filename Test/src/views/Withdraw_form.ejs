@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Tạo phiếu rút tiền</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/input.css">
+    <link rel="stylesheet" href="/css/deposit.css">
+    <script src="/js/input.js"></script>
+    <script src="/js/validator.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="deposit-form" class="deposit">
+        <div id="deposit__title">Phiếu rút tiền</div>
+        <form action="/guitien_form/xacnhan" method="post" class="form-input">
+            <div id="deposit__group0">
+                <div id="deposit__group1">
+                    <div onclick="inputClicked({
+                                            id: 'input-MASO',
+                                            fontSize: '14px',
+                                            top: '5.5%',
+                                            animation: 'inputTitleMoveUp_deposit'})" id="input-MASO"
+                        class="form-group inp-deposit">
+                        <input id="MASO" class="form-group__input inp-deposit__input" type="text" name="MASO">
+                        <div class="form-group__title inp-deposit__title">Nhập mã sổ</div>
+                        <span id="input-name-message" class="form-group__message"></span>
+                    </div>
+
+
+                </div>
+
+                <div id="deposit__group2">
+
+
+                    <div onclick="inputClicked({
+                                            id: 'input-date',
+                                            inputType: 'date',
+                                            fontSize: '14px',
+                                            top: '5.5%',
+                                            animation: 'inputTitleMoveUp_deposit'})" id="input-date"
+                        class="form-group inp-deposit">
+                        <input id="date" class="form-group__input inp-deposit__input" type="text" name="NGAY">
+                        <div class="form-group__title inp-deposit__title">Ngày tạo sổ</div>
+                        <span id="input-name-message" class="form-group__message"></span>
+                    </div>
+                </div>
+            </div>
+            <div id="deposit__group3">
+                <div onclick="inputClicked({
+                                        id: 'input-SOTIEN',
+                                        inputType: 'int',
+                                        fontSize: '14px',
+                                        top: '5.5%',
+                                        animation: 'inputTitleMoveUp_deposit'})" id="input-SOTIEN"
+                    class="form-group inp-deposit">
+                    <input id="SOTIEN" class="form-group__input inp-deposit__input" type="text" name="SOTIEN">
+                    <div class="form-group__title inp-deposit__title">Nhập số tiền rút</div>
+                    <span id="input-name-message" class="form-group__message"></span>
+                </div>
+
+                <button class="form-group__button next-button">Tiếp tục</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        Validator({
+            form: '#form',
+            errorSelector: '.form-group__message',
+            rules: [
+                Validator.isRequired('#TENKH', 'Nhập lại tên đi nha'),
+                Validator.isRequired('#password'),
+                Validator.isRequired('#date')
+            ]
+        })
+    </script>
+
+</body>

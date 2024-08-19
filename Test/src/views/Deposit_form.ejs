@@ -1,56 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Form</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="/css/input.css">
-        <script src="/js/input.js"></script>
-        <script src="/js/validator.js"></script>
-        <style> 
-           
-        </style>
-    </head>
 
-    <body>
-        <div id="form">
-            <form action="/guitien_xacnhan" method="post">
-                <fieldset>
-                    <legend>Thông tin gửi tiền</legend>
-                    <div onclick="inputClicked({
-                            id: 'input-MASO',
-                            inputType: 'text'})"
-                        id="input-MASO" class="form-group">
-                        <input id="MASO" class="form-group__input" type="text" name="MASO">
-                        <div class="form-group__title form-control">Nhập mã sổ</div>
+<head>
+    <title>Tạo phiếu gửi tiền</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/input.css">
+    <link rel="stylesheet" href="/css/deposit.css">
+    <script src="/js/validator.js"></script>
+</head>
+
+<body>
+    <div id="deposit-form" class="deposit">
+        <div id="deposit__title">Phiếu gửi tiền</div>
+        <form class="form-input" action="/guitien_form/xacnhan" method="post">
+            <div id="deposit__group0">
+                <div id="deposit__group1">
+                
+                    <div id="input-MASO" class="form-group inp-deposit">
+                        <input id="MASO" class="form-group__input inp-deposit__input" type="text" name="MASO"
+                            placeholder=" ">
+                        <label for="MASO" class="form-group__title form-group__input__title inp-deposit__title">Nhập
+                             mã sổ</label>
                         <span id="input-name-message" class="form-group__message"></span>
                     </div>
 
-                    <div onclick="inputClicked({
-                            id: 'input-SOTIEN',
-                            inputType: 'int'})"
-                        id="input-SOTIEN" class="form-group">
-                        <input id="SOTIEN" class="form-group__input" type="text" name="SOTIEN">
-                        <div class="form-group__title">Nhập số tiền gửi</div>
+                    
+                </div>
+
+                <div id="deposit__group2">
+                                        
+                    <div id="input-date" class="form-group inp-deposit">
+                        <input id="date" class="form-group__input inp-deposit__input" type="date" name="NGAY"
+                            placeholder=" ">
+                        <label for="date" class="form-group__title form-group__input__title inp-deposit__title">Ngày
+                            tạo sổ</label>
                         <span id="input-name-message" class="form-group__message"></span>
                     </div>
+                </div>
+            </div>
+            <div id="deposit__group3">
+                <div id="input-SOTIEN" class="form-group inp-deposit">
+                    <input id="SOTIEN" class="form-group__input inp-deposit__input" type="text" name="SOTIEN"
+                        placeholder=" ">
+                    <label for="SOTIEN" class="form-group__title form-group__input__title inp-deposit__title">Nhập số
+                        tiền gửi</label>
+                    <span id="input-name-message" class="form-group__message"></span>
+                </div>
 
-                    <div onclick="inputClicked({
-                            id: 'input-Ngay',
-                            inputType: 'text'})"
-                        id="input-Ngay" class="form-group">
-                        <input id="NGAY" class="form-group__input" type="text" name="NGAY">
-                        <div class="form-group__title">Nhập ngày gửi</div>
-                        <span id="input-name-message" class="form-group__message"></span>
-                    </div>
+                <button class="form-group__button next-button">Tiếp tục</button>
+            </div>
+        </form>
+    </div>
 
-                    <div class = '.form-add ' >
-                        <button class="form-group__button">Gửi tiền</button>
-                    </div>
-                </fieldset>
-            </form>
-        
-        </div>
-
-    </body>
-</html>
+</body>

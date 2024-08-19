@@ -98,4 +98,3 @@ const earningChart = new Chart(ctx2, {
 });
 
 }); 
-

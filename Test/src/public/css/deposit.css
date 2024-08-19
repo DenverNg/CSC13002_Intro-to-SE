@@ -1,6 +1,6 @@
 /* For Input form */
 
-.createbook {
+.deposit {
     width: 900px;
     background-color: #EEECFF;
     display: flex;
@@ -12,7 +12,7 @@
     border-top-right-radius: 10px 10px;
 }
 
-#createbook__title {
+#deposit__title {
     width: 100%;
     height: 50px;
     color: #FFFF;
@@ -27,15 +27,15 @@
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
 }
 
-#createbook__group0 {
+#deposit__group0 {
     margin-top: 40px;
-    width: 790px;
+    width: 780px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#createbook__group3{
+#deposit__group3 {
     max-width: 800px;
     display: flex;
     flex-direction: column;
@@ -43,7 +43,7 @@
     justify-self: center;
 }
 
-#SOTIEN{
+#SOTIEN {
     width: 780px;
 }
 
@@ -54,22 +54,27 @@
     align-items: center;
 }
 
-.inp-createbook {
+.inp-deposit {
     max-width: 800px;
 }
 
-.inp-createbook__input {
+.inp-deposit__input {
     width: 350px;
-    height: 60px;
+    height: 50px;
+    font-size: 20px;
+    margin: 25px 0 25px;
+}
+
+.inp-deposit__title {
     font-size: 20px;
 }
 
-.inp-createbook__title {
-    font-size: 20px;
-    top: calc(30% + 1px);
+.inp-deposit__input:focus+.inp-deposit__title,
+.inp-deposit__input:not(:placeholder-shown)+.inp-deposit__title {
+    font-size: 15px;
 }
 
-@keyframes inputTitleMoveUp_createbook {
+@keyframes inputTitleMoveUp_deposit {
     to {
         font-size: 14px;
         top: calc(5.5%);
@@ -78,7 +83,7 @@
     }
 }
 
-@keyframes inputTitleMoveDown_createbook {
+@keyframes inputTitleMoveDown_deposit {
     to {
         font-size: 20px;
         top: calc(30% + 1px);
@@ -97,6 +102,10 @@
     align-self: end;
 }
 
+.next-button:hover {
+    opacity: 0.8;
+}
+
 .back-button {
     width: 200px;
     font-weight: bold;
@@ -105,12 +114,30 @@
     align-self: end;
 }
 
+.back-button:hover {
+    opacity: 0.8;
+}
+
+
 .submit-button {
     width: 200px;
     font-weight: bold;
     border: none;
     background-image: linear-gradient(90deg, #51B072, #059436);
     align-self: end;
+}
+
+.submit-button:hover {
+    opacity: 0.8;
+}
+
+.submit-button:disabled{
+    width: 200px;
+    font-weight: bold;
+    border: none;
+    background-image: linear-gradient(90deg, #87968c, #404442);
+    align-self: end;
+    cursor: not-allowed;
 }
 
 /* For Verify form */
@@ -139,14 +166,14 @@
     margin-top: 15px;
 }
 
-.verify-createbook__title {
+.verify-deposit__title {
     position: unset;
     font-size: 20px;
     font-weight: 400;
     color: #7065D2;
 }
 
-.verify-createbook__value {
+.verify-deposit__value {
     position: unset;
     font-size: 25px;
     font-weight: 500;
