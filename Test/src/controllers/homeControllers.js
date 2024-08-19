@@ -68,10 +68,7 @@ const getSettings = async(req, res) => {
     const resultMininum = await getMininum();
     res.render('Settings.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
 }
-    const resultsTerm = await getActiveTermDeposit();
-    const resultMininum = await getMininum();
-    res.render('Settings.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
-}
+
 
 
 const getDepositForm = async(req, res) => {
@@ -131,6 +128,7 @@ const getAddTermDeposit = async(req, res) => {
     res.render('Settings_Add.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
 
 }
+
 const postAddTermDeposit = async(req, res) => {
     const action = req.body.action;
     if (action === 'confirm') {
@@ -153,114 +151,7 @@ const getModifyTermDeposit = async(req, res) => {
     const resultMininum = await getMininum();
     res.render('Settings_ModifyRate.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
 }
-const postModifyTermDeposit = async (req, res) => {
-    const action = req.body.action;
 
-    if (action === 'confirm') {
-        const { MALOAI, LAISUAT } = req.body;
-
-        // Kiểm tra xem MALOAI và LAISUAT có phải là mảng không và chúng có cùng độ dài không
-        if (!Array.isArray(MALOAI) || !Array.isArray(LAISUAT) || MALOAI.length !== LAISUAT.length) {
-            return res.status(400).send('Invalid data format');
-        }
-        try {
-            // Thực hiện cập nhật
-            await updateRateDeposit(LAISUAT, MALOAI);
-            res.redirect('/cai_dat');
-        } catch (error) {
-            console.error('Error executing query:', error);
-            res.status(500).send('An error occurred while saving the data');
-        }
-    } else if (action === 'cancel') {
-        res.redirect('/cai_dat');
-    } else {
-        res.status(400).send('Invalid action');
-    }
-};
-const getModifyMinValue = async(req, res) => {
-    const resultsTerm = await getActiveTermDeposit();
-    const resultMininum = await getMininum();
-    res.render('Settings_ModifyMin.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
-}
-const postModifyMinValue = async (req, res) => {
-    const action = req.body.action;
-
-    if (action === 'confirm') {
-        const {TEN, GIATRI } = req.body;
-
-        // Kiểm tra xem MALOAI và LAISUAT có phải là mảng không và chúng có cùng độ dài không
-        if (!Array.isArray(TEN) || !Array.isArray(GIATRI) || GIATRI.length !== TEN.length) {
-            return res.status(400).send('Invalid data format');
-        }
-        try {
-            // Thực hiện cập nhật
-            await updateMininum(GIATRI, TEN);
-            res.redirect('/cai_dat');
-        } catch (error) {
-            console.error('Error executing query:', error);
-            res.status(500).send('An error occurred while saving the data');
-        }
-    } else if (action === 'cancel') {
-        res.redirect('/cai_dat');
-    } else {
-        res.status(400).send('Invalid action');
-    }
-};
-const getSettings_Delete = async(req, res) => {
-    const resultsTerm = await getActiveTermDeposit();
-    const resultMininum = await getMininum();
-    res.render('Settings_Delete.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
-
-}
-const postDeleteTermDeposit = async(req, res) => {
-    const action = req.body.action;
-    if (action === 'confirm') {
-        const blurredTerms = req.body.blurredTerms || [];
-        try {
-            // Thực hiện cập nhật
-            await deleteTermDeposit(blurredTerms);
-            res.redirect('/cai_dat');
-        } catch (error) {
-            console.error('Error executing query:', error);
-            res.status(500).send('An error occurred while saving the data');
-        }
-    } else if (action === 'cancel') {
-        res.redirect('/cai_dat');
-    } else {
-        res.status(400).send('Invalid action');
-    }
-}
-
-
-//Add new term deposit
-const getAddTermDeposit = async(req, res) => {      
-    const resultsTerm = await getActiveTermDeposit();
-    const resultMininum = await getMininum();
-    res.render('Settings_Add.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
-
-}
-const postAddTermDeposit = async(req, res) => {
-    const action = req.body.action;
-    if (action === 'confirm') {
-        const {TENKYHAN,THOIGIANDAOHAN,LAISUAT} = req.body;
-        const query = 'INSERT INTO LOAI_SOTK(MALOAI, KYHAN, LAISUAT,TRANGTHAI)\
-        VALUES (?,?,?,?)';
-        try {
-            await connection.query(query, [THOIGIANDAOHAN, TENKYHAN, LAISUAT, 1]);
-            res.redirect('/cai_dat');
-        } catch (error) {
-            console.error('Error executing query:', error);
-            res.status(500).send('An error occurred while saving the data');
-        }
-    } else if (action === 'cancel') {
-        res.redirect('/cai_dat');
-    }
-}
-const getModifyTermDeposit = async(req, res) => {
-    const resultsTerm = await getActiveTermDeposit();
-    const resultMininum = await getMininum();
-    res.render('Settings_ModifyRate.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
-}
 const postModifyTermDeposit = async (req, res) => {
     const action = req.body.action;
 
@@ -360,11 +251,4 @@ module.exports = {
     getAddTermDeposit,
     getModifyMinValue,
     postModifyMinValue
-
-    postCreateBookForm,
-    postAddTermDeposit,
-    getAddTermDeposit,
-    getModifyMinValue,
-    postModifyMinValue
-
 }

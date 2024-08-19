@@ -24,16 +24,6 @@ router.post('/cai_dat/sua/xacnhan', postModifyTermDeposit);
 
 router.get('/cai_dat/sua_min', getModifyMinValue);
 router.post('/cai_dat/sua_min/xacnhan', postModifyMinValue);
-router.post('/cai_dat/xoa/xacnhan', postDeleteTermDeposit);
-
-router.get('/cai_dat/them', getAddTermDeposit);
-router.post('/cai_dat/them/xacnhan', postAddTermDeposit);
-
-router.get('/cai_dat/sua', getModifyTermDeposit);
-router.post('/cai_dat/sua/xacnhan', postModifyTermDeposit);
-
-router.get('/cai_dat/sua_min', getModifyMinValue);
-router.post('/cai_dat/sua_min/xacnhan', postModifyMinValue);
 
 
 router.get('/taoso_form', getCreateBookForm);
@@ -42,8 +32,8 @@ router.post('/taoso_form/xacnhan', postCreateBookForm);
 router.get('/guitien_form', getDepositForm);
 router.post('/guitien_form/xacnhan', postDepositForm);
 
-router.get('/ruttien_form', getWithdrawForm);
-router.post('/ruttien_xacnhan', postWithdrawForm);
+// router.get('/ruttien_form', getWithdrawForm);
+// router.post('/ruttien_xacnhan', postWithdrawForm);
 
 
 
