@@ -32,8 +32,8 @@ router.post('/taoso_form/xacnhan', postCreateBookForm);
 router.get('/guitien_form', getDepositForm);
 router.post('/guitien_form/xacnhan', postDepositForm);
 
-// router.get('/ruttien_form', getWithdrawForm);
-// router.post('/ruttien_xacnhan', postWithdrawForm);
+router.get('/ruttien_form', getWithdrawForm);
+router.post('/ruttien_form/xacnhan', postWithdrawForm);
 
 
 
