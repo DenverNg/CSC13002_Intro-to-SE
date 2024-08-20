@@ -3,9 +3,14 @@
     <head>
         <title>SEBANK</title>
         <meta charset="utf-8">
+       
+        
         <link rel="stylesheet" href="/css/main.css">
         <script src="/js/func.js"></script>
 		<link rel="stylesheet" href="/css/table.css">
+         <!--JSPDF-->
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script> 
         <script src="/js/table.js"></script>
         <link rel="stylesheet" href="/css/dropdown.css">
         <script src="/js/dropdown.js"></script>
@@ -17,12 +22,10 @@
        
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
         
-        <!--JSPDF-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script> 
         <div class="container">
             <aside class="sidebar" style="z-index: 99">
                 <img src="/images/SEBank.png" alt="logo-hover" class="sidebar-img-default" />
@@ -93,34 +96,18 @@
                                     <div class="form-group__title">Nhập ngày báo cáo</div>
                                     <span id="input-name-message" class="form-group__message"></span>
                                     </div>
-            
-            
-                                    <!--Dropdown Select-->
-                                    <div class="wrapper">
-                                        <div class="select-btn">
-                                        <span>Chọn loại kỳ hạn</span>
-                                        <i class="uil uil-angle-down"></i>
-                                        </div>
-                                        <div class="select-content">
-                                        <div class="select-search">
-                                            <i class="uil uil-search"></i>
-                                            <input spellcheck="false" type="text" placeholder="Tìm kiếm loại kỳ hạn">
-                                        </div>
-                                        <ul class="options"></ul>
-                                        </div>
-                                    </div>
                                 </div>
                                 
             
                                 <div class="Function">
-                                    <div class="icon" id="download">
+                                    <div class="icon" id="download-daily">
                                         <span class="material-symbols-outlined" style="font-size: 40px">
                                             download
                                             </span>
                                         Tải báo cáo
                                     </div>
                                     
-                                    <div class="icon" id="print">
+                                    <div class="icon" id="print-daily">
                                         <span class="material-icons" style="font-size: 40px">
                                             print
                                         </span>
@@ -170,10 +157,60 @@
                     </div>
                         
                     <div class="tab-pane">
-                        <h2>Angular</h2>
-                        <p>Angular is an application design framework and development platform for creating efficient and sophisticated single-page apps.</p>
-                        </div>
+                    <div class="topbar-report">
+                        Báo Cáo Đóng/Mở Hàng Tháng
                     </div>
+                        
+                    
+                    
+                    <div class="subheader">
+                        <div class="EnterValue">
+                            <!--Input Date-->
+                            <div onclick="inputClicked({
+                                id: 'input-date',
+                                inputType: 'date'})"
+                            id="input-date" class="form-group">
+                            <input id="date" class="form-group__input" type="text">
+                            <div class="form-group__title">Nhập ngày báo cáo</div>
+                            <span id="input-name-message" class="form-group__message"></span>
+                            </div>
+    
+    
+                            <!--Dropdown Select-->
+                            <div class="wrapper">
+                                <div class="select-btn">
+                                <span>Chọn loại kỳ hạn</span>
+                                <i class="uil uil-angle-down"></i>
+                                </div>
+                                <div class="select-content">
+                                <div class="select-search">
+                                    <i class="uil uil-search"></i>
+                                    <input spellcheck="false" type="text" placeholder="Tìm kiếm loại kỳ hạn">
+                                </div>
+                                <ul class="options"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+    
+                        <div class="Function">
+                            <div class="icon" id="download">
+                                <span class="material-symbols-outlined" style="font-size: 40px">
+                                    download
+                                    </span>
+                                Tải báo cáo
+                            </div>
+                            
+                            <div class="icon" id="print">
+                                <span class="material-icons" style="font-size: 40px">
+                                    print
+                                </span>
+                                In báo cáo
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
         </div>
         </body>
