@@ -1,5 +1,7 @@
 const connection = require('../config/database');
-const {getAllBooks, getDailyRP, getMonthlyRP, getAllTermDeposit, getActiveTermDeposit, getMininum, updateRateDeposit, updateMininum, deleteTermDeposit, getNextMaSo, getTenKH, getLoaiTK, checkMaso} = require('../services/CRUD');
+const {getAllBooks, getDailyRP, getMonthlyRP, getAllTermDeposit, getActiveTermDeposit, getMininum, updateRateDeposit, 
+    updateMininum, deleteTermDeposit, getNextMaSo, getTenKH, getLoaiTK, checkMaso, getMinMoney, 
+    checkDaoHan, checkNgayRut, calTienLai, getLaiSuat, getThoiGianToiThieu} = require('../services/CRUD');
 const {getCurrentDate} = require('../public/js/date');
 const { set, get } = require('express/lib/response');
 
@@ -17,13 +19,26 @@ const getTransactions = async(req, res) => {
         currentDate: getCurrentDate()});
 }
 const getCreateBookForm = async(req, res) => {
-    newMaSo = await getNextMaSo();
+    const newMaSo = await getNextMaSo();
     res.render('CreateBook_form.ejs', {newMaSo: newMaSo});
 } 
 
 const postCreateBookForm = async (req, res) => {
     const action = req.body.action;
-    MASO = req.body.MASO;
+    if (req.body.MASO)
+        MASO = req.body.MASO;
+    else {
+        maxMaSo = await getNextMaSo();
+        const numericPart = parseInt(maxMaSo.slice(2) - 1, 10);
+
+        // Increment the numeric part
+        const nextNumericPart = (numericPart + 1).toString().padStart(6, '0');
+
+        // Generate the new MaSo
+        const newMaSo = `MS${nextNumericPart}`;
+
+        MASO = newMaSo;
+    }
     if (!action) {
         // Initial rendering of the verification page
         res.render('CreateBook_Verify.ejs', {
@@ -80,12 +95,14 @@ const postDepositForm = async(req, res) => {
     const action = req.body.action;
     const TENKH = await getTenKH(req.body.MASO);
     const LOAI = await getLoaiTK(req.body.MASO);
-    const SOLUONG = await checkMaso(req.body.MASO);
+    const CHECKMASO = await checkMaso(req.body.MASO);
+    const TIENTOITHIEU = await getMinMoney();
     if (!action) {
         // Initial rendering of the verification page
         res.render('Deposit_Verify.ejs', {
             LOAI: LOAI,
-            SOLUONG: SOLUONG,
+            CHECKMASO: CHECKMASO,
+            TIENTOITHIEU: TIENTOITHIEU,
             MASO: req.body.MASO,
             TENKH: TENKH,
             NGAY: req.body.NGAY,
@@ -111,14 +128,64 @@ const postDepositForm = async(req, res) => {
 const getWithdrawForm = async(req, res) => {
     res.render('Withdraw_form.ejs');
 }
+
 const postWithdrawForm = async(req, res) => {
-    const maso = req.body.MASO;
-    const ngaygui = req.body.NGAY;
-    const sotien = req.body.SOTIEN;
-    const query = 'CALL LAPPHIEUGUI(? ,?, ?);'
-    connection.query(query, [maso, ngaygui, sotien], (err, result) => {
-        res.send(req.body);
-    })
+    const action = req.body.action;
+    const TENKH = await getTenKH(req.body.MASO);
+    const LOAI = await getLoaiTK(req.body.MASO);
+    const CHECKMASO = await checkMaso(req.body.MASO);
+    const TIENTOITHIEU = await getMinMoney();
+    const THOIGIANTOITHIEU = await getThoiGianToiThieu();
+
+    const CHECKNGAYRUT = await checkNgayRut(req.body.NGAY, req.body.MASO);
+    const CHECKDAOHAN = await checkDaoHan(req.body.NGAY, req.body.MASO);
+
+    if (CHECKNGAYRUT == "ERROR" || (LOAI == 0 && CHECKDAOHAN != -1) || CHECKDAOHAN == 0) {
+        LAISUAT = 0;
+        TIENLAI = 0;
+        THUCNHAN = 0;
+    } 
+    else {
+    LAISUAT = await getLaiSuat(req.body.MASO);
+    TIENLAI = await calTienLai(req.body.MASO,req.body.NGAY, req.body.SOTIEN);
+    THUCNHAN = parseFloat(req.body.SOTIEN) + parseFloat(TIENLAI);
+    }
+
+    if (!action) {
+        // Initial rendering of the verification page
+        res.render('Withdraw_Verify.ejs', {
+            LOAI: LOAI,
+            CHECKMASO: CHECKMASO,
+            TIENTOITHIEU: TIENTOITHIEU,
+            LAISUAT: LAISUAT,
+            TIENLAI: TIENLAI,
+            THUCNHAN: THUCNHAN,
+            CHECKNGAYRUT: CHECKNGAYRUT,
+            CHECKDAOHAN: CHECKDAOHAN,
+            THOIGIANTOITHIEU: THOIGIANTOITHIEU,
+            //ALLOWWITHDRAW: ALLOWWITHDRAW,
+
+            MASO: req.body.MASO,
+            TENKH: TENKH,
+            NGAY: req.body.NGAY,
+            SOTIEN: req.body.SOTIEN
+            
+        });
+    } else if (action === 'confirm') {
+        // Save data to the database
+        const { MASO, NGAY, SOTIEN } = req.body;
+        const query = 'CALL LAPPHIEURUT(?, ?, ?)';
+        try {
+            await connection.query(query, [MASO, NGAY, SOTIEN]);
+            res.redirect('/quan_ly_so');
+        } catch (error) {
+            console.error('Error executing query:', error);
+            res.status(500).send('An error occurred while saving the data');
+        }
+    } else if (action === 'cancel') {
+        // Go back to the form without saving
+        res.redirect('/ruttien_form');
+    }
 }
 
 //Add new term deposit
@@ -250,5 +317,7 @@ module.exports = {
     postAddTermDeposit,
     getAddTermDeposit,
     getModifyMinValue,
-    postModifyMinValue
+    postModifyMinValue,
+    getWithdrawForm,
+    postWithdrawForm
 }
