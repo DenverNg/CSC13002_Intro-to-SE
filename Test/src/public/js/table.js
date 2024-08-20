@@ -1,9 +1,11 @@
+
 document.addEventListener('DOMContentLoaded', () => {
+// 1. Searching for specific data of HTML table
 const search = document.querySelector('.input-group input'),
     table_rows = document.querySelectorAll('tbody tr'),
     table_headings = document.querySelectorAll('thead th');
 
-// 1. Searching for specific data of HTML table
+if (search)
 search.addEventListener('input', searchTable);
 
 function searchTable() {
@@ -53,15 +55,39 @@ function sortTable(column, sort_asc) {
 
 // 3. Converting HTML table to PDF
 
-const pdf_btn = document.querySelector('#toPDF');
-const customers_table = document.querySelector('#customers_table');
+const pdf_btn = document.querySelector('#print-daily');
+const customers_table = document.querySelector('#Daily-Report');
 
 
 const toPDF = function (customers_table) {
+    const new_table = document.createElement("table");
+  
+    // Loop through rows and cells
+    for (const row of customers_table.rows) {
+      const new_row = new_table.insertRow();
+      for (const cell of row.cells) {
+        const new_cell = new_row.insertCell();
+        
+        // Check if cell contains text (no icons)
+        if (cell.textContent.trim() !== "") {
+          new_cell.textContent = cell.textContent;
+        }
+      }
+    }
+  
     const html_code = `
+      <!DOCTYPE html>
     <!DOCTYPE html>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <main class="table" id="customers_table">${customers_table.innerHTML}</main>`;
+    <link rel="stylesheet" href="/css/table_report.css">
+
+    <center>
+        <img src="/images/Report-Header.png">
+        <div class="header"> Báo cáo doanh số hoạt động ngày </div>
+        Ngày : 
+        <main class="table">${new_table.outerHTML}</main>
+        <img src="/images/Report-Footer.png">
+    </center>
+    `;
 
     const new_window = window.open();
      new_window.document.write(html_code);
@@ -72,90 +98,16 @@ const toPDF = function (customers_table) {
     }, 400);
 }
 
+    
 pdf_btn.onclick = () => {
     toPDF(customers_table);
 }
 
-// 4. Converting HTML table to JSON
-
-const json_btn = document.querySelector('#toJSON');
-
-const toJSON = function (table) {
-    let table_data = [],
-        t_head = [],
-
-        t_headings = table.querySelectorAll('th'),
-        t_rows = table.querySelectorAll('tbody tr');
-
-    for (let t_heading of t_headings) {
-        let actual_head = t_heading.textContent.trim().split(' ');
-
-        t_head.push(actual_head.splice(0, actual_head.length - 1).join(' ').toLowerCase());
-    }
-
-    t_rows.forEach(row => {
-        const row_object = {},
-            t_cells = row.querySelectorAll('td');
-
-        t_cells.forEach((t_cell, cell_index) => {
-            const img = t_cell.querySelector('img');
-            if (img) {
-                row_object['customer image'] = decodeURIComponent(img.src);
-            }
-            row_object[t_head[cell_index]] = t_cell.textContent.trim();
-        })
-        table_data.push(row_object);
-    })
-
-    return JSON.stringify(table_data, null, 4);
-}
-
-json_btn.onclick = () => {
-    const json = toJSON(customers_table);
-    downloadFile(json, 'json')
-}
-
-// 5. Converting HTML table to CSV File
-
-const csv_btn = document.querySelector('#toCSV');
-
-const toCSV = function (table) {
-    // Code For SIMPLE TABLE
-    // const t_rows = table.querySelectorAll('tr');
-    // return [...t_rows].map(row => {
-    //     const cells = row.querySelectorAll('th, td');
-    //     return [...cells].map(cell => cell.textContent.trim()).join(',');
-    // }).join('\n');
-
-    const t_heads = table.querySelectorAll('th'),
-        tbody_rows = table.querySelectorAll('tbody tr');
-
-    const headings = [...t_heads].map(head => {
-        let actual_head = head.textContent.trim().split(' ');
-        return actual_head.splice(0, actual_head.length - 1).join(' ').toLowerCase();
-    }).join(',') + ',' + 'image name';
-
-    const table_data = [...tbody_rows].map(row => {
-        const cells = row.querySelectorAll('td'),
-            img = decodeURIComponent(row.querySelector('img').src),
-            data_without_img = [...cells].map(cell => cell.textContent.replace(/,/g, ".").trim()).join(',');
-
-        return data_without_img + ',' + img;
-    }).join('\n');
-
-    return headings + '\n' + table_data;
-}
-
-csv_btn.onclick = () => {
-    const csv = toCSV(customers_table);
-    downloadFile(csv, 'csv', 'customer orders');
-}
-
 // 6. Converting HTML table to EXCEL File
 
-const excel_btn = document.querySelector('#toEXCEL');
+const excel_btn = document.querySelector('#download-daily');
 
-const toExcel = function (table) {
+const toExcel = function (table,title) {
     // Code For SIMPLE TABLE
     // const t_rows = table.querySelectorAll('tr');
     // return [...t_rows].map(row => {
@@ -168,23 +120,24 @@ const toExcel = function (table) {
 
     const headings = [...t_heads].map(head => {
         let actual_head = head.textContent.trim().split(' ');
-        return actual_head.splice(0, actual_head.length - 1).join(' ').toLowerCase();
-    }).join('\t') + '\t' + 'image name';
+        return actual_head.splice(0, actual_head.length - 1).join(' ');
+    }).join('\t');
 
     const table_data = [...tbody_rows].map(row => {
         const cells = row.querySelectorAll('td'),
-            img = decodeURIComponent(row.querySelector('img').src),
             data_without_img = [...cells].map(cell => cell.textContent.trim()).join('\t');
 
-        return data_without_img + '\t' + img;
+        return data_without_img;
     }).join('\n');
 
-    return headings + '\n' + table_data;
+    return title + '\n' + "Ngày:" + '\n' + headings + '\n' + table_data;
 }
 
 excel_btn.onclick = () => {
-    const excel = toExcel(customers_table);
-    downloadFile(excel, 'excel');
+    const excel = toExcel(customers_table,"Báo cáo doanh số hoạt động ngày");
+  downloadFile(excel, 'excel');
+
+  // Inform the user about the download
 }
 
 const downloadFile = function (data, fileType, fileName = '') {
