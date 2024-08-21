@@ -9,27 +9,21 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/input.css">
     <link rel="stylesheet" href="/css/deposit.css">
-    <script src="/js/input.js"></script>
     <script src="/js/validator.js"></script>
-    <style>
-
-    </style>
 </head>
 
 <body>
     <div id="deposit-form" class="deposit">
         <div id="deposit__title">Phiếu rút tiền</div>
-        <form action="/guitien_form/xacnhan" method="post" class="form-input">
+        <form class="form-input" action="/ruttien_form/xacnhan" method="post">
             <div id="deposit__group0">
                 <div id="deposit__group1">
-                    <div onclick="inputClicked({
-                                            id: 'input-MASO',
-                                            fontSize: '14px',
-                                            top: '5.5%',
-                                            animation: 'inputTitleMoveUp_deposit'})" id="input-MASO"
-                        class="form-group inp-deposit">
-                        <input id="MASO" class="form-group__input inp-deposit__input" type="text" name="MASO">
-                        <div class="form-group__title inp-deposit__title">Nhập mã sổ</div>
+
+                    <div id="input-MASO" class="form-group inp-deposit">
+                        <input id="MASO" class="form-group__input inp-deposit__input" type="text" name="MASO"
+                            placeholder=" ">
+                        <label for="MASO" class="form-group__title form-group__input__title inp-deposit__title">Nhập
+                            mã sổ</label>
                         <span id="input-name-message" class="form-group__message"></span>
                     </div>
 
@@ -38,30 +32,21 @@
 
                 <div id="deposit__group2">
 
-
-                    <div onclick="inputClicked({
-                                            id: 'input-date',
-                                            inputType: 'date',
-                                            fontSize: '14px',
-                                            top: '5.5%',
-                                            animation: 'inputTitleMoveUp_deposit'})" id="input-date"
-                        class="form-group inp-deposit">
-                        <input id="date" class="form-group__input inp-deposit__input" type="text" name="NGAY">
-                        <div class="form-group__title inp-deposit__title">Ngày tạo sổ</div>
+                    <div id="input-date" class="form-group inp-deposit">
+                        <input id="date" class="form-group__input inp-deposit__input" type="date" name="NGAY"
+                            placeholder=" ">
+                        <label for="date" class="form-group__title form-group__input__title inp-deposit__title">Ngày
+                            rút</label>
                         <span id="input-name-message" class="form-group__message"></span>
                     </div>
                 </div>
             </div>
             <div id="deposit__group3">
-                <div onclick="inputClicked({
-                                        id: 'input-SOTIEN',
-                                        inputType: 'int',
-                                        fontSize: '14px',
-                                        top: '5.5%',
-                                        animation: 'inputTitleMoveUp_deposit'})" id="input-SOTIEN"
-                    class="form-group inp-deposit">
-                    <input id="SOTIEN" class="form-group__input inp-deposit__input" type="text" name="SOTIEN">
-                    <div class="form-group__title inp-deposit__title">Nhập số tiền rút</div>
+                <div id="input-SOTIEN" class="form-group inp-deposit">
+                    <input id="SOTIEN" class="form-group__input inp-deposit__input" type="text" name="SOTIEN"
+                        placeholder=" ">
+                    <label for="SOTIEN" class="form-group__title form-group__input__title inp-deposit__title">Nhập số
+                        tiền rút</label>
                     <span id="input-name-message" class="form-group__message"></span>
                 </div>
 
@@ -69,17 +54,5 @@
             </div>
         </form>
     </div>
-
-    <script>
-        Validator({
-            form: '#form',
-            errorSelector: '.form-group__message',
-            rules: [
-                Validator.isRequired('#TENKH', 'Nhập lại tên đi nha'),
-                Validator.isRequired('#password'),
-                Validator.isRequired('#date')
-            ]
-        })
-    </script>
 
 </body>

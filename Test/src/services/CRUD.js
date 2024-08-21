@@ -67,6 +67,7 @@ const updateMininum = async (values, names) => {
     }
 }
 
+// CREATE BOOK
 const getNextMaSo = async () => {
     // Query to get the maximum existing MaSo
     const [rows, fields] = await connection.query("SELECT MAX(MASO) as maxMaSo FROM SOTIETKIEM");
@@ -89,6 +90,7 @@ const getNextMaSo = async () => {
     }
 };
 
+// DEPOSIT FORM
 const getTenKH = async(MASO) => {
     const [results, fields] = await connection.query(
         'SELECT KH.HOTEN FROM SOTIETKIEM S JOIN KHACHHANG KH ON S.MAKH = KH.MAKH WHERE S.MASO = ?', [MASO]);
@@ -109,8 +111,96 @@ const getLoaiTK = async(MASO) =>{
 
 const checkMaso = async(MASO) => {
     const [results, fields] = await connection.query(
-        'SELECT COUNT(*) AS COUNT FROM SOTIETKIEM WHERE MASO = ?', [MASO]);
+        'SELECT COUNT(*) AS COUNT, TRANGTHAI FROM SOTIETKIEM WHERE MASO = ?', [MASO]);
+    if (results[0].COUNT == 0) {
+        return -1; //MASO không tồn tại
+    }
+    if (results[0].TRANGTHAI == 0) {
+        return 0; //MASO đã bị khóa
+    }
     return results[0].COUNT;
+}
+
+const getMinMoney = async() => {
+    const [results, fields] = await connection.query(
+        'SELECT GIATRI FROM DONVI_TOITHIEU WHERE TEN = "SOTIENGUI"');
+    return results[0].GIATRI;
+}
+
+// WITHDRAW FORM
+const getThoiGianToiThieu = async() => {
+    const [results, fields] = await connection.query(
+        'SELECT GIATRI FROM DONVI_TOITHIEU WHERE TEN = "THOIGIAN"');
+    return results[0].GIATRI;
+}
+
+// const allowWithdraw = async(MASO, SOTIEN) => {
+//     const [results, fields] = await connection.query(
+//         'SELECT SODU FROM SOTIETKIEM WHERE MASO = ?', [MASO]);
+//     if (results.length == 0) {
+//         return -1; //MASO không tồn tại
+//     }
+//     if (results[0].SODU < SOTIEN) {
+//         return 0;
+//     }
+//     return 1;
+// }
+
+const checkNgayRut = async(NGAY, MASO) => {
+    const [results, fields] = await connection.query(
+        'SELECT DATEDIFF(?, NGAYMOSO) AS DIFF FROM SOTIETKIEM WHERE MASO = ?', [NGAY, MASO]);
+    const ThoiGianToiThieu = await getThoiGianToiThieu();
+    if (results[0].DIFF >= ThoiGianToiThieu)
+        return results[0].DIFF;
+    return "ERROR";
+}
+
+const checkDaoHan = async(NGAY, MASO) => {
+    const [results, fields] = await connection.query(
+        'SELECT DATEDIFF(?, NGAYMOSO) AS DIFF, LOAI FROM SOTIETKIEM WHERE MASO = ?', [NGAY, MASO]);
+    if (results[0].LOAI == 0)
+        return -1;
+    if (results[0].DIFF / results[0].LOAI >= 30)
+        return 1;
+    return 0;
+}
+
+const getLaiSuat = async(MASO) => {
+    const [results, fields] = await connection.query(
+        'SELECT LAISUAT FROM SOTIETKIEM S JOIN LOAI_SOTK L ON S.LOAI = L.MALOAI WHERE MASO = ?', [MASO]);
+    return results[0].LAISUAT;
+}
+
+const calTienLai = async(MASO, NGAY, SOTIEN) => {
+    // -1: Số tiền rút lớn hơn số dư (STK không kỳ hạn)
+    // -2: Số tiền rút khác số dư (STK có kỳ hạn)
+    // -3: Chưa đến thời gian đáo hạn (STK có kỳ hạn)
+    const [results, fields] = await connection.query(
+        'SELECT LAISUAT, NGAYMOSO, SODU, LOAI FROM SOTIETKIEM S JOIN LOAI_SOTK L ON S.LOAI = L.MALOAI WHERE MASO = ?', [MASO]);
+    const LAISUAT = results[0].LAISUAT;
+    const NGAYMOSO = results[0].NGAYMOSO;
+    const SODU = results[0].SODU;
+    const LOAI = results[0].LOAI;
+    const DAOHAN = await checkDaoHan(NGAY, MASO);
+    const [results1, fields1] = await connection.query(
+        'SELECT DATEDIFF(?, ?) AS DIFF', [NGAY, NGAYMOSO]);
+    const DIFF = results1[0].DIFF;
+
+    if (LOAI == 0){
+        if (SOTIEN > SODU)
+            return "ERROR 0"; 
+        if (DIFF < 30)
+            return 0;
+        return SOTIEN * LAISUAT;
+    }
+    else {
+        if (SOTIEN != SODU)
+            return "ERROR 1";
+        if (DAOHAN >= 1)
+            return SOTIEN * LAISUAT * DAOHAN;
+        else 
+            return "ERROR 2";
+    }
 }
 
 module.exports = {
@@ -123,8 +213,21 @@ module.exports = {
     getMininum,
     updateRateDeposit,
     updateMininum,
+
+    // CREATE BOOK
     getNextMaSo,
+
+    // DEPOSIT FORM
     getTenKH,
     getLoaiTK,
-    checkMaso
+    checkMaso,
+    getMinMoney,
+
+    // WITHDRAW FORM
+    getThoiGianToiThieu,
+    //allowWithdraw,
+    getLaiSuat,
+    checkNgayRut,
+    checkDaoHan,
+    calTienLai
 }
