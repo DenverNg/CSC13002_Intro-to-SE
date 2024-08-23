@@ -1,8 +1,9 @@
 const connection = require('../config/database');
 const {getAllBooks, getDailyRP, getMonthlyRP, getAllTermDeposit, getActiveTermDeposit, getMininum, updateRateDeposit, 
     updateMininum, deleteTermDeposit, getNextMaSo, getTenKH, getLoaiTK, checkMaso, getMinMoney, 
-    checkDaoHan, checkNgayRut, calTienLai, getLaiSuat, getThoiGianToiThieu} = require('../services/CRUD');
-const {getCurrentDate} = require('../public/js/date');
+    checkDaoHan, checkNgayRut, calTienLai, getLaiSuat, getThoiGianToiThieu,
+    getAllType} = require('../services/CRUD');
+const {getCurrentDate, getDateForReport, getMonthForReport, getMonthOnly} = require('../public/js/date');
 const { set, get } = require('express/lib/response');
 
 
@@ -67,17 +68,71 @@ const postCreateBookForm = async (req, res) => {
     }
 };
 
-//Reports
+//Daily Report
+
 const getDailyReports = async(req, res) => {
-    //let date = req.body.NGAY;
-    const results = await getDailyRP('2024-10-18'); //Chưa lấy được ngày từ user
-    res.render('Daily_Report.ejs', {listDailyRP: results});
+        const results = await getDailyRP(getDateForReport());
+        res.render('Daily_Report.ejs', {
+            listDailyRP: results,
+            currentDate: getDateForReport()
+        });
 }
+
+const postDailyReports = async(req, res) => {
+    const action = req.body.action;
+    if (action === 'confirm') {
+        // Save data to the database
+        let date = req.body.date
+        const results = await getDailyRP(date);
+        res.render('Daily_Report.ejs', {
+            listDailyRP: results,
+            currentDate: date
+        });
+    } 
+}
+
+
 const getMonthlyReports = async(req, res) => {
-    // const results = await getMonthlyRP('2024-10-18'); //Chưa lấy được ngày từ user
-    // res.render('Monthly_Report.ejs');
-    res.send('Monthly Report');
+        types = await getAllType();
+        const results = await getMonthlyRP(getMonthOnly(), "KHÔNG KỲ HẠN");
+        res.render('Monthly_Report.ejs', {
+            listMonthlyRP: results,
+            currentMonth: getMonthForReport(),
+            types: types,
+        });
 }
+
+const postMonthlyReports = async(req, res) => {
+    const action = req.body.action;
+    if (action === 'confirm') {
+        // Save data to the database
+        const monthYear  = req.body.date;
+        const type = req.body.types;
+        if (!type || !monthYear) {
+            return res.status(400).send('Tháng và loại kỳ hạn là bắt buộc.');
+        }
+        try {
+            const [month, year] = monthYear.split('-');
+            const monthNumber = parseInt(month, 10);
+
+            // Fetch the report data based on month and type
+            const results = await getMonthlyRP(monthNumber, type);
+
+            // Render the report page with the fetched data and selected parameters
+            res.render('Monthly_Report.ejs', {
+                listMonthlyRP: results,
+                currentMonth: '${monthNumber}-${year}',
+                selectedType: type
+            });
+        } catch (error) {
+            console.error('Error fetching report data:', error);
+            res.status(500).send('Lỗi khi lấy dữ liệu báo cáo.');
+        }
+    } else {
+        res.status(400).send('Hành động không hợp lệ.');
+    }
+}
+
 const getSettings = async(req, res) => {
     const resultsTerm = await getActiveTermDeposit();
     const resultMininum = await getMininum();
@@ -301,7 +356,9 @@ module.exports = {
     getDashboard,
     getTransactions,
     getDailyReports,
+    postDailyReports,
     getMonthlyReports,
+    postMonthlyReports,
     getSettings,
     getSettings_Delete,
     postDeleteTermDeposit,

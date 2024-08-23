@@ -1,3 +1,5 @@
+const { getAllType } = require('../../services/CRUD');
+
 document.addEventListener('DOMContentLoaded', () => {
 
 function updateName(selectedLi) {
@@ -14,6 +16,12 @@ options = wrapper.querySelector(".options");
 
 
 let types = ["Không kỳ hạn","Kỳ hạn 3 tháng","Kỳ hạn 6 tháng","Kỳ hạn 8 tháng","Kỳ hạn 10 tháng", "Kỳ hạn 12 tháng","Kỳ hạn 16 tháng","Kỳ hạn 20 tháng"];
+// async function fetchTypes(){
+//     let types = await getAllType();
+//     addType();
+// }
+
+
 function addType(selectedType) {
     options.innerHTML = "";
     types.forEach(type => {
