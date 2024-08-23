@@ -2,7 +2,7 @@ const connection = require('../config/database');
 
 const getAllBooks = async () => {
     const [results, fields] = await connection.query(
-        'SELECT S.MASO, KH.HOTEN, S.LOAI, S.SODU  FROM SOTIETKIEM S JOIN KHACHHANG KH ON S.MAKH = KH.MAKH WHERE S.TRANGTHAI = 1');
+        'SELECT S.MASO, KH.HOTEN, S.LOAI, S.SODU, KH.CMND  FROM SOTIETKIEM S JOIN KHACHHANG KH ON S.MAKH = KH.MAKH WHERE S.TRANGTHAI = 1');
     return results;
 }
 const getDailyRP = async(date) => {
