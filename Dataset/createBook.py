@@ -2,7 +2,7 @@ import json
 import random
 from datetime import datetime, timedelta
 
-file_path = 'uit_member.json'
+file_path = 'name.json'
 with open(file_path, 'r', encoding='utf-8') as file:
     data = json.load(file)
 
@@ -10,8 +10,8 @@ locations = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10',
              'Q11', 'Q12', 'Tân Bình', 'Bình Tân', 'Bình Thạnh', 'Thủ Đức']
 
 def generate_random_date():
-    start_date = datetime(2024, 8, 30)
-    end_date = datetime(2024, 12, 31)
+    start_date = datetime(2024, 8, 1)
+    end_date = datetime(2024, 9, 30)
     random_days = random.randint(0, (end_date - start_date).days)
     return start_date + timedelta(days=random_days)
 
@@ -27,7 +27,7 @@ def generate_unique_number(existing_numbers):
 # Set to keep track of unique numbers
 existing_numbers = set()
 
-with open('output.txt', 'w', encoding='utf-8') as output_file:
+with open('createBook.txt', 'w', encoding='utf-8') as output_file:
     for member in data:
         random_number = random.choice([0, 3, 6])
         full_name = member.get('full_name')

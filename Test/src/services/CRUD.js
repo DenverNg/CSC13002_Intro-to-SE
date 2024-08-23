@@ -13,7 +13,7 @@ const getDailyRP = async(date) => {
 const getMonthlyRP = async(month, type) => {
     const [results, fields] = await connection.query(
         'CALL BAOCAO_THANG(?,?)', [month, type]);
-    return results;
+    return results[3];
 }
 const getAllTermDeposit = async() => {
     const [results, fields] = await connection.query(
@@ -203,6 +203,15 @@ const calTienLai = async(MASO, NGAY, SOTIEN) => {
     }
 }
 
+const getAllType = async() => {
+    const [results, fields] = await connection.query(
+        'SELECT KYHAN FROM LOAI_SOTK');
+    for (let i = 0; i < results.length; i++) {
+        results[i] = results[i].KYHAN;
+    }
+    return results;
+}
+
 module.exports = {
     getAllBooks,
     getDailyRP,
@@ -229,5 +238,8 @@ module.exports = {
     getLaiSuat,
     checkNgayRut,
     checkDaoHan,
-    calTienLai
+    calTienLai,
+
+    // REPORT
+    getAllType
 }
