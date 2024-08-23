@@ -116,6 +116,9 @@
 								<div id="types">
 									<input type="hidden" name="types" value="<%= types %>">
 								</div>
+								
+								<input type="hidden" id="hidden-type" name="selectedType" value="<%= selectedType %>">
+
 								<button type="submit" class="form-group__button submit-button" name="action" value="confirm">Xem báo
 									cáo</button>
 								</form>
@@ -201,16 +204,24 @@
 			const wrapper = document.querySelector(".wrapper"),
 				selectBtn = wrapper.querySelector(".select-btn"),
 				searchInp = wrapper.querySelector("input"),
-				options = wrapper.querySelector(".options");
+				options = wrapper.querySelector(".options"),
+				hiddenTypeInput = document.getElementById("hidden-type");
 
 			//let types = ["Không kỳ hạn", "Kỳ hạn 3 tháng", "Kỳ hạn 6 tháng", "Kỳ hạn 8 tháng", "Kỳ hạn 10 tháng", "Kỳ hạn 12 tháng", "Kỳ hạn 16 tháng", "Kỳ hạn 20 tháng"]; // replace with actual types fetched from the server
 			const types = "<%= types %>".split(","); // Get the types from the server-side variable	
-			function addType(selectedType = '') {
+			const selectedType = "<%= selectedType %>";
+			
+			function addType() {
 				options.innerHTML = ""; // Clear the current options
-				types.forEach(type => {
-					let isSelected = type == selectedType ? "selected" : "";
-					let li = `<li onclick="updateName(this)" class="${isSelected}">${type}</li>`;
+				if (selectedType) {
+					let li = `<li onclick="updateName(this)" class="selected">${selectedType}</li>`;
 					options.insertAdjacentHTML("beforeend", li);
+				}
+				types.forEach(type => {
+					if (type !== selectedType) {
+						let li = `<li onclick="updateName(this)">${type}</li>`;
+						options.insertAdjacentHTML("beforeend", li);
+					}
 				});
 			}
 
@@ -220,9 +231,10 @@
 
 			function updateName(selectedLi) {
 				searchInp.value = ""; // Clear search input
-				addType(selectedLi.innerText); // Refresh list with the selected type
+				addType(); // Refresh list with the selected type
 				selectBtn.firstElementChild.innerText = selectedLi.innerText; // Update button text with selected type
 				wrapper.classList.remove("active"); // Hide dropdown options after selection
+				hiddenTypeInput.value = selectedLi.innerText; // Update hidden input value
 			}
 
 			searchInp.addEventListener("keyup", () => {
@@ -238,11 +250,7 @@
 			});
 
 			selectBtn.addEventListener("click", () => wrapper.classList.toggle("active")); // Toggle dropdown visibility
-			options.addEventListener('', (event) => {
-				if (event.target.tagName === 'LI') {
-					updateName(event.target);
-				}
-			})
+			
 			options.addEventListener('click', (event) => {
 				if (event.target.tagName === 'LI') {
 					updateName(event.target);

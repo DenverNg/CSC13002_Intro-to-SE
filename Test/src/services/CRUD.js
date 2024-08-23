@@ -134,18 +134,6 @@ const getThoiGianToiThieu = async() => {
     return results[0].GIATRI;
 }
 
-// const allowWithdraw = async(MASO, SOTIEN) => {
-//     const [results, fields] = await connection.query(
-//         'SELECT SODU FROM SOTIETKIEM WHERE MASO = ?', [MASO]);
-//     if (results.length == 0) {
-//         return -1; //MASO không tồn tại
-//     }
-//     if (results[0].SODU < SOTIEN) {
-//         return 0;
-//     }
-//     return 1;
-// }
-
 const checkNgayRut = async(NGAY, MASO) => {
     const [results, fields] = await connection.query(
         'SELECT DATEDIFF(?, NGAYMOSO) AS DIFF FROM SOTIETKIEM WHERE MASO = ?', [NGAY, MASO]);
@@ -172,9 +160,6 @@ const getLaiSuat = async(MASO) => {
 }
 
 const calTienLai = async(MASO, NGAY, SOTIEN) => {
-    // -1: Số tiền rút lớn hơn số dư (STK không kỳ hạn)
-    // -2: Số tiền rút khác số dư (STK có kỳ hạn)
-    // -3: Chưa đến thời gian đáo hạn (STK có kỳ hạn)
     const [results, fields] = await connection.query(
         'SELECT LAISUAT, NGAYMOSO, SODU, LOAI FROM SOTIETKIEM S JOIN LOAI_SOTK L ON S.LOAI = L.MALOAI WHERE MASO = ?', [MASO]);
     const LAISUAT = results[0].LAISUAT;
@@ -212,6 +197,12 @@ const getAllType = async() => {
     return results;
 }
 
+const getSoDu = async(MASO) => {
+    const [results, fields] = await connection.query(
+        'SELECT SODU FROM SOTIETKIEM WHERE MASO = ?', [MASO]);
+    return results[0].SODU;
+}
+
 module.exports = {
     getAllBooks,
     getDailyRP,
@@ -241,5 +232,6 @@ module.exports = {
     calTienLai,
 
     // REPORT
-    getAllType
+    getAllType,
+    getSoDu
 }
