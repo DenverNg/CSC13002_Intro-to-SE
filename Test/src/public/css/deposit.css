@@ -12,6 +12,15 @@
     border-top-right-radius: 10px 10px;
 }
 
+.highlight-yellow {
+    background-color: #F68E26; 
+    /* Light yellow */
+}
+
+.text-orange {
+    color: #F68E26;
+}
+
 #deposit__title {
     width: 100%;
     height: 50px;

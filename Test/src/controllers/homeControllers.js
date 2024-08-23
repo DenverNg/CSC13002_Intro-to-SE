@@ -2,7 +2,7 @@ const connection = require('../config/database');
 const {getAllBooks, getDailyRP, getMonthlyRP, getAllTermDeposit, getActiveTermDeposit, getMininum, updateRateDeposit, 
     updateMininum, deleteTermDeposit, getNextMaSo, getTenKH, getLoaiTK, checkMaso, getMinMoney, 
     checkDaoHan, checkNgayRut, calTienLai, getLaiSuat, getThoiGianToiThieu,
-    getAllType} = require('../services/CRUD');
+    getAllType, getSoDu} = require('../services/CRUD');
 const {getCurrentDate, getDateForReport, getMonthForReport, getMonthOnly} = require('../public/js/date');
 const { set, get } = require('express/lib/response');
 
@@ -99,16 +99,18 @@ const getMonthlyReports = async(req, res) => {
             listMonthlyRP: results,
             currentMonth: getMonthForReport(),
             types: types,
+            selectedType: "KHÔNG KỲ HẠN"
         });
 }
 
 const postMonthlyReports = async(req, res) => {
     const action = req.body.action;
+    types = await getAllType();
     if (action === 'confirm') {
         // Save data to the database
         const monthYear  = req.body.date;
-        const type = req.body.types;
-        if (!type || !monthYear) {
+        const selectedType = req.body.selectedType;
+        if (!selectedType || !monthYear) {
             return res.status(400).send('Tháng và loại kỳ hạn là bắt buộc.');
         }
         try {
@@ -116,13 +118,14 @@ const postMonthlyReports = async(req, res) => {
             const monthNumber = parseInt(month, 10);
 
             // Fetch the report data based on month and type
-            const results = await getMonthlyRP(monthNumber, type);
-
+            const results = await getMonthlyRP(monthNumber, selectedType);
+            // console.log(results);
             // Render the report page with the fetched data and selected parameters
             res.render('Monthly_Report.ejs', {
                 listMonthlyRP: results,
                 currentMonth: '${monthNumber}-${year}',
-                selectedType: type
+                selectedType: selectedType,
+                types: types
             });
         } catch (error) {
             console.error('Error fetching report data:', error);
@@ -191,19 +194,38 @@ const postWithdrawForm = async(req, res) => {
     const CHECKMASO = await checkMaso(req.body.MASO);
     const TIENTOITHIEU = await getMinMoney();
     const THOIGIANTOITHIEU = await getThoiGianToiThieu();
+    const SODU = await getSoDu(req.body.MASO);
 
     const CHECKNGAYRUT = await checkNgayRut(req.body.NGAY, req.body.MASO);
     const CHECKDAOHAN = await checkDaoHan(req.body.NGAY, req.body.MASO);
+    const CHECKTIENLAI = await calTienLai(req.body.MASO,req.body.NGAY, req.body.SOTIEN);
+
+    LAISUAT = await getLaiSuat(req.body.MASO);
+    const TIENLAIhidden = CHECKTIENLAI;
+
+    if (CHECKTIENLAI === "ERROR 1" || CHECKTIENLAI === "ERROR 0") {
+        const lai = await getLaiSuat(req.body.MASO);
+        TIENLAI = lai * SODU;
+        THUCNHAN = SODU + parseFloat(TIENLAI);
+
+    }
+    else if (CHECKTIENLAI === "ERROR 2") {
+        TIENLAI = 0;
+        THUCNHAN = 0;
+    }
+    else {
+        TIENLAI = CHECKTIENLAI;
+        THUCNHAN = parseFloat(req.body.SOTIEN) + parseFloat(TIENLAI);
+    }
 
     if (CHECKNGAYRUT == "ERROR" || (LOAI == 0 && CHECKDAOHAN != -1) || CHECKDAOHAN == 0) {
         LAISUAT = 0;
         TIENLAI = 0;
         THUCNHAN = 0;
-    } 
-    else {
-    LAISUAT = await getLaiSuat(req.body.MASO);
-    TIENLAI = await calTienLai(req.body.MASO,req.body.NGAY, req.body.SOTIEN);
-    THUCNHAN = parseFloat(req.body.SOTIEN) + parseFloat(TIENLAI);
+    }
+
+    if (isNaN(THUCNHAN)) {
+        THUCNHAN = 0;
     }
 
     if (!action) {
@@ -218,7 +240,8 @@ const postWithdrawForm = async(req, res) => {
             CHECKNGAYRUT: CHECKNGAYRUT,
             CHECKDAOHAN: CHECKDAOHAN,
             THOIGIANTOITHIEU: THOIGIANTOITHIEU,
-            //ALLOWWITHDRAW: ALLOWWITHDRAW,
+            TIENLAIhidden: TIENLAIhidden,
+            SODU: SODU,
 
             MASO: req.body.MASO,
             TENKH: TENKH,

@@ -35,6 +35,12 @@
                 <div id="THOIGIANTOITHIEU">
                     <input type="hidden" name="THOIGIANTOITHIEU" value="<%= THOIGIANTOITHIEU %>">
                 </div>
+                <div id="TIENLAIhidden">
+                    <input type="hidden" name="TIENLAIhidden" value="<%= TIENLAIhidden %>">
+                </div>
+                <div id="SODU">
+                    <input type="hidden" name="SODU" value="<%= SODU %>">
+                </div>
                         
 
                 <div id="MASO" class="form-group verify-row">
@@ -66,7 +72,7 @@
                     <div class="form-group__title verify-deposit__value">
                         <%= SOTIEN %>
                     </div>
-                    <input type="hidden" name="SOTIEN" value="<%= SOTIEN %>">
+                    <input type="hidden" name="SOTIEN" id="sotien-input" value="<%= SOTIEN %>">
                 </div>
 
                 <div id="LAISUAT" class="form-group verify-row">
@@ -112,11 +118,17 @@
             const SOTIEN = "<%=SOTIEN %>"; // Get the SOTIEN value from the server-side variable
             const CHECKNGAYRUT = "<%= CHECKNGAYRUT %>";
             const CHECKDAOHAN = "<%= CHECKDAOHAN %>";
-            const TIENLAI = "<%= TIENLAI %>";
+            const TIENLAIhidden = "<%= TIENLAIhidden %>";
             const THOIGIANTOITHIEU = "<%= THOIGIANTOITHIEU %>";
+            const SODU = "<%= SODU %>";
 
             const submit = document.getElementById('submit-btn');
+            const sotienRow = document.getElementById('SOTIEN');
+            const sotienValue = document.querySelector('#SOTIEN .verify-deposit__value');
+            const sotienTitle = document.querySelector('#SOTIEN .verify-deposit__title');
+            const sotienInput = document.getElementById('sotien-input');
             let isValid = true;
+            let disabledToast = false;
 
             if (parseInt(CHECKMASO) === -1) {
                 toast({
@@ -136,9 +148,6 @@
                 });
                 isValid = false;
             }
-
-            
-            
             if (CHECKNGAYRUT === 'ERROR') {
                 toast({
                     title: 'Lỗi',
@@ -159,39 +168,47 @@
                 isValid = false;
             }
 
-            if (TIENLAI === 'ERROR 0') {
+            else if (TIENLAIhidden === 'ERROR 0') {
                 toast({
                     title: 'Lỗi',
                     desc: 'SỔ TIẾT KIỆM KHÔNG KỲ HẠN: SỐ TIỀN RÚT ĐÃ VƯỢT QUÁ SỐ DƯ',
                     type: 'error',
                     duration: 3000
                 });
-                isValid = false;
+                sotienValue.style.color = '#DE8023'; // Yellow text color
+                sotienTitle.style.color = '#DE8023'; // Yellow text color
+                sotienValue.textContent = SODU;
+                sotienInput.value = SODU;
+                disabledToast = true;
             }
-            else if (TIENLAI === 'ERROR 1') {
+            else if (TIENLAIhidden === 'ERROR 1') {
                 toast({
                     title: 'Lỗi',
                     desc: 'SỐ TIỀN RÚT KHÔNG HỢP LỆ. CHỈ ĐƯỢC RÚT TOÀN BỘ SỐ DƯ',
                     type: 'error',
                     duration: 3000
                 });
-                isValid = false;
+                sotienValue.style.color = '#DE8023'; // Yellow text color
+                sotienTitle.style.color = '#DE8023'; // Yellow text color
+                sotienValue.textContent = SODU;
+                sotienInput.value = SODU;
+                disabledToast = true;
             }
-            else if (TIENLAI === 'ERROR 2') {
+            else if (TIENLAIhidden === 'ERROR 2') {
                 toast({
                     title: 'Lỗi',
                     desc: 'CHƯA ĐẾN THỜI GIAN ĐÁO HẠN',
                     type: 'error',
                     duration: 3000
                 });
-                isValid = false;
+               isValid = false;
             }
 
 
-            if (!isValid) {
+            if (!isValid && !disabledToast) {
                 submit.disabled = true;
             }
-            else {
+            else if (!disabledToast) {
                 toast({
                     title: 'Thành công',
                     desc: 'TẤT CẢ THÔNG TIN ĐỀU HỢP LỆ',
