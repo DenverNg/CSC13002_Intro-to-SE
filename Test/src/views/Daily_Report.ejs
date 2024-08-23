@@ -3,8 +3,6 @@
     <head>
         <title>SEBANK</title>
         <meta charset="utf-8">
-       
-        
         <link rel="stylesheet" href="/css/main.css">
         <script src="/js/func.js"></script>
 		<link rel="stylesheet" href="/css/table.css">
@@ -65,56 +63,53 @@
             <div class = "main">
                 <!-- Quản lý sổ -->
                 <div class="content" id="Report">
+                    <!-- Tabs -->
                     <div class="tabs">
                         <div class="tab-item active">
-                        <i class="tab-icon fas fa-code"></i>
-                        Báo cáo doanh số
+                            <a href="/bao_cao_ngay">
+                                <i class="tab-icon fas fa-code"></i>
+                                Báo cáo doanh số
+                            </a>
                         </div>
                         <div class="tab-item">
-                        <i class="tab-icon fas fa-cog"></i>
-                        Báo cáo đóng/mở
+                            <a href="/bao_cao_thang">
+                                <i class="tab-icon fas fa-cog"></i>
+                                Báo cáo đóng/mở
+                            </a>
                         </div>
                         <div class="line"></div>
                     </div>
+                    
+                    <!-- Daily Report Content -->
                     <div class="tab-content">
                         <div class="tab-pane active">
-                            
                             <div class="topbar-report">
                                 Báo Cáo Doanh Số Hoạt Động Ngày
                             </div>
-                                
-                            
-                            
                             <div class="subheader">
                                 <div class="EnterValue">
-                                    <!--Input Date-->
-                                    <div onclick="inputClicked({
-                                        id: 'input-date',
-                                        inputType: 'date'})"
-                                    id="input-date" class="form-group">
-                                    <input id="date" class="form-group__input" type="text">
-                                    <div class="form-group__title">Nhập ngày báo cáo</div>
-                                    <span id="input-name-message" class="form-group__message"></span>
-                                    </div>
+                                    <form action="/bao_cao_ngay#" method="POST">
+                                        <div onclick="inputClicked({ id: 'input-date', inputType: 'date'})" id="input-date"
+                                            class="form-group">
+                                            <input id="date" name="date" class="form-group__input" type="date" value="<%= currentDate %>"
+                                                required>
+                                            <div class="form-group__title">Nhập ngày báo cáo</div>
+                                            <span id="input-name-message" class="form-group__message"></span>
+                                        </div>
+                                        <button type="submit" class="form-group__button submit-button" name="action" value="confirm">Xem báo
+                                            cáo</button>
+                                    </form>
                                 </div>
-                                
-            
                                 <div class="Function">
                                     <div class="icon" id="download-daily">
-                                        <span class="material-symbols-outlined" style="font-size: 40px">
-                                            download
-                                            </span>
+                                        <span class="material-symbols-outlined" style="font-size: 40px">download</span>
                                         Tải báo cáo
                                     </div>
-                                    
                                     <div class="icon" id="print-daily">
-                                        <span class="material-icons" style="font-size: 40px">
-                                            print
-                                        </span>
+                                        <span class="material-icons" style="font-size: 40px">print</span>
                                         In báo cáo
                                     </div>
                                 </div>
-                                
                             </div>
             
                             
@@ -155,60 +150,7 @@
                                     </table>
                             </section>
                     </div>
-                        
-                    <div class="tab-pane">
-                    <div class="topbar-report">
-                        Báo Cáo Đóng/Mở Hàng Tháng
-                    </div>
-                        
-                    
-                    
-                    <div class="subheader">
-                        <div class="EnterValue">
-                            <!--Input Date-->
-                            <div onclick="inputClicked({
-                                id: 'input-date',
-                                inputType: 'date'})"
-                            id="input-date" class="form-group">
-                            <input id="date" class="form-group__input" type="text">
-                            <div class="form-group__title">Nhập ngày báo cáo</div>
-                            <span id="input-name-message" class="form-group__message"></span>
-                            </div>
-    
-    
-                            <!--Dropdown Select-->
-                            <div class="wrapper">
-                                <div class="select-btn">
-                                <span>Chọn loại kỳ hạn</span>
-                                <i class="uil uil-angle-down"></i>
-                                </div>
-                                <div class="select-content">
-                                <div class="select-search">
-                                    <i class="uil uil-search"></i>
-                                    <input spellcheck="false" type="text" placeholder="Tìm kiếm loại kỳ hạn">
-                                </div>
-                                <ul class="options"></ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-    
-                        <div class="Function">
-                            <div class="icon" id="download">
-                                <span class="material-symbols-outlined" style="font-size: 40px">
-                                    download
-                                    </span>
-                                Tải báo cáo
-                            </div>
-                            
-                            <div class="icon" id="print">
-                                <span class="material-icons" style="font-size: 40px">
-                                    print
-                                </span>
-                                In báo cáo
-                            </div>
-                        </div>
-                        
+                     
                     </div>
                 </div>
             </div>
