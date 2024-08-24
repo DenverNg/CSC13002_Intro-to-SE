@@ -1,7 +1,7 @@
 const express = require('express');
 const {getDashboard, getTransactions, getDailyReports, getMonthlyReports, getSettings, getCreateBookForm, postCreateBookForm, getDepositForm, postDepositForm,  getSettings_Delete, postDeleteTermDeposit,getAddTermDeposit,postAddTermDeposit,
     getModifyTermDeposit, postModifyTermDeposit,getModifyMinValue, postModifyMinValue
-, getWithdrawForm, postWithdrawForm, postDailyReports, postMonthlyReports} = require('../controllers/homeControllers');
+, getWithdrawForm, postWithdrawForm, postDailyReports, postMonthlyReports,getPassword} = require('../controllers/homeControllers');
 const router = express.Router();
 
 
@@ -12,6 +12,7 @@ router.get('/bao_cao_ngay', getDailyReports);
 router.post('/bao_cao_ngay', postDailyReports);
 router.get('/bao_cao_thang', getMonthlyReports);
 router.post('/bao_cao_thang', postMonthlyReports);
+router.get('/mat_khau', getPassword);
 router.get('/cai_dat', getSettings);
 
 

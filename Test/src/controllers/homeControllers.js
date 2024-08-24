@@ -135,7 +135,9 @@ const postMonthlyReports = async(req, res) => {
         res.status(400).send('Hành động không hợp lệ.');
     }
 }
-
+const getPassword = (req, res) => {
+    res.render('Password.ejs');
+}
 const getSettings = async(req, res) => {
     const resultsTerm = await getActiveTermDeposit();
     const resultMininum = await getMininum();
@@ -399,5 +401,6 @@ module.exports = {
     getModifyMinValue,
     postModifyMinValue,
     getWithdrawForm,
-    postWithdrawForm
+    postWithdrawForm,
+    getPassword
 }
