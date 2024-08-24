@@ -4,13 +4,14 @@ let pass = document.getElementById("password");
 let cover = document.querySelector('.password')
 function checkPassword() {
     if (correct_password == pass.value)
-        cover.classList.add('active');
+        return true;
 }
 
 let eyeicon = document.getElementById("eyeicon");
 
 pass.addEventListener('input',()=>{
-    checkPassword();
+    if(checkPassword())
+        window.location.href = '/cai_dat';
 })
 
 eyeicon.addEventListener('click',()=>{

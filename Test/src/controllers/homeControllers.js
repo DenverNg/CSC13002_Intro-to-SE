@@ -138,6 +138,8 @@ const postMonthlyReports = async(req, res) => {
 const getPassword = (req, res) => {
     res.render('Password.ejs');
 }
+
+
 const getSettings = async(req, res) => {
     const resultsTerm = await getActiveTermDeposit();
     const resultMininum = await getMininum();
