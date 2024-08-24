@@ -55,104 +55,104 @@ function sortTable(column, sort_asc) {
 
 // 3. Converting HTML table to PDF
 
-const pdf_btn = document.querySelector('#print-daily');
-const customers_table = document.querySelector('#Daily-Report');
+// const pdf_btn = document.querySelector('#print-daily');
+// const customers_table = document.querySelector('#Daily-Report');
 
 
-const toPDF = function (customers_table) {
-    const new_table = document.createElement("table");
+// const toPDF = function (customers_table) {
+//     const new_table = document.createElement("table");
   
-    // Loop through rows and cells
-    for (const row of customers_table.rows) {
-      const new_row = new_table.insertRow();
-      for (const cell of row.cells) {
-        const new_cell = new_row.insertCell();
+//     // Loop through rows and cells
+//     for (const row of customers_table.rows) {
+//       const new_row = new_table.insertRow();
+//       for (const cell of row.cells) {
+//         const new_cell = new_row.insertCell();
         
-        // Check if cell contains text (no icons)
-        if (cell.textContent.trim() !== "") {
-          new_cell.textContent = cell.textContent;
-        }
-      }
-    }
+//         // Check if cell contains text (no icons)
+//         if (cell.textContent.trim() !== "") {
+//           new_cell.textContent = cell.textContent;
+//         }
+//       }
+//     }
   
-    const html_code = `
-      <!DOCTYPE html>
-    <!DOCTYPE html>
-    <link rel="stylesheet" href="/css/table_report.css">
+//     const html_code = `
+//       <!DOCTYPE html>
+//     <!DOCTYPE html>
+//     <link rel="stylesheet" href="/css/table_report.css">
 
-    <center>
-        <img src="/images/Report-Header.png">
-        <div class="header"> Báo cáo doanh số hoạt động ngày </div>
-        Ngày : 
-        <main class="table">${new_table.outerHTML}</main>
-        <img src="/images/Report-Footer.png">
-    </center>
-    `;
+//     <center>
+//         <img src="/images/Report-Header.png">
+//         <div class="header"> Báo cáo doanh số hoạt động ngày </div>
+//         Ngày : 
+//         <main class="table">${new_table.outerHTML}</main>
+//         <img src="/images/Report-Footer.png">
+//     </center>
+//     `;
 
-    const new_window = window.open();
-     new_window.document.write(html_code);
+//     const new_window = window.open();
+//      new_window.document.write(html_code);
 
-    setTimeout(() => {
-        new_window.print();
-        new_window.close();
-    }, 400);
-}
+//     setTimeout(() => {
+//         new_window.print();
+//         new_window.close();
+//     }, 400);
+// }
 
     
-pdf_btn.onclick = () => {
-    toPDF(customers_table);
-}
+// pdf_btn.onclick = () => {
+//     toPDF(customers_table);
+// }
 
-// 6. Converting HTML table to EXCEL File
+// // 6. Converting HTML table to EXCEL File
 
-const excel_btn = document.querySelector('#download-daily');
+// const excel_btn = document.querySelector('#download-daily');
 
-const toExcel = function (table,title) {
-    // Code For SIMPLE TABLE
-    // const t_rows = table.querySelectorAll('tr');
-    // return [...t_rows].map(row => {
-    //     const cells = row.querySelectorAll('th, td');
-    //     return [...cells].map(cell => cell.textContent.trim()).join('\t');
-    // }).join('\n');
+// const toExcel = function (table,title) {
+//     // Code For SIMPLE TABLE
+//     // const t_rows = table.querySelectorAll('tr');
+//     // return [...t_rows].map(row => {
+//     //     const cells = row.querySelectorAll('th, td');
+//     //     return [...cells].map(cell => cell.textContent.trim()).join('\t');
+//     // }).join('\n');
 
-    const t_heads = table.querySelectorAll('th'),
-        tbody_rows = table.querySelectorAll('tbody tr');
+//     const t_heads = table.querySelectorAll('th'),
+//         tbody_rows = table.querySelectorAll('tbody tr');
 
-    const headings = [...t_heads].map(head => {
-        let actual_head = head.textContent.trim().split(' ');
-        return actual_head.splice(0, actual_head.length - 1).join(' ');
-    }).join('\t');
+//     const headings = [...t_heads].map(head => {
+//         let actual_head = head.textContent.trim().split(' ');
+//         return actual_head.splice(0, actual_head.length - 1).join(' ');
+//     }).join('\t');
 
-    const table_data = [...tbody_rows].map(row => {
-        const cells = row.querySelectorAll('td'),
-            data_without_img = [...cells].map(cell => cell.textContent.trim()).join('\t');
+//     const table_data = [...tbody_rows].map(row => {
+//         const cells = row.querySelectorAll('td'),
+//             data_without_img = [...cells].map(cell => cell.textContent.trim()).join('\t');
 
-        return data_without_img;
-    }).join('\n');
+//         return data_without_img;
+//     }).join('\n');
 
-    return title + '\n' + "Ngày:" + '\n' + headings + '\n' + table_data;
-}
+//     return title + '\n' + "Ngày:" + '\n' + headings + '\n' + table_data;
+// }
 
-excel_btn.onclick = () => {
-    const excel = toExcel(customers_table,"Báo cáo doanh số hoạt động ngày");
-  downloadFile(excel, 'excel');
+// excel_btn.onclick = () => {
+//     const excel = toExcel(customers_table,"Báo cáo doanh số hoạt động ngày");
+//   downloadFile(excel, 'excel');
 
-  // Inform the user about the download
-}
+//   // Inform the user about the download
+// }
 
-const downloadFile = function (data, fileType, fileName = '') {
-    const a = document.createElement('a');
-    a.download = fileName;
-    const mime_types = {
-        'json': 'application/json',
-        'csv': 'text/csv',
-        'excel': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    }
-    a.href = `
-        data:${mime_types[fileType]};charset=utf-8,${encodeURIComponent(data)}
-    `;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-}
+// const downloadFile = function (data, fileType, fileName = '') {
+//     const a = document.createElement('a');
+//     a.download = fileName;
+//     const mime_types = {
+//         'json': 'application/json',
+//         'csv': 'text/csv',
+//         'excel': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+//     }
+//     a.href = `
+//         data:${mime_types[fileType]};charset=utf-8,${encodeURIComponent(data)}
+//     `;
+//     document.body.appendChild(a);
+//     a.click();
+//     a.remove();
+// }
 });
