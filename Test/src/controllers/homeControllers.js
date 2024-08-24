@@ -114,7 +114,7 @@ const postMonthlyReports = async(req, res) => {
             return res.status(400).send('Tháng và loại kỳ hạn là bắt buộc.');
         }
         try {
-            const [month, year] = monthYear.split('-');
+            const [year, month] = monthYear.split('-');
             const monthNumber = parseInt(month, 10);
 
             // Fetch the report data based on month and type
@@ -123,7 +123,7 @@ const postMonthlyReports = async(req, res) => {
             // Render the report page with the fetched data and selected parameters
             res.render('Monthly_Report.ejs', {
                 listMonthlyRP: results,
-                currentMonth: '${monthNumber}-${year}',
+                currentMonth: req.body.date,
                 selectedType: selectedType,
                 types: types
             });

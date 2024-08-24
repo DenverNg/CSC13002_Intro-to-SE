@@ -93,7 +93,7 @@
 								<form action="/bao_cao_thang" method="POST">
 								<div onclick="inputClicked({ id: 'input-date', inputType: 'month'})" id="input-date"
 									class="form-group">
-									<input id="date" name="date" class="form-group__input" type="month">
+									<input id="date" name="date" class="form-group__input" type="month" value="<%= currentMonth %>" >
 									<div class="form-group__title">Nhập tháng báo cáo</div>
 									<!-- <span id="input-name-message" class="form-group__message"></span> -->
 									<span id="selected-month" class="form-group__message"></span>
@@ -195,11 +195,16 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 			const dateInput = document.getElementById('date');
-			const now = new Date();
-			const year = now.getFullYear();
-			const month = ('0' + (now.getMonth() + 1)).slice(-2); // Get current month with leading zero if needed
-			dateInput.value = `${month}-${year}`; // Set the input value to the current month
-
+			const selectedMonthSpan = document.getElementById('selected-month');
+			const currentMonth = "<%= currentMonth %>" // Set the input value to the current month
+			if (currentMonth) {
+				dateInput.value = currentMonth; // Đặt giá trị input là currentMonth
+			} else {
+				const now = new Date();
+				const year = now.getFullYear();
+				const month = ('0' + (now.getMonth() + 1)).slice(-2); // Tháng hiện tại với leading zero nếu cần
+				dateInput.value = `${year}-${month}`; // Đặt giá trị input là tháng hiện tại
+			}
 			// Function to handle dropdown population
 			const wrapper = document.querySelector(".wrapper"),
 				selectBtn = wrapper.querySelector(".select-btn"),
