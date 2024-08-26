@@ -8,12 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="/css/input.css">
     <link rel="stylesheet" href="/css/createbook.css">
+    <script src="/js/toast.js"></script>
 </head>
 
 <body>
+    <div id="toast"></div>
     <div id="createbook-verify" class="createbook">
         <div id="createbook__title">Sổ tiết kiệm</div>
         <form action="/taoso_form/xacnhan" method="post" class="form-verify">
+            <div id="TIENTOITHIEU">
+                <input type="hidden" name="TIENTOITHIEU" value="<%= TIENTOITHIEU %>">
+            </div>
             <div class="verify__group0">
                 <div id="MASO" class="form-group verify-row">
                     <div class="form-group__title verify-createbook__title">Mã sổ</div>
@@ -60,10 +65,40 @@
     
             <div class="verify__group1">
                 <button type="button" class="form-group__button back-button" onclick="window.history.back()">Quay lại</button>
-                <button type="submit" class="form-group__button submit-button" name="action" value="confirm">Xác nhận</button>
+                <button id="submit-btn" type="submit" class="form-group__button submit-button" name="action" value="confirm">Xác nhận</button>
             </div>
         </form>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const SOTIEN = "<%=SOTIEN %>"; // Get the SOTIEN value from the server-side variable
+            const TIENTOITHIEU = "<%= TIENTOITHIEU %>"; // Get the TIENTOITHIEU value from the server-side variable
+            const submit = document.getElementById('submit-btn');
+            let isValid = true;
+
+            if (parseInt(SOTIEN) < parseInt(TIENTOITHIEU)) {
+                toast({
+                    title: 'Lỗi',
+                    desc: 'SỐ TIỀN GỬI THÊM KHÔNG HỢP LỆ (TỐI THIỂU ' + TIENTOITHIEU + ' VNĐ)',
+                    type: 'error',
+                    duration: 3000
+                });
+                isValid = false;
+            }
+
+            if (!isValid) {
+                submit.disabled = true;
+            }
+            else {
+                toast({
+                    title: 'Thành công',
+                    desc: 'TẤT CẢ THÔNG TIN ĐỀU HỢP LỆ',
+                    type: 'success',
+                    duration: 3000
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

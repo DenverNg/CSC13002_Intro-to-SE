@@ -6,10 +6,16 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="/css/input.css">
         <link rel="stylesheet" href="/css/createbook.css">
+        <link rel="stylesheet" href="/css/dropdown_createbook.css">
+        <!-- Linking Google Font Link for Icon -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+        
+        <script src="/js/dropdown.js"></script>
         <script src="/js/validator.js"></script>
-        <style> 
-           
-        </style>
+
     </head>
 
     <body>
@@ -38,11 +44,24 @@
                     </div>
     
                     <div id="createbook__group2">
-                        <div id="input-LOAI" class="form-group inp-createbook">
-                            <input id="LOAI" class="form-group__input inp-createbook__input" type="text" name="LOAI" placeholder=" ">
-                            <label for="LOAI" class="form-group__title form-group__input__title inp-createbook__title">Nhập loại sổ</label>
-                            <span id="input-name-message" class="form-group__message"></span>
+                        <div class="wrapper">
+                            <div class="select-createbook-btn">
+                                <span id="selected-type">Chọn loại kỳ hạn</span>
+                                <i class="uil uil-angle-down"></i>
+                            </div>
+                            <div class="select-createbook-content">
+                                <div class="select-search">
+                                    <i class="uil uil-search"></i>
+                                    <input spellcheck="false" type="text" placeholder="Tìm kiếm loại kỳ hạn">
+                                </div>
+                                <ul class="options"></ul>
+                            </div>
                         </div>
+                        <div id="types">
+                            <input type="hidden" name="types" value="<%= types %>">
+                        </div>
+                        
+                        <input type="hidden" id="hidden-type" name="selectedType" value="<%= selectedType %>">
             
                         <div id="input-CMND" class="form-group inp-createbook">
                             <input id="CMND" class="form-group__input inp-createbook__input" type="text" name="CMND" placeholder=" ">
@@ -80,5 +99,63 @@
                     ]
             })
         </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Function to handle dropdown population
+                const wrapper = document.querySelector(".wrapper"),
+                    selectBtn = wrapper.querySelector(".select-createbook-btn"),
+                    searchInp = wrapper.querySelector("input"),
+                    options = wrapper.querySelector(".options"),
+                    hiddenTypeInput = document.getElementById("hidden-type");
 
+                const types = "<%= types %>".split(","); // Get the types from the server-side variable	
+                const selectedType = "<%= selectedType %>";
+
+                function addType() {
+                    options.innerHTML = ""; // Clear the current options
+                    if (selectedType) {
+                        let li = `<li onclick="updateName(this)" class="selected">${selectedType}</li>`;
+                        options.insertAdjacentHTML("beforeend", li);
+                    }
+                    types.forEach(type => {
+                        if (type !== selectedType) {
+                            let li = `<li onclick="updateName(this)">${type}</li>`;
+                            options.insertAdjacentHTML("beforeend", li);
+                        }
+                    });
+                }
+
+                addType(); // Populate dropdown on page load
+                const firstOption = options.querySelector('li');
+                updateName(firstOption);
+
+                function updateName(selectedLi) {
+                    searchInp.value = ""; // Clear search input
+                    addType(); // Refresh list with the selected type
+                    selectBtn.firstElementChild.innerText = selectedLi.innerText; // Update button text with selected type
+                    wrapper.classList.remove("active"); // Hide dropdown options after selection
+                    hiddenTypeInput.value = selectedLi.innerText; // Update hidden input value
+                }
+
+                searchInp.addEventListener("keyup", () => {
+                    let arr = [];
+                    let searchedVal = searchInp.value.toLowerCase();
+                    arr = types.filter(data => {
+                        return data.toLowerCase().includes(searchedVal); // Filter types based on search input
+                    }).map(data => {
+                        let isSelected = data == selectBtn.firstElementChild.innerText ? "selected" : "";
+                        return `<li onclick="updateName(this)" class="${isSelected}">${data}</li>`;
+                    }).join("");
+                    options.innerHTML = arr ? arr : `<p style="margin-top: 10px;">Không tìm thấy loại kỳ hạn nào</p>`; // Update dropdown with filtered list or message if no match
+                });
+
+                selectBtn.addEventListener("click", () => wrapper.classList.toggle("active")); // Toggle dropdown visibility
+
+                options.addEventListener('click', (event) => {
+                    if (event.target.tagName === 'LI') {
+                        updateName(event.target);
+                    }
+                })
+            });
+        </script>
 </body>

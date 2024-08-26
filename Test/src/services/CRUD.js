@@ -202,36 +202,46 @@ const getSoDu = async(MASO) => {
         'SELECT SODU FROM SOTIETKIEM WHERE MASO = ?', [MASO]);
     return results[0].SODU;
 }
+const getMaLoai = async () => {
+  const [results, fields] = await connection.query(
+    "SELECT MALOAI FROM LOAI_SOTK"
+  );
+  for (let i = 0; i < results.length; i++) {
+    results[i] = results[i].MALOAI;
+  }
+  return results;
+};
 
 module.exports = {
-    getAllBooks,
-    getDailyRP,
-    getMonthlyRP,
-    getAllTermDeposit,
-    getActiveTermDeposit,
-    deleteTermDeposit,
-    getMininum,
-    updateRateDeposit,
-    updateMininum,
+  getAllBooks,
+  getDailyRP,
+  getMonthlyRP,
+  getAllTermDeposit,
+  getActiveTermDeposit,
+  deleteTermDeposit,
+  getMininum,
+  updateRateDeposit,
+  updateMininum,
 
-    // CREATE BOOK
-    getNextMaSo,
+  // CREATE BOOK
+  getNextMaSo,
 
-    // DEPOSIT FORM
-    getTenKH,
-    getLoaiTK,
-    checkMaso,
-    getMinMoney,
+  // DEPOSIT FORM
+  getTenKH,
+  getLoaiTK,
+  checkMaso,
+  getMinMoney,
 
-    // WITHDRAW FORM
-    getThoiGianToiThieu,
-    //allowWithdraw,
-    getLaiSuat,
-    checkNgayRut,
-    checkDaoHan,
-    calTienLai,
+  // WITHDRAW FORM
+  getThoiGianToiThieu,
+  //allowWithdraw,
+  getLaiSuat,
+  checkNgayRut,
+  checkDaoHan,
+  calTienLai,
 
-    // REPORT
-    getAllType,
-    getSoDu
-}
+  // REPORT
+  getAllType,
+  getSoDu,
+  getMaLoai,
+};
