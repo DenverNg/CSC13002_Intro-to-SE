@@ -7,8 +7,7 @@
         <script src="/js/func.js"></script>
 		<link rel="stylesheet" href="/css/table.css">
         <script src="/js/table.js"></script>
-		<link rel="stylesheet" href="/css/password.css">
-        <script src="/js/password.js"></script>
+		<link rel="stylesheet" href="/css/button.css">
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -42,7 +41,7 @@
 						</span> Báo cáo
 					</a>
 				</li>
-				<li>
+				<li class="active">
 					<a href="/mat_khau#">
 						<span class="material-icons" style="font-size: 35px">
 						settings
@@ -60,18 +59,20 @@
 							<div class="topbar">
 							Cài đặt
 							</div>
-							<p class="date" id="Manage-date"></p>
+							<p class="date"><%= currentDate %></p>
 						</div>
 					</div>
 
-
+					<div class="table_name">
+						Thay đổi về loại kỳ hạn
+					</div>
 					<section class="table__body">
 						<table>
 							<thead>
 								<tr style="pointer-events: none;">
-									<th> Tên kỳ hạn </th>
-									<th> Thời gian đáo hạn </th>
-									<th> Lãi suất</th>
+									<th><img src="/images/card.png"> Tên kỳ hạn </th>
+									<th><img src="/images/time.png"> Thời gian đáo hạn </th>
+									<th><img src="/images/coin.png"> Lãi suất</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -84,17 +85,30 @@
 								<% } %>
 							</tbody>
 						</table>
-						<button class="form-group__button" onclick="window.location.href='/cai_dat/xoa'">Xoá</button>
-						<button class="form-group__button" onclick="window.location.href='/cai_dat/them'">Thêm</button>
-						<button class="form-group__button" onclick="window.location.href='/cai_dat/sua'">Sửa</button>
+						<div class="Function">
+							<button class="button red" onclick="window.location.href='/cai_dat/xoa'">
+								<img src="/images/card-delete.png">
+								Xoá loại kỳ hạn
+							</button>
+							<button class="button green" onclick="window.location.href='/cai_dat/them'">
+								<img src="/images/card-add.png">
+								Thêm loại kỳ hạn
+							</button>
+							<button class="button purple" onclick="window.location.href='/cai_dat/sua'">
+								<img src="/images/edit.png">
+								Chỉnh sửa giá trị
+							</button>
+						</div>
 					</section>
-
+					<div class="table_name">
+						Thay đổi về đại lượng tối thiểu
+					</div>
 					<section class="table__body">
 						<table>
 							<thead>
 								<tr style="pointer-events: none;">
-									<th> Tên đại lượng </th>
-									<th> Giá trị </th>
+									<th><img src="/images/card.png"> Tên đại lượng </th>
+									<th><img src="/images/star.png"> Giá trị </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -110,7 +124,12 @@
 								<% } %>
 							</tbody>
 						</table>
-						<button class="form-group__button" onclick="window.location.href='/cai_dat/sua_min'">Sửa</button>
+						<div class="Function" style=" justify-content:flex-end;width:70%">
+							<button class="button purple" onclick="window.location.href='/cai_dat/sua_min'">
+								<img src="/images/edit.png">
+								Chỉnh sửa giá trị
+							</button>
+						</div>
 					</section>
 				</div>
 			</div>

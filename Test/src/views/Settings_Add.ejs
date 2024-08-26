@@ -7,6 +7,8 @@
         <script src="/js/func.js"></script>
 		<link rel="stylesheet" href="/css/table.css">
         <script src="/js/table.js"></script>
+		<link rel="stylesheet" href="/css/button.css">
+
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -40,7 +42,7 @@
 						</span> Báo cáo
 					</a>
 				</li>
-				<li>
+				<li class="active">
 					<a href="/mat_khau#">
 						<span class="material-icons" style="font-size: 35px">
 						settings
@@ -58,17 +60,17 @@
 							<div class="topbar">
 							Cài đặt
 							</div>
-							<p class="date" id="Manage-date"></p>
+							<p class="date"><%= currentDate %></p>
 						</div>
 					</div>
 					<section class="table__body">
 						<form action="/cai_dat/them/xacnhan" method="post" class="form-verify">
 							<table>
 								<thead>
-									<tr>
-										<th> Tên kỳ hạn <span class="icon-arrow">&UpArrow;</span></th>
-										<th> Thời gian đáo hạn <span class="icon-arrow">&UpArrow;</span></th>
-										<th> Lãi suất <span class="icon-arrow">&UpArrow;</span></th>
+									<tr style="pointer-events: none;">
+										<th><img src="/images/card.png"> Tên kỳ hạn </th>
+										<th><img src="/images/time.png"> Thời gian đáo hạn </th>
+										<th><img src="/images/coin.png"> Lãi suất</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -81,44 +83,38 @@
 									<% } %>
 									<tr>
 										<td>
-											<input type="text" name="TENKYHAN" placeholder="Nhập tên kỳ hạn" %>">
+											<div class="input-box">
+												<input type="text" name="TENKYHAN" placeholder="Nhập tên kỳ hạn" %>">
+											</div>
 										</td>
 										<td>
-											<input type="text" name="THOIGIANDAOHAN" placeholder="Nhập thời gian đáo hạn(tháng)" %>">
+											<div class="input-box">
+												<input type="text" name="THOIGIANDAOHAN" placeholder="Nhập thời gian đáo hạn" %>">
+												tháng
+											</div>
 										</td>
 										<td>
-											<input type="text" name="LAISUAT" placeholder="Nhập lãi suất" %>">
+											<div class="input-box">
+												<input type="text" name="LAISUAT" placeholder="Nhập lãi suất" %>">
+												%
+											</div>
 										</td>
 									</tr>
 								</tbody>
 							</table>
-							<button class="form-group__button" name="action" value="confirm">Thêm</button>
-							<button class="form-group__button" name="action" value="cancel">Huỷ thêm</button>
-						</form>
-					</section>
+							</button>
+							<div class="Function">
 
-					<section class="table__body">
-						<table>
-							<thead>
-								<tr>
-									<th> Tên đại lượng <span class="icon-arrow">&UpArrow;</span></th>
-									<th> Giá trị <span class="icon-arrow">&UpArrow;</span></th>
-								</tr>
-							</thead>
-							<tbody>
-								<% for (let i = 0; i < listMininum.length; i++) { %>
-									<tr>
-										<%if(listMininum[i].TEN == "SOTIENGUI"){ %>
-											<td>Số tiền gửi tối thiểu</td>
-										<% }else if(listMininum[i].TEN == "THOIGIAN"){ %>
-											<td>Thời gian gửi tối thiểu</td>
-										<% } %>
-										<td><%=listMininum[i].GIATRI %></td>
-									</tr>					
-								<% } %>
-							</tbody>
-						</table>
-						<button class="form-group__button" onclick="window.location.href='/cai_dat/xoa'">Sửa</button>
+								<button class="button green" name="action" value="confirm">
+									<img src="/images/save_green.png" >
+									Thêm
+								</button>
+								<button class="button purple" name="action" value="cancel">
+									<img src="/images/close.png" >
+									Huỷ thêm
+								</button>
+							</div>
+						</form>
 					</section>
 				</div>
 			</div>

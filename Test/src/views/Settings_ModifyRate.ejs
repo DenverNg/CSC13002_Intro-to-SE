@@ -7,6 +7,8 @@
         <script src="/js/func.js"></script>
 		<link rel="stylesheet" href="/css/table.css">
         <script src="/js/table.js"></script>
+		<link rel="stylesheet" href="/css/button.css">
+
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -40,7 +42,7 @@
 						</span> Báo cáo
 					</a>
 				</li>
-				<li>
+				<li class="active">
 					<a href="/mat_khau#">
 						<span class="material-icons" style="font-size: 35px">
 						settings
@@ -58,17 +60,17 @@
 							<div class="topbar">
 							Cài đặt
 							</div>
-							<p class="date" id="Manage-date"></p>
+							<p class="date"><%= currentDate %></p>
 						</div>
 					</div>
 					<section class="table__body">
 						<form action="/cai_dat/sua/xacnhan" method="post" class="form-verify">
 							<table>
 								<thead>
-									<tr>
-										<th> Tên kỳ hạn <span class="icon-arrow">&UpArrow;</span></th>
-										<th> Thời gian đáo hạn <span class="icon-arrow">&UpArrow;</span></th>
-										<th> Lãi suất <span class="icon-arrow">&UpArrow;</span></th>
+									<tr style="pointer-events: none;">
+										<th><img src="/images/card.png"> Tên kỳ hạn </th>
+										<th><img src="/images/time.png"> Thời gian đáo hạn </th>
+										<th><img src="/images/coin.png"> Lãi suất</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -79,39 +81,32 @@
 											<td>
 												<!-- Thêm trường ẩn để lưu mã định danh -->
 												<input type="hidden" name="MALOAI[]" value="<%= listTerm[i].MALOAI %>" />
-												<input type="text" name="LAISUAT[]" value="<%= (listTerm[i].LAISUAT * 100).toFixed(2) %>" />%
+												<div class="input-box" style="width:180px">
+													<input style="width:100px" type="text" name="LAISUAT[]" value="<%= (listTerm[i].LAISUAT * 100).toFixed(2) %>" />
+													%
+												</div>
 											</td>
 										</tr>
 									<% } %>
 								</tbody>
 							</table>
-							<button class="form-group__button" name="action" value="confirm">Lưu</button>
-							<button class="form-group__button" name="action" value="cancel">Huỷ thay đổi</button>
-						</form>
-					</section>
+							<div class="Function">
+								<button class="button red" name="action" value="confirm">
+									<img src="/images/save.png">
+									Lưu thay đổi
+								</button>
 
-					<section class="table__body">
-						<table>
-							<thead>
-								<tr>
-									<th> Tên đại lượng <span class="icon-arrow">&UpArrow;</span></th>
-									<th> Giá trị <span class="icon-arrow">&UpArrow;</span></th>
-								</tr>
-							</thead>
-							<tbody>
-								<% for (let i = 0; i < listMininum.length; i++) { %>
-									<tr>
-										<%if(listMininum[i].TEN == "SOTIENGUI"){ %>
-											<td>Số tiền gửi tối thiểu</td>
-										<% }else if(listMininum[i].TEN == "THOIGIAN"){ %>
-											<td>Thời gian gửi tối thiểu</td>
-										<% } %>
-										<td><%=listMininum[i].GIATRI %></td>
-									</tr>					
-								<% } %>
-							</tbody>
-						</table>
-						<button class="form-group__button" onclick="window.location.href='/cai_dat/xoa'">Sửa</button>
+								<button class="button green" type="button"  onclick="window.location.href='/cai_dat/sua'">
+									<img src="/images/refresh.png">
+									Reset
+								</button>
+
+								<button class="button purple" name="action" value="cancel">
+									<img src="/images/close.png">
+									Huỷ thay đổi
+								</button>	
+							</div>
+						</form>
 					</section>
 				</div>
 			</div>

@@ -7,6 +7,8 @@
         <script src="/js/func.js"></script>
 		<link rel="stylesheet" href="/css/table.css">
         <script src="/js/table.js"></script>
+        <link rel="stylesheet" href="/css/button.css">
+
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -40,7 +42,7 @@
 						</span> Báo cáo
 					</a>
 				</li>
-				<li>
+				<li class="active">
 					<a href="/mat_khau#">
 						<span class="material-icons" style="font-size: 35px">
 						settings
@@ -58,41 +60,17 @@
 							<div class="topbar">
 							Cài đặt
 							</div>
-							<p class="date" id="Manage-date"></p>
+                            <p class="date"><%= currentDate %></p>
 						</div>
 					</div>
-					<section class="table__body">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th> Tên kỳ hạn <span class="icon-arrow">&UpArrow;</span></th>
-                                    <th> Thời gian đáo hạn <span class="icon-arrow">&UpArrow;</span></th>
-                                    <th> Lãi suất <span class="icon-arrow">&UpArrow;</span></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% for (let i = 0; i < listTerm.length; i++) { %>
-                                    <tr>
-                                        <td><%=listTerm[i].KYHAN %></td>
-                                        <td><%=listTerm[i].MALOAI %> tháng</td>
-                                        <td><%=listTerm[i].LAISUAT%></td>
-
-                                    </tr>
-                                <% } %>
-                            </tbody>
-                        </table>
-                        <button class="form-group__button" onclick="window.location.href='/cai_dat/xoa'">Xoá</button>
-                        <button class="form-group__button" onclick="window.location.href='/cai_dat/them'">Thêm</button>
-                        <button class="form-group__button" onclick="window.location.href='/cai_dat/sua'">Sửa</button>
-					</section>
-
+					
 					<section class="table__body">
                         <form action="/cai_dat/sua_min/xacnhan" method="post" class="form-verify">
                             <table>
                                 <thead>
-                                    <tr>
-                                        <th> Tên đại lượng <span class="icon-arrow">&UpArrow;</span></th>
-                                        <th> Giá trị <span class="icon-arrow">&UpArrow;</span></th>
+                                    <tr style="pointer-events: none;">
+                                        <th><img src="/images/card.png"> Tên đại lượng </th>
+                                        <th><img src="/images/star.png"> Giá trị </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -106,14 +84,35 @@
                                             <td>
                                                 <!-- Thêm trường ẩn để lưu mã định danh -->
                                                 <input type="hidden" name="TEN[]" value="<%=listMininum[i].TEN %>" />
-                                                <input type="text" name="GIATRI[]" value="<%=listMininum[i].GIATRI %>" />
+                                                <div class="input-box" style="width:250px">
+													<input style="width:140px" type="text" name="GIATRI[]" value="<%=listMininum[i].GIATRI %>" />
+													<%if(i==0){ %>
+                                                        <p>VND</p>
+                                                    <% }else if(i==1){ %>
+                                                            <p>ngày</p>
+                                                    <% } %>
+												</div>
                                             </td>
                                         </tr>					
                                     <% } %>
                                 </tbody>
                             </table>
-                            <button class="form-group__button" name="action" value="confirm">Lưu</button>
-                            <button class="form-group__button" name="action" value="cancel">Huỷ thay đổi</button>
+                            <div class="Function">
+								<button class="button red" name="action" value="confirm">
+									<img src="/images/save.png">
+									Lưu thay đổi
+								</button>
+
+								<button class="button green" type="button"  onclick="window.location.href='/cai_dat/sua_min'">
+									<img src="/images/refresh.png">
+									Reset
+								</button>
+
+								<button class="button purple" name="action" value="cancel">
+									<img src="/images/close.png">
+									Huỷ thay đổi
+								</button>	
+							</div>
                         </form>
 					</section>
 				</div>

@@ -1,28 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const listItems = document.querySelectorAll('.sidebar-links li');
-    //print the first item
-    console.log(listItems[0]);
-    const contentSections = document.querySelectorAll('.content');
+    // const listItems = document.querySelectorAll('.sidebar-links li');
+    // const contentSections = document.querySelectorAll('.content');
 
-    if (listItems.length > 0) {
-      //listItems[0].classList.add('active');
-      contentSections[0].classList.add('active');
-      listItems.forEach(listItem => {
-        listItem.addEventListener('click', () => {
-          listItems.forEach(item => item.classList.remove('active'));
-          listItem.classList.add('active');
-          const contentId = listItem.dataset.content;
-               const activeContent = document.getElementById(contentId);
+    // if (listItems.length > 0) {
+    //   listItems[0].classList.add('active');
+    //   contentSections[0].classList.add('active');
+    //   // listItems.forEach(listItem => {
+    //   //   // listItem.addEventListener('click', () => {
+    //   //     listItems.forEach(item => item.classList.remove('active'));
+    //   //     listItem.classList.add('active');
+    //   //     const contentId = listItem.dataset.content;
+    //   //          const activeContent = document.getElementById(contentId);
          
-               if (activeContent) {
-                 contentSections.forEach(section => section.classList.remove('active'));
-                 activeContent.classList.add('active');
-               }
-        });
-      });
-    } else {
-      console.error('No list items found with the class "sidebar-links li"');
-    }
+    //   //          if (activeContent) {
+    //   //            contentSections.forEach(section => section.classList.remove('active'));
+    //   //            activeContent.classList.add('active');
+    //   //          }
+    //   //   //});
+    //   // });
+    // } else {
+    //   console.error('No list items found with the class "sidebar-links li"');
+    // }
+      // Get the current URL path
+  
 
 
     const sidebar = document.querySelector('.sidebar');

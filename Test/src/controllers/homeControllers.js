@@ -143,7 +143,7 @@ const getPassword = (req, res) => {
 const getSettings = async(req, res) => {
     const resultsTerm = await getActiveTermDeposit();
     const resultMininum = await getMininum();
-    res.render('Settings.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+    res.render('Settings.ejs', {listTerm: resultsTerm, listMininum: resultMininum,currentDate: getCurrentDate()});
 }
 
 
@@ -274,7 +274,7 @@ const postWithdrawForm = async(req, res) => {
 const getAddTermDeposit = async(req, res) => {      
     const resultsTerm = await getActiveTermDeposit();
     const resultMininum = await getMininum();
-    res.render('Settings_Add.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+    res.render('Settings_Add.ejs', {listTerm: resultsTerm, listMininum: resultMininum,currentDate: getCurrentDate()});
 
 }
 
@@ -298,7 +298,7 @@ const postAddTermDeposit = async(req, res) => {
 const getModifyTermDeposit = async(req, res) => {
     const resultsTerm = await getActiveTermDeposit();
     const resultMininum = await getMininum();
-    res.render('Settings_ModifyRate.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+    res.render('Settings_ModifyRate.ejs', {listTerm: resultsTerm, listMininum: resultMininum,currentDate: getCurrentDate()});
 }
 
 const postModifyTermDeposit = async (req, res) => {
@@ -328,7 +328,7 @@ const postModifyTermDeposit = async (req, res) => {
 const getModifyMinValue = async(req, res) => {
     const resultsTerm = await getActiveTermDeposit();
     const resultMininum = await getMininum();
-    res.render('Settings_ModifyMin.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+    res.render('Settings_ModifyMin.ejs', {listTerm: resultsTerm, listMininum: resultMininum,currentDate: getCurrentDate()});
 }
 const postModifyMinValue = async (req, res) => {
     const action = req.body.action;
@@ -357,7 +357,7 @@ const postModifyMinValue = async (req, res) => {
 const getSettings_Delete = async(req, res) => {
     const resultsTerm = await getActiveTermDeposit();
     const resultMininum = await getMininum();
-    res.render('Settings_Delete.ejs', {listTerm: resultsTerm, listMininum: resultMininum});
+    res.render('Settings_Delete.ejs', {listTerm: resultsTerm, listMininum: resultMininum,currentDate: getCurrentDate()});
 
 }
 const postDeleteTermDeposit = async(req, res) => {
