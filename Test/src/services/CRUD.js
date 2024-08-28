@@ -227,7 +227,14 @@ const getWithdraw_Week_Data = async() => {
         'CALL SOTIENRUT_TRONGTUAN()');
     return results[0];
 }
-
+const statisticsTypeDeposit = async() => {
+    const [results, fields] = await connection.query(
+        'SELECT LOAI, KYHAN, COUNT(MASO) AS COUNT\
+        FROM SOTIETKIEM S\
+        JOIN LOAI_SOTK L ON S.LOAI = L.MALOAI\
+        GROUP BY LOAI, KYHAN');
+    return results;
+}
 module.exports = {
     getAllBooks,
     getDailyRP,
@@ -264,5 +271,6 @@ module.exports = {
     // DASHBOARD
     getNumNewBooks,
     getEarning_Week_Data,
-    getWithdraw_Week_Data
+    getWithdraw_Week_Data,
+    statisticsTypeDeposit
 };
