@@ -1,4 +1,3 @@
-import { getEarning_Week, getWithdraw_Week } from "../../services/CRUD";
 document.addEventListener('DOMContentLoaded', async() => { 
     // const listItems = document.querySelectorAll('.sidebar-links li');
     // const contentSections = document.querySelectorAll('.content');
@@ -48,12 +47,6 @@ document.addEventListener('DOMContentLoaded', async() => {
  
   const ctx1 = document.getElementById('myChart').getContext('2d');
   const ctx2 = document.getElementById('earning').getContext('2d');
-  const earningData = await getEarning_Week();
-  const withdrawData = await getWithdraw_Week();
-  const earningDataArr = earningData.map(item => parseInt(item.SOTIEN, 10));
-  const withdrawDataArr = withdrawData.map(item => parseInt(item.SOTIEN, 10));
-  console.log(1111)
-
   const pieData = {
     labels: ['Không kỳ hạn', 'Kỳ hạn 3 tháng', 'Kỳ hạn 6 tháng', 'Khác'],
     datasets: [{

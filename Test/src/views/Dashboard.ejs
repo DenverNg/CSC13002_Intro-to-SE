@@ -113,8 +113,6 @@
 			<!-- Charts -->
 			<script>
 				document.addEventListener('DOMContentLoaded', () => {
-					const earningData = <%= JSON.stringify(earningDataArr) %>;
-                    const withdrawData = <%= JSON.stringify(withdrawDataArr) %>;
 					// const listItems = document.querySelectorAll('.sidebar-links li');
 					// const contentSections = document.querySelectorAll('.content');
 
@@ -160,14 +158,21 @@
 				
 
 				/*--chart--*/
+				const earningData = <%= JSON.stringify(earningDataArr) %>;
+				const withdrawData = <%= JSON.stringify(withdrawDataArr) %>;
+				const listType = <%- JSON.stringify(listType) %>;
+
+				// Extract labels and data from listType
+				const labelsType = listType.map(item => item.KYHAN);
+				const dataType = listType.map(item => item.COUNT);
 				
 				const ctx1 = document.getElementById('myChart').getContext('2d');
 				const ctx2 = document.getElementById('earning').getContext('2d');
 				const pieData = {
-					labels: ['Không kỳ hạn', 'Kỳ hạn 3 tháng', 'Kỳ hạn 6 tháng', 'Khác'],
+					labels: labelsType,
 					datasets: [{
 					label: 'DepositeTerm',
-					data: [4500,4500,4500, 4500],
+					data: dataType,
 					backgroundColor: [
 						'rgba(255, 99, 132, 1)',
 						'rgba(54, 162, 235, 1)',
