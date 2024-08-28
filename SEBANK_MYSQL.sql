@@ -1,5 +1,3 @@
-
-GO
 use SEBANK
 
 
@@ -18,6 +16,8 @@ DROP PROCEDURE IF EXISTS LAPPHIEURUT;
 DROP PROCEDURE IF EXISTS TRACUUSO;
 DROP PROCEDURE IF EXISTS BAOCAO_NGAY;
 DROP PROCEDURE IF EXISTS BAOCAO_THANG;
+DROP PROCEDURE IF EXISTS SOTIENRUT_TRONGTUAN;
+DROP PROCEDURE IF EXISTS SOTIENGUI_TRONGTUAN;
 
 # Create Table
 CREATE TABLE KHACHHANG (
@@ -76,9 +76,9 @@ ADD CONSTRAINT FK_PHIEURUT_STK FOREIGN KEY (MASO) REFERENCES SOTIETKIEM(MASO);
 -- Thêm các loại tiết kiệm
 INSERT INTO LOAI_SOTK (MALOAI, KYHAN, LAISUAT, TRANGTHAI)
 VALUES
-    (0, 'Không kỳ hạn', 0.0015, 1),
-    (3, 'Kỳ hạn 3 tháng', 0.005, 1),
-    (6, 'Kỳ hạn 6 tháng', 0.0055, 1);
+    (0, 'KHÔNG KỲ HẠN', 0.0015, 1),
+    (3, 'KỲ HẠN 3 THÁNG', 0.005, 1),
+    (6, 'KỲ HẠN 6 THÁNG', 0.0055, 1);
 
 -- Thêm các đơn vị tối thiểu
 INSERT INTO DONVI_TOITHIEU (TEN, GIATRI)
@@ -88,9 +88,35 @@ VALUES
 
 DELIMITER //
 
+CREATE FUNCTION TAO_MASO()
+RETURNS CHAR(8)
+BEGIN
+    DECLARE new_maso CHAR(8);
+    DECLARE current_max CHAR(8);
+
+    -- Lấy mã số lớn nhất hiện có
+    SELECT MAX(MASO) INTO current_max FROM SOTIETKIEM;
+
+    -- Nếu không có mã số nào, bắt đầu từ 'MS000000'
+    IF current_max IS NULL THEN
+        SET new_maso = 'MS000000';
+    ELSE
+        -- Tăng mã số hiện tại và định dạng lại
+        SET new_maso = CONCAT(
+            'MS', 
+            LPAD(CAST(SUBSTRING(current_max, 3) AS UNSIGNED) + 1, 6, '0')
+        );
+    END IF;
+
+    RETURN new_maso;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
 CREATE PROCEDURE MOSOTIETKIEM(
-	IN p_MASO CHAR(8),
-    IN p_KYHAN NCHAR(20),
+    IN p_LOAITK INT,
     IN p_TENKH NVARCHAR(100),
     IN p_CMND CHAR(12),
     IN p_DIACHI NVARCHAR(100),
@@ -99,13 +125,12 @@ CREATE PROCEDURE MOSOTIETKIEM(
 )
 BEGIN
     DECLARE v_MAKH INT;
-    DECLARE v_LOAITK INT;
+    DECLARE v_MASO CHAR(8);
     DECLARE v_min_amount INT;
 
     -- KIỂM TRA TÍNH HỢP LỆ
-    SELECT MALOAI INTO v_LOAITK FROM LOAI_SOTK WHERE KYHAN = p_KYHAN;
-    IF v_LOAITK IS NULL THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Kỳ hạn không hợp lệ';
+    IF p_LOAITK NOT IN (SELECT MALOAI FROM LOAI_SOTK) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Loại tiết kiệm không hợp lệ';
     END IF;
 
     IF p_NGAYMOSO < CURDATE() THEN
@@ -130,8 +155,8 @@ BEGIN
     END IF;
 
     -- Cập nhật bảng SỔ TIẾT KIỆM
-    INSERT INTO SOTIETKIEM (MASO, MAKH, SODU, LOAI, NGAYMOSO, TRANGTHAI) 
-    VALUES (p_MASO, v_MAKH, p_SOTIEN, v_LOAITK, p_NGAYMOSO, 1);
+    SET v_MASO = TAO_MASO();
+    INSERT INTO SOTIETKIEM (MASO, MAKH, SODU, LOAI, NGAYMOSO, TRANGTHAI) VALUES (v_MASO, v_MAKH, p_SOTIEN, p_LOAITK, p_NGAYMOSO, 1);
 
     -- Kết thúc thủ tục
 END //
@@ -298,7 +323,7 @@ BEGIN
 		UNION ALL
 		        SELECT LOAI AS LOAI, SUM(SODU) AS TongTien
 		        FROM SOTIETKIEM
-		        WHERE NGAYMOSO = p_NGAY
+		        WHERE NGAYMOSO = p_NGAY 
 		        GROUP BY LOAI
 		) AS RESULTS
 		GROUP BY LOAI) AS TONGTHU ON L.MALOAI = TONGTHU.LOAI
@@ -379,6 +404,124 @@ END //
 DELIMITER ;
 
 
+-- Tạo dữ liệu cho 180 sổ tiết kiệm
+DELIMITER $$
+
+-- Tạo tập dữ liệu CMND tạm thời
+CREATE TEMPORARY TABLE TEMP_CMND (CMND CHAR(12) PRIMARY KEY);
+SET @i = 1;
+
+WHILE @i <= 60 DO
+    INSERT INTO TEMP_CMND (CMND) VALUES (LPAD(@i, 12, '0'));
+    SET @i = @i + 1;
+END WHILE;
+
+-- Tạo dữ liệu cho SOTIETKIEM
+CREATE TEMPORARY TABLE TEMP_SOTK (MASO CHAR(8), MAKH INT, SODU INT, LOAI INT, NGAYMOSO DATE, TRANGTHAI INT, PRIMARY KEY(MASO));
+SET @i = 1;
+SET @j = 0;
+SET @month = 1;
+SET @year = 2024;
+SET @sodutemp = 1000000;
+
+WHILE @month <= 12 DO
+    SET @j = 0;
+    WHILE @j < 15 DO
+        SET @type = @j DIV 5;
+        SET @date = CONCAT(@year, '-', LPAD(@month, 2, '0'), '-', LPAD(CEIL(RAND() * 28), 2, '0'));
+        SET @cmnd = (SELECT CMND FROM TEMP_CMND ORDER BY RAND() LIMIT 1);
+        SET @makh = (SELECT COALESCE(MAX(MAKH), 0) + 1 FROM KHACHHANG WHERE CMND = @cmnd);
+
+        -- Nếu khách hàng chưa tồn tại, thêm vào bảng KHACHHANG
+        IF NOT EXISTS (SELECT 1 FROM KHACHHANG WHERE CMND = @cmnd) THEN
+            INSERT INTO KHACHHANG (MAKH, HOTEN, DIACHI, CMND) VALUES (@makh, CONCAT('KH_', @cmnd), 'Address', @cmnd);
+        ELSE
+            SET @makh = (SELECT MAKH FROM KHACHHANG WHERE CMND = @cmnd);
+        END IF;
+
+        -- Thêm dữ liệu vào bảng SOTIETKIEM tạm thời
+        INSERT INTO TEMP_SOTK (MASO, MAKH, SODU, LOAI, NGAYMOSO, TRANGTHAI) VALUES (CONCAT('MS', LPAD(@i, 6, '0')), @makh, @sodutemp, @type, @date, 1);
+        SET @i = @i + 1;
+        SET @j = @j + 1;
+    END WHILE;
+    SET @month = @month + 1;
+END WHILE;
+
+-- Chèn dữ liệu từ bảng tạm vào bảng chính SOTIETKIEM
+INSERT INTO SOTIETKIEM SELECT * FROM TEMP_SOTK;
+
+-- Xóa bảng tạm
+DROP TABLE IF EXISTS TEMP_CMND;
+DROP TABLE IF EXISTS TEMP_SOTK;
+
+DELIMITER ;
+
+DELIMITER //
+-- THỐNG KÊ SỐ TIỀN RÚT TRONG TUẦN
+CREATE PROCEDURE SOTIENRUT_TRONGTUAN()
+BEGIN
+    -- Thực hiện LEFT JOIN với bảng PHIEURUTTIEN
+    SELECT 
+        w.Ngay AS NGAYRUT, 
+        COALESCE(SUM(p.SOTIEN), 0) AS SOTIEN
+    FROM (
+        -- Tạo danh sách các ngày trong tuần
+        SELECT 
+            DATE_ADD(CURRENT_DATE(), INTERVAL -WEEKDAY(CURRENT_DATE()) + n DAY) AS Ngay
+        FROM (
+            SELECT 0 AS n UNION ALL 
+            SELECT 1 UNION ALL 
+            SELECT 2 UNION ALL 
+            SELECT 3 UNION ALL 
+            SELECT 4 UNION ALL 
+            SELECT 5 UNION ALL 
+            SELECT 6
+        ) AS Numbers
+    ) w
+    LEFT JOIN 
+        PHIEURUTTIEN p 
+    ON 
+        w.Ngay = p.NGAYRUT
+    GROUP BY 
+        w.Ngay
+    ORDER BY 
+        w.Ngay;
+END //
+
+DELIMITER ;
+DELIMITER //
+-- THỐNG KÊ SỐ TIỀN GỬI TRONG TUẦN
+CREATE PROCEDURE SOTIENGUI_TRONGTUAN()
+BEGIN
+    -- Thực hiện LEFT JOIN với bảng PHIEUGUITIEN
+    SELECT 
+        w.Ngay AS NGAYRUT, 
+        COALESCE(SUM(p.SOTIEN), 0) AS SOTIEN
+    FROM (
+        -- Tạo danh sách các ngày trong tuần
+        SELECT 
+            DATE_ADD(CURRENT_DATE(), INTERVAL -WEEKDAY(CURRENT_DATE()) + n DAY) AS Ngay
+        FROM (
+            SELECT 0 AS n UNION ALL 
+            SELECT 1 UNION ALL 
+            SELECT 2 UNION ALL 
+            SELECT 3 UNION ALL 
+            SELECT 4 UNION ALL 
+            SELECT 5 UNION ALL 
+            SELECT 6
+        ) AS Numbers
+    ) w
+    LEFT JOIN 
+        PHIEUGUITIEN p 
+    ON 
+        w.Ngay = p.NGAYGUI
+    GROUP BY 
+        w.Ngay
+    ORDER BY 
+        w.Ngay;
+END //
+
+DELIMITER ;
 
 --TEST
 CALL MOSOTIETKIEM(3, 'Cường', '1234', 'aBC', '2024-08-22', 1000000);
@@ -390,13 +533,14 @@ CALL LAPPHIEURUT('MS000001', '2025-08-20', 500000);
 CALL TRACUUSO('CƯỜNG');
 CALL BAOCAO_NGAY('2024-10-18');
 CALL BAOCAO_THANG(8, 'KỲ HẠN 3 THÁNG');
-
+CALL SOTIENRUT_TRONGTUAN();
+CALL SOTIENGUI_TRONGTUAN();
 
 
 SHOW PROCEDURE STATUS WHERE Db = 'SEBANK';
-SELECT * FROM DONVI_TOITHIEU
-SELECT * FROM LOAI_SOTK
-SELECT * FROM KHACHHANG
-SELECT * FROM SOTIETKIEM
-SELECT * FROM PHIEUGUITIEN
-SELECT * FROM PHIEURUTTIEN
+SELECT * FROM DONVI_TOITHIEU;
+SELECT * FROM LOAI_SOTK;
+SELECT * FROM KHACHHANG;
+SELECT * FROM SOTIETKIEM;
+SELECT * FROM PHIEUGUITIEN;
+SELECT * FROM PHIEURUTTIEN;
