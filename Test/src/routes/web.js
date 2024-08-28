@@ -5,16 +5,27 @@ const {getDashboard, getTransactions, getDailyReports, getMonthlyReports, getSet
 const router = express.Router();
 
 
-
+//Dashboard
 router.get('/', getDashboard);
+
+//Quản lý sổ
 router.get('/quan_ly_so', getTransactions);
+router.get('/taoso_form', getCreateBookForm);
+router.post('/taoso_form/xacnhan', postCreateBookForm);
+router.get('/guitien_form', getDepositForm);
+router.post('/guitien_form/xacnhan', postDepositForm);
+router.get('/ruttien_form', getWithdrawForm);
+router.post('/ruttien_form/xacnhan', postWithdrawForm);
+
+//Báo cáo
 router.get('/bao_cao_ngay', getDailyReports);
 router.post('/bao_cao_ngay', postDailyReports);
 router.get('/bao_cao_thang', getMonthlyReports);
 router.post('/bao_cao_thang', postMonthlyReports);
+
+//Cài đặt
 router.get('/mat_khau', getPassword);
 router.get('/cai_dat', getSettings);
-
 
 router.get('/cai_dat/xoa', getSettings_Delete);
 router.post('/cai_dat/xoa/xacnhan', postDeleteTermDeposit);
@@ -29,14 +40,7 @@ router.get('/cai_dat/sua_min', getModifyMinValue);
 router.post('/cai_dat/sua_min/xacnhan', postModifyMinValue);
 
 
-router.get('/taoso_form', getCreateBookForm);
-router.post('/taoso_form/xacnhan', postCreateBookForm);
 
-router.get('/guitien_form', getDepositForm);
-router.post('/guitien_form/xacnhan', postDepositForm);
-
-router.get('/ruttien_form', getWithdrawForm);
-router.post('/ruttien_form/xacnhan', postWithdrawForm);
 
 
 

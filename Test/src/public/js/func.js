@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+import { getEarning_Week, getWithdraw_Week } from "../../services/CRUD";
+document.addEventListener('DOMContentLoaded', async() => { 
     // const listItems = document.querySelectorAll('.sidebar-links li');
     // const contentSections = document.querySelectorAll('.content');
 
@@ -25,82 +26,88 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
 
-    const sidebar = document.querySelector('.sidebar');
-    const mainToggle = document.querySelector('.main');
-    const tabToggle = document.querySelector('.tab-pane');
+  const sidebar = document.querySelector('.sidebar');
+  const mainToggle = document.querySelector('.main');
+  const tabToggle = document.querySelector('.tab-pane');
 
 
-    sidebar.addEventListener('mouseover', () => {
-    mainToggle.classList.add('active');
-    //tabToggle.classList.add('active');
+  sidebar.addEventListener('mouseover', () => {
+  mainToggle.classList.add('active');
+  //tabToggle.classList.add('active');
+
+});
+
+  sidebar.addEventListener('mouseout', () => {
+  // tabToggle.classList.remove('active');
+  mainToggle.classList.remove('active');
 
   });
-
-    sidebar.addEventListener('mouseout', () => {
-   // tabToggle.classList.remove('active');
-    mainToggle.classList.remove('active');
-
-    });
   
 
   /*--chart--*/
  
-const ctx1 = document.getElementById('myChart').getContext('2d');
-const ctx2 = document.getElementById('earning').getContext('2d');
+  const ctx1 = document.getElementById('myChart').getContext('2d');
+  const ctx2 = document.getElementById('earning').getContext('2d');
+  const earningData = await getEarning_Week();
+  const withdrawData = await getWithdraw_Week();
+  const earningDataArr = earningData.map(item => parseInt(item.SOTIEN, 10));
+  const withdrawDataArr = withdrawData.map(item => parseInt(item.SOTIEN, 10));
+  console.log(1111)
 
-const trafficData = {
-  labels: ['Facebook', 'Youtube', 'Amazon'],
-  datasets: [{
-    label: 'Traffic Source',
-    data: [1100, 1500, 2205],
-    backgroundColor: [
-      'rgba(255, 99, 132, 1)',
-      'rgba(54, 162, 235, 1)',
-      'rgba(255, 206, 86, 1)'
+  const pieData = {
+    labels: ['Không kỳ hạn', 'Kỳ hạn 3 tháng', 'Kỳ hạn 6 tháng', 'Khác'],
+    datasets: [{
+      label: 'DepositeTerm',
+      data: [4500,4500,4500, 4500],
+      backgroundColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(79,235,120, 1)'
+      ]
+    }]
+  };
+
+  const earningChartData = {
+    labels: ['Mon','Tue','Wed','Thur','Fri','Sat','Sun'],
+    datasets: [{
+      label: 'Số tiền gửi',
+      data: earningDataArr,
+      backgroundColor: 'rgba(79,235,120, 1)',
+      borderColor: 'rgba(79,235,120, 1)',
+      pointRadius: 6,
+      pointHoverRadius: 8,
+      pointHoverBackgroundColor: 'rgba(255, 206, 86, 1)',
+      pointHoverBorderColor: 'rgba(255, 206, 86, 1)',
+      lineTension: 0.05
+      },
+      {
+      label: 'Số tiền rút',
+      data: withdrawDataArr,
+      backgroundColor: 'rgba(255, 99, 132, 1)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+      pointRadius: 6,
+      pointHoverRadius: 8,
+      pointHoverBackgroundColor: 'rgba(255, 206, 86, 1)',
+      pointHoverBorderColor: 'rgba(255, 206, 86, 1)',
+      lineTension: 0.05 
+      }
     ]
-  }]
-};
+  };
 
-const earningData = {
-  labels: ['Mon','Tue','Wed','Thur','Fri','Sat','Sun'],
-  datasets: [{
-    label: 'Earning',
-    data: [4500, 4106, 7005, 6754, 5154, 4554, 7815],
-    backgroundColor: 'rgba(79,235,120, 1)',
-    borderColor: 'rgba(79,235,120, 1)',
-    pointRadius: 6,
-    pointHoverRadius: 8,
-    pointHoverBackgroundColor: 'rgba(255, 206, 86, 1)',
-    pointHoverBorderColor: 'rgba(255, 206, 86, 1)',
-    lineTension: 0.05
-    },
-    {
-    label: 'Withdraw',
-    data: [1254, 3215, 8452, 204, 257, 6740, 1000],
-    backgroundColor: 'rgba(255, 99, 132, 1)',
-    borderColor: 'rgba(255, 99, 132, 1)',
-    pointRadius: 6,
-    pointHoverRadius: 8,
-    pointHoverBackgroundColor: 'rgba(255, 206, 86, 1)',
-    pointHoverBorderColor: 'rgba(255, 206, 86, 1)',
-    lineTension: 0.05 
+  const pieChart = new Chart(ctx1, {
+    type: 'doughnut',
+    data: pieData,
+    options: {
+    responsive: true
     }
-  ]
-};
+  });
 
-const trafficChart = new Chart(ctx1, {
-  type: 'doughnut',
-  data: trafficData,
-  options: {
-  responsive: true
-  }
-});
-
-const earningChart = new Chart(ctx2, {
-  type: 'line',
-  data: earningData,
-  options: {
-  }
-});
+  const earningChart = new Chart(ctx2, {
+    type: 'line',
+    data: earningChartData,
+    options: {
+    }
+  });
 
 }); 

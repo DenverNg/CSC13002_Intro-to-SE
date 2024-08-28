@@ -212,36 +212,57 @@ const getMaLoai = async () => {
   return results;
 };
 
+const getNumNewBooks = async() => {
+    const [results, fields] = await connection.query(
+        'SELECT COUNT(MASO) AS SOSOMOI FROM SOTIETKIEM WHERE NGAYMOSO = CURDATE()');
+    return results[0]['SOSOMOI'];
+}
+const getEarning_Week_Data = async() => {
+    const [results, fields] = await connection.query(
+        'CALL SOTIENGUI_TRONGTUAN()');
+    return results[0];
+}
+const getWithdraw_Week_Data = async() => {
+    const [results, fields] = await connection.query(
+        'CALL SOTIENRUT_TRONGTUAN()');
+    return results[0];
+}
+
 module.exports = {
-  getAllBooks,
-  getDailyRP,
-  getMonthlyRP,
-  getAllTermDeposit,
-  getActiveTermDeposit,
-  deleteTermDeposit,
-  getMininum,
-  updateRateDeposit,
-  updateMininum,
+    getAllBooks,
+    getDailyRP,
+    getMonthlyRP,
+    getAllTermDeposit,
+    getActiveTermDeposit,
+    deleteTermDeposit,
+    getMininum,
+    updateRateDeposit,
+    updateMininum,
 
-  // CREATE BOOK
-  getNextMaSo,
+    // CREATE BOOK
+    getNextMaSo,
 
-  // DEPOSIT FORM
-  getTenKH,
-  getLoaiTK,
-  checkMaso,
-  getMinMoney,
+    // DEPOSIT FORM
+    getTenKH,
+    getLoaiTK,
+    checkMaso,
+    getMinMoney,
 
-  // WITHDRAW FORM
-  getThoiGianToiThieu,
-  //allowWithdraw,
-  getLaiSuat,
-  checkNgayRut,
-  checkDaoHan,
-  calTienLai,
+    // WITHDRAW FORM
+    getThoiGianToiThieu,
+    //allowWithdraw,
+    getLaiSuat,
+    checkNgayRut,
+    checkDaoHan,
+    calTienLai,
 
-  // REPORT
-  getAllType,
-  getSoDu,
-  getMaLoai,
+    // REPORT
+    getAllType,
+    getSoDu,
+    getMaLoai,
+
+    // DASHBOARD
+    getNumNewBooks,
+    getEarning_Week_Data,
+    getWithdraw_Week_Data
 };
