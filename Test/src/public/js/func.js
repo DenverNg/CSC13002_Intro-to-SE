@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
   // const listItems = document.querySelectorAll('.sidebar-links li');
   // const contentSections = document.querySelectorAll('.content');
 
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     datasets: [
       {
         label: "Số tiền gửi",
-        data: earningDataArr,
+        data: [12, 19, 3, 5, 2, 3, 10],
         backgroundColor: "rgba(79,235,120, 1)",
         borderColor: "rgba(79,235,120, 1)",
         pointRadius: 6,
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       },
       {
         label: "Số tiền rút",
-        data: withdrawDataArr,
+        data: [2, 3, 12, 5, 3, 10, 15],
         backgroundColor: "rgba(255, 99, 132, 1)",
         borderColor: "rgba(255, 99, 132, 1)",
         pointRadius: 6,
