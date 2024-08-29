@@ -1,0 +1,72 @@
+.content-group {
+    height: 690px;
+    background-color: rgba(255, 255, 255, 1);
+    max-width: 94.5%;
+    margin: 0 auto 20px auto;
+    border-radius: .6rem;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button-group {
+    width: 100%;
+    margin-right: 60px;
+    margin-top: auto;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-self: flex-end;
+}
+
+.button__btn {
+    border: none;
+    background-color: transparent; 
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button__btn + .button__btn {
+    margin-left: 150px;
+}
+
+.button__btn:hover{
+    transform: scale(1.25);
+    transition: all 0.3s;
+}
+
+.button__btn svg {
+    opacity: 0.73;
+    transition: opacity 0.3s ease;
+}
+
+.button__btn:hover svg {
+    opacity: 1;
+}
+
+.button__btn:hover .button__lable {
+    opacity: 1;
+}
+
+.button__lable {
+    font-size: 20px;
+    cursor: pointer;
+    /* background: linear-gradient(90deg, #8613adbf, #a00050be); */
+    /* -webkit-background-clip: text; */
+    color: #7065D2;
+    opacity: 0.73;
+}
+
+.table--no-margin {
+    margin: unset;
+    width: 100%;
+}
+
+.topbar--set-padding {
+    padding-top: 30px;
+}
