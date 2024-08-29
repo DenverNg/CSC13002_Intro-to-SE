@@ -60,7 +60,8 @@
 							<p class="date"><%= currentDate %></p>
 						</div>
 						<div class="input-group">
-							<input type="search" placeholder="Search Data...">
+							<div class="search-icon"> <%- include('../public/images/search_icon.svg') %> </div>
+							<input class="search-content" type="search" placeholder="Search Data...">
 						</div>
 					</div>
 				
@@ -69,7 +70,7 @@
 							<table>
 								<thead>
 									<tr>
-										<th class="table__column--No"> STT <span class="icon-arrow">&UpArrow;</span></th>
+										<th class="table__column--No"> STT </th>
 										<th class="table__column--Book-ID"> Mã sổ <span class="icon-arrow">&UpArrow;</span></th>
 										<th class="table__column--Customer-Name"> Khách hàng <span class="icon-arrow">&UpArrow;</span></th>
 										<th class="table__column--Customer-ID"> CMND <span class="icon-arrow">&UpArrow;</span></th>
