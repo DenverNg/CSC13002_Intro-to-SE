@@ -7,130 +7,131 @@
         <script src="/js/func.js"></script>
 		<link rel="stylesheet" href="/css/table.css">
         <script src="/js/table.js"></script>
+		<link rel="stylesheet" href="/css/transactions.css">
         <!-- Linking Google Font Link for Icon -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-    <div class="container">
-		<!--Có thể làm các phần tĩnh thành file riêng cho gọn-->
-        <aside class="sidebar">
-        <img src="/images/SEBank.png" alt="logo-hover" class="sidebar-img-default" />
-        <img src="/images/Logo.png" alt="logo-hover" class="sidebar-img-hover" />
-        <ul class="sidebar-links">
-            <li data-content="Dashboard">
-                <a href="/#">
-                    <span class="material-icons" style="font-size: 35px">
-                        home
-                    </span> Trang chủ
-                </a>
-            </li>
-            <li data-content="Manage" class="active">
-                <a href="/quan_ly_so#">
-                    <span class="material-icons" style="font-size: 35px">
-                        manage_search
-                        </span>Quản lý sổ
-                </a>
-            </li>
-            <li>
-                <a href="/bao_cao_ngay#">
-                    <span class="material-icons" style="font-size: 35px">
-                        description
-                    </span> Báo cáo
-                </a>
-            </li>
-            <li>
-                <a href="/mat_khau#">
-                    <span class="material-icons" style="font-size: 35px">
-                    settings
-                    </span> Cài đặt
-                </a>
-            </li>
-        </ul>
-       	</aside>
-
-	  <div class = "main">
-		<!-- Quản lý sổ -->
-		<div class="content" id="Manage">
-			<div class="table__header">
-				<div>
-					<div class="topbar">
-					Quản lý sổ
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	</head>
+	<body>
+		<div class="container">
+			<!--Có thể làm các phần tĩnh thành file riêng cho gọn-->
+			<aside class="sidebar">
+				<img src="/images/SEBank.png" alt="logo-hover" class="sidebar-img-default" />
+				<img src="/images/Logo.png" alt="logo-hover" class="sidebar-img-hover" />
+				<ul class="sidebar-links">
+					<li data-content="Dashboard">
+						<a href="/#">
+							<span class="material-icons" style="font-size: 35px">
+								home
+							</span> Trang chủ
+						</a>
+					</li>
+					<li data-content="Manage class="active">
+						<a href="/quan_ly_so#">
+							<span class="material-icons" style="font-size: 35px">
+								manage_search
+								</span>Quản lý sổ
+						</a>
+					</li>
+					<li>
+						<a href="/bao_cao_ngay#">
+							<span class="material-icons" style="font-size: 35px">
+								description
+							</span> Báo cáo
+						</a>
+					</li>
+					<li>
+						<a href="/mat_khau#">
+							<span class="material-icons" style="font-size: 35px">
+							settings
+							</span> Cài đặt
+						</a>
+					</li>
+				</ul>
+			</aside>
+	
+			<div class = "main" style="margin: auto 0 auto 0;">
+				<!-- Quản lý sổ -->
+				<div class="content" id="Manage">
+					<div class="table__header">
+						<div>
+							<div class="topbar topbar--set-padding">
+							Quản lý sổ
+							</div>
+							<p class="date"><%= currentDate %></p>
+						</div>
+						<div class="input-group">
+							<input type="search" placeholder="Search Data...">
+						</div>
 					</div>
-					<p class="date"><%= currentDate %></p>
-				</div>
-				<div class="input-group">
-					<input type="search" placeholder="Search Data...">
+				
+					<div class="content-group">
+						<section class="table__body table--no-margin">
+							<table>
+								<thead>
+									<tr>
+										<th> STT <span class="icon-arrow">&UpArrow;</span></th>
+										<th> Mã sổ <span class="icon-arrow">&UpArrow;</span></th>
+										<th> Khách hàng <span class="icon-arrow">&UpArrow;</span></th>
+										<th> Loại tiết kiệm <span class="icon-arrow">&UpArrow;</span></th>
+										<th> Số dư <span class="icon-arrow">&UpArrow;</span></th>
+									</tr>
+								</thead>
+								<tbody>
+									<% for (let i = 0; i < listBooks.length; i++) { %>
+										<tr>
+											<td><%=i+1%></td>
+											<td><%= listBooks[i].MASO %></td>
+											<td><%= listBooks[i].HOTEN %></td>
+											<% if (listBooks[i].LOAI == 0) { %>
+												<td>
+												<p class="status delivered">Không kỳ hạn</p>
+												</td>
+											<% } else if (listBooks[i].LOAI == 3) { %>
+												<td>
+													<p class="status pending">Kỳ hạn 3 tháng</p>
+												</td>
+											<% } else if (listBooks[i].LOAI == 6) { %>
+												<td>
+													<p class="status shipped">Kỳ hạn 6 tháng</p>
+												</td>
+											<% } else { %>
+												<td>
+												<p class="status cancelled">Kỳ hạn <%=listBooks[i].LOAI%> tháng</p>
+												</td>
+											<% } %>
+											<td><%= listBooks[i].SODU %></td>
+											<td style="display: none;"><%= listBooks[i].CMND %></td>
+										</tr>
+									<% } %>
+								</tbody>
+							</table>
+						</section>
+	
+						<div class="button-group">
+							<button id="new-book" class="button__btn" onclick="window.location.href='/taoso_form'">
+								<%- include('../public/images/card-add.svg') %>
+								<label for="new-book" class="button__lable">Tạo sổ mới</label>
+							</button>
+	
+							<button id="deposit" class="button__btn" onclick="window.location.href='/guitien_form'">
+								<%- include('../public/images/money-recive.svg') %>
+								<label for="deposit" class="button__lable">Gửi thêm tiền</label>
+							</button>			
+	
+							<button id="withdraw" class="button__btn" onclick="window.location.href='/ruttien_form'">
+								<%- include('../public/images/money-send.svg') %>
+								<label for="withdraw" class="button__lable">Rút tiền</label>
+							</button>				
+						</div>
+					</div>
 				</div>
 			</div>
-			<section class="table__body">
-				<table>
-						<thead>
-							<tr>
-								<th> STT <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Mã sổ <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Khách hàng <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Loại tiết kiệm <span class="icon-arrow">&UpArrow;</span></th>
-								<th> Số dư <span class="icon-arrow">&UpArrow;</span></th>
-							</tr>
-						</thead>
-						<tbody>
-							<% for (let i = 0; i < listBooks.length; i++) { %>
-								<tr>
-									<td><%=i+1%></td>
-									<td><%= listBooks[i].MASO %></td>
-									<td><%= listBooks[i].HOTEN %></td>
-									<% if (listBooks[i].LOAI == 0) { %>
-										<td>
-										  <p class="status delivered">Không kỳ hạn</p>
-										</td>
-									<% } else if (listBooks[i].LOAI == 3) { %>
-										<td>
-											<p class="status pending">Kỳ hạn 3 tháng</p>
-										</td>
-									<% } else if (listBooks[i].LOAI == 6) { %>
-										<td>
-											<p class="status shipped">Kỳ hạn 6 tháng</p>
-										</td>
-									<% } else { %>
-										<td>
-										  <p class="status cancelled">Kỳ hạn <%= listBooks[i].LOAI%> tháng</p>
-										</td>
-									<% } %>
-									<td><%= listBooks[i].SODU %></td>
-									<td style="display: none;"><%= listBooks[i].CMND %></td>
-								</tr>
-							<% } %>
-						</tbody>
-					</table>
-			</section>
-       	</div>
-
-		<!--Ai đó sửa code css thành file riêng nha-->
-		<style>
-			.form-group__button {
-				background-color: #4CAF50;
-				color: white;
-				padding: 14px 20px;
-				margin: center;
-				border: none;
-				cursor: pointer;
-				width: 350;
-			}
-			.form-group__button:hover {
-				opacity: 0.8;
-			}
-		</style>
-		<div class="form-group">
-			<button class="form-group__button" onclick="window.location.href='/taoso_form'">Tạo sổ mới</button>
-			<button class="form-group__button" onclick="window.location.href='/guitien_form'">Gửi thêm tiền</button>
-			<button class="form-group__button" onclick="window.location.href='/ruttien_form'">Rút tiền</button>
-		</div>
-	</div>
-	<script src="date.js"></script>
- 		<script>
-    		const currentDayDashboard = document.getElementById('Dashboard-date');
-			const currentDayManage = document.getElementById('Manage-date');
-    		currentDayDashboard.textContent = getCurrentDate();
-			currentDayManage.textContent = getCurrentDate();
-  		</script>
-    </body>
+			<script src="date.js"></script>
+			<script>
+				const currentDayDashboard = document.getElementById('Dashboard-date');
+				const currentDayManage = document.getElementById('Manage-date');
+				currentDayDashboard.textContent = getCurrentDate();
+				currentDayManage.textContent = getCurrentDate();
+			</script>
+	</body>
 </html>
