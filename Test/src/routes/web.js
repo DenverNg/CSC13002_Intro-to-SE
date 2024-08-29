@@ -5,7 +5,6 @@ const {getDashboard, getTransactions, getDailyReports, getMonthlyReports, getSet
 const router = express.Router();
 
 
-
 //Dashboard
 router.get('/', getDashboard);
 
@@ -39,6 +38,12 @@ router.post('/cai_dat/sua/xacnhan', postModifyTermDeposit);
 
 router.get('/cai_dat/sua_min', getModifyMinValue);
 router.post('/cai_dat/sua_min/xacnhan', postModifyMinValue);
+
+
+
+
+
+
 
 
 

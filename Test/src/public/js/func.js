@@ -98,4 +98,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     data: earningChartData,
     options: {},
   });
-});
+}); 
