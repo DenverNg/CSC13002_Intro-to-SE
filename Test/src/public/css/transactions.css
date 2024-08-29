@@ -62,9 +62,34 @@
     opacity: 0.73;
 }
 
+thead th {
+    width: unset;
+}
+
 .table--no-margin {
     margin: unset;
     width: 100%;
+}
+
+.table__column--No {
+    width: 9%;
+}
+
+.table__column--Book-ID {
+    width: 14%;
+}
+
+.table__column--Customer-Name {
+    width: 22%;
+}
+
+.table__column--Customer-ID {
+    width: 14%;
+}
+
+.table__column--Term-type {
+    width: 20%;
+    text-align: center;
 }
 
 .topbar--set-padding {
