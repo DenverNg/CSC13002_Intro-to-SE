@@ -9,9 +9,7 @@ with open(file_path, 'r', encoding='utf-8') as file:
 locations = ['Quận 1', 'Quận 2', 'Quận 3', 'Quận 4', 'Quận 5', 'Quận 6', 'Quận 7',
              'Quận 8', 'Quận 9', 'Quận 10', 'Quận 11', 'Quận 12', 'Quận Bình Thạnh', 'Quận Gò Vấp', 'Quận Phú Nhuận',
              'Quận Tân Bình', 'Quận Tân Phú', 'Quận Thủ Đức', 'Huyện Bình Chánh', 'Huyện Cần Giờ', 'Huyện Củ Chi',
-             'Huyện Hóc Môn', 'Huyện Nhà Bè', 'Huyện Bình Tân', '227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM']
-
-ky_han_options = ["Không kỳ hạn", "Kỳ hạn 3 tháng", "Kỳ hạn 6 tháng"]
+             'Huyện Hóc Môn', 'Huyện Nhà Bè', 'Huyện Bình Tân', '227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',]
 
 
 def generate_random_date(month):
@@ -55,8 +53,8 @@ with open('createBook.txt', 'w', encoding='utf-8') as output_file:
         else:  # Last ~1/3 of 200 accounts
             month = 8
 
-        # Alternate between the options for `ky_han`
-        ky_han = random.choice(ky_han_options)
+        # Alternate between 0, 3, 6 in sequence
+        random_number = [0, 3, 6][i % 3]
 
         full_name = member.get('full_name')
         unique_number = generate_unique_number(existing_numbers)
@@ -65,11 +63,7 @@ with open('createBook.txt', 'w', encoding='utf-8') as output_file:
         amount = random.randint(100001, 2000000)
         amount = round(amount, -3)
 
-        # Create the `Mã Sổ` identifier
-        ma_so = f"MS{i:06}"  # `i` formatted as a zero-padded 6-digit number
-
-        # Include `Mã Sổ` in the SQL command
-        sql_command = f"CALL MOSOTIETKIEM('{ma_so}', '{ky_han}', '{full_name}', '{
+        sql_command = f"CALL MOSOTIETKIEM({random_number}, '{full_name}', '{
             unique_number}', '{location}', '{random_date}', {amount});\n"
         output_file.write(sql_command)
 
