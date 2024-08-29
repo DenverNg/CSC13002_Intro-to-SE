@@ -1,5 +1,5 @@
 .content-group {
-    height: 690px;
+    height: 660px;
     background-color: rgba(255, 255, 255, 1);
     max-width: 94.5%;
     margin: 0 auto 20px auto;
@@ -11,13 +11,16 @@
 }
 
 .button-group {
+    /* #7065d297 */
+    border-top: 4px solid transparent; /* The same thickness as the stroke-width */
+    border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="6"><line x1="0" y1="5" x2="50" y2="5" stroke="%237065D2" stroke-width="5" stroke-dasharray="50, 30"/></svg>') 10 repeat;
     width: 100%;
-    margin-right: 60px;
     margin-top: auto;
-    margin-bottom: 30px;
+    padding-top: 20px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     align-self: flex-end;
 }
 
@@ -94,4 +97,14 @@ thead th {
 
 .topbar--set-padding {
     padding-top: 30px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1%;
+    top: 10%;
+}
+
+.search-content {
+    margin-left: 10px;
 }

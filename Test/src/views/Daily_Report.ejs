@@ -91,15 +91,8 @@
                             <div class="subheader">
                                 <div class="EnterValue">
                                     <form action="/bao_cao_ngay#" method="POST">
-                                        <!-- <div onclick="inputClicked({ id: 'input-date', inputType: 'date'})" id="input-date"
-                                            class="form-group">
-                                            <input id="date" name="date" class="form-group__input" type="date" value="<%= currentDate %>"
-                                                required>
-                                            <div class="form-group__title">Nhập ngày báo cáo</div>
-                                            <span id="input-name-message" class="form-group__message"></span>
-                                        </div> -->
                                         <div id="input-date" class="form-group inp-createbook">
-                                            <input id="date" class="form-group__input inp-createbook__input" type="date" name="NGAY" placeholder=" ">
+                                            <input id="date" class="form-group__input inp-createbook__input" type="date" name="NGAY" placeholder=" " value="<%= currentDate %>">
                                             <label for="date" class="form-group__title form-group__input__title inp-createbook__title">Ngày báo cáo</label>
                                             <span id="input-name-message" class="form-group__message"></span>
                                         </div>
@@ -123,7 +116,7 @@
                                 <table id="Daily-Report">
                                         <thead>
                                             <tr>
-                                                <th> STT <span class="icon-arrow">&UpArrow;</span></th>
+                                                <th> STT </th>
                                                 <th> Loại tiết kiệm <span class="icon-arrow">&UpArrow;</span></th>
                                                 <th> Tổng thu <span class="icon-arrow">&UpArrow;</span></th>
                                                 <th> Tổng chi <span class="icon-arrow">&UpArrow;</span></th>

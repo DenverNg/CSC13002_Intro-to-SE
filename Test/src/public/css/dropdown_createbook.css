@@ -62,9 +62,9 @@
 
 .select-createbook-content {
     display: none;
-    width: 380px;
+    width: 350px;
     padding: 20px;
-    /* margin-top: 15px; */
+    margin-top: 10px;
     background: #fff;
     border-radius: 7px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
