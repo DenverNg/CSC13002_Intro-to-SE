@@ -153,7 +153,7 @@ const getThoiGianToiThieu = async () => {
 
 const checkNgayRut = async (NGAY, MASO) => {
   const [results, fields] = await connection.query(
-    "SELECT DATEDIFF(?, NGAYMOSO) AS DIFF FROM SOTIETKIEM WHERE MASO = ?",
+    "SELECT DATEDIFF(?, NGAYGUIGANNHAT) AS DIFF FROM SOTIETKIEM WHERE MASO = ?",
     [NGAY, MASO]
   );
   const ThoiGianToiThieu = await getThoiGianToiThieu();
@@ -163,7 +163,7 @@ const checkNgayRut = async (NGAY, MASO) => {
 
 const checkDaoHan = async (NGAY, MASO) => {
   const [results, fields] = await connection.query(
-    "SELECT DATEDIFF(?, NGAYMOSO) AS DIFF, LOAI FROM SOTIETKIEM WHERE MASO = ?",
+    "SELECT DATEDIFF(?, NGAYGUIGANNHAT) AS DIFF, LOAI FROM SOTIETKIEM WHERE MASO = ?",
     [NGAY, MASO]
   );
   if (results[0].LOAI == 0) return -1;
@@ -173,7 +173,7 @@ const checkDaoHan = async (NGAY, MASO) => {
 
 const getLaiSuat = async (MASO) => {
   const [results, fields] = await connection.query(
-    "SELECT LAISUAT FROM SOTIETKIEM S JOIN LOAI_SOTK L ON S.LOAI = L.MALOAI WHERE MASO = ?",
+    "SELECT S.LAISUAT FROM SOTIETKIEM S LEFT JOIN LOAI_SOTK L ON S.LOAI = L.MALOAI WHERE MASO = ?",
     [MASO]
   );
   return results[0].LAISUAT;
@@ -181,17 +181,17 @@ const getLaiSuat = async (MASO) => {
 
 const calTienLai = async (MASO, NGAY, SOTIEN) => {
   const [results, fields] = await connection.query(
-    "SELECT LAISUAT, NGAYMOSO, SODU, LOAI FROM SOTIETKIEM S JOIN LOAI_SOTK L ON S.LOAI = L.MALOAI WHERE MASO = ?",
+    "SELECT S.LAISUAT, S.NGAYGUIGANNHAT, S.SODU, S.LOAI FROM SOTIETKIEM S LEFT JOIN LOAI_SOTK L ON S.LOAI = L.MALOAI WHERE MASO = ?",
     [MASO]
   );
   const LAISUAT = results[0].LAISUAT;
-  const NGAYMOSO = results[0].NGAYMOSO;
+  const NGAYGUIGANNHAT = results[0].NGAYGUIGANNHAT;
   const SODU = results[0].SODU;
   const LOAI = results[0].LOAI;
   const DAOHAN = await checkDaoHan(NGAY, MASO);
   const [results1, fields1] = await connection.query(
     "SELECT DATEDIFF(?, ?) AS DIFF",
-    [NGAY, NGAYMOSO]
+    [NGAY, NGAYGUIGANNHAT]
   );
   const DIFF = results1[0].DIFF;
 
@@ -208,7 +208,7 @@ const calTienLai = async (MASO, NGAY, SOTIEN) => {
 
 const getAllType = async () => {
   const [results, fields] = await connection.query(
-    "SELECT KYHAN FROM LOAI_SOTK"
+    "SELECT KYHAN FROM LOAI_SOTK WHERE TRANGTHAI = 1"
   );
   for (let i = 0; i < results.length; i++) {
     results[i] = results[i].KYHAN;
