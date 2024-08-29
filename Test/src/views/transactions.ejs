@@ -74,7 +74,7 @@
 										<th class="table__column--Customer-Name"> Khách hàng <span class="icon-arrow">&UpArrow;</span></th>
 										<th class="table__column--Customer-ID"> CMND <span class="icon-arrow">&UpArrow;</span></th>
 										<th class="table__column--Term-type"> Loại tiết kiệm <span class="icon-arrow">&UpArrow;</span></th>
-										<th style="padding-left: 40px;"> Số dư <span class="icon-arrow">&UpArrow;</span></th>
+										<th style="padding-left: 40px;"> Số dư (VNĐ) <span class="icon-arrow">&UpArrow;</span></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -101,7 +101,7 @@
 												<p class="status cancelled">Kỳ hạn <%=listBooks[i].LOAI%> tháng</p>
 												</td>
 											<% } %>
-											<td style="padding-left: 40px;"><%= listBooks[i].SODU %></td>
+											<td style="padding-left: 40px;"><%= listBooks[i].SODU.toLocaleString('de-DE') %></td>
 		
 										</tr>
 									<% } %>
