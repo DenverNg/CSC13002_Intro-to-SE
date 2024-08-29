@@ -1,21 +1,3 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    font-family: "Helvetica Neue";
-    background-color: #000;
-}
-
-body>div {
-    margin: auto;
-}
-
 #form {
     margin: 20px 20px;
     width: 500px;
@@ -38,7 +20,6 @@ body>div {
     border-radius: 10px;
     color: #7065D2;
     padding: 0 10px;
-    margin: 30px 0 30px;
     margin: 30px 0 30px;
 }
 
@@ -73,24 +54,6 @@ body>div {
     background: radial-gradient(closest-side, #ffffff 70%, #ffffff00);
 }
 
-@keyframes inputTitleMoveUp {
-    to {
-        font-size: 17px;
-        top: calc(4%);
-        left: 15px;
-        background-image: linear-gradient(0, #FFFF, #EEECFF);
-    }
-}
-
-@keyframes inputTitleMoveDown {
-    to {
-        font-size: 28px;
-        top: calc(25% + 2px);
-        left: 0;
-        background-image: none;
-    }
-}
-
 .form-group__message {
     font-size: 17px;
     font-style: italic;
@@ -103,6 +66,7 @@ body>div {
 .form-group.invalid .form-group__input {
     border-color: #c54560;
     border-width: 1.5px;
+    color: #c54560;
 }
 
 .form-group.invalid .form-group__title {
