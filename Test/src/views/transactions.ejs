@@ -69,11 +69,12 @@
 							<table>
 								<thead>
 									<tr>
-										<th> STT <span class="icon-arrow">&UpArrow;</span></th>
-										<th> Mã sổ <span class="icon-arrow">&UpArrow;</span></th>
-										<th> Khách hàng <span class="icon-arrow">&UpArrow;</span></th>
-										<th> Loại tiết kiệm <span class="icon-arrow">&UpArrow;</span></th>
-										<th> Số dư <span class="icon-arrow">&UpArrow;</span></th>
+										<th class="table__column--No"> STT <span class="icon-arrow">&UpArrow;</span></th>
+										<th class="table__column--Book-ID"> Mã sổ <span class="icon-arrow">&UpArrow;</span></th>
+										<th class="table__column--Customer-Name"> Khách hàng <span class="icon-arrow">&UpArrow;</span></th>
+										<th class="table__column--Customer-ID"> CMND <span class="icon-arrow">&UpArrow;</span></th>
+										<th class="table__column--Term-type"> Loại tiết kiệm <span class="icon-arrow">&UpArrow;</span></th>
+										<th style="padding-left: 40px;"> Số dư <span class="icon-arrow">&UpArrow;</span></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -82,6 +83,7 @@
 											<td><%=i+1%></td>
 											<td><%= listBooks[i].MASO %></td>
 											<td><%= listBooks[i].HOTEN %></td>
+											<td><%= listBooks[i].CMND %></td>
 											<% if (listBooks[i].LOAI == 0) { %>
 												<td>
 												<p class="status delivered">Không kỳ hạn</p>
@@ -99,8 +101,8 @@
 												<p class="status cancelled">Kỳ hạn <%=listBooks[i].LOAI%> tháng</p>
 												</td>
 											<% } %>
-											<td><%= listBooks[i].SODU %></td>
-											<td style="display: none;"><%= listBooks[i].CMND %></td>
+											<td style="padding-left: 40px;"><%= listBooks[i].SODU %></td>
+		
 										</tr>
 									<% } %>
 								</tbody>
