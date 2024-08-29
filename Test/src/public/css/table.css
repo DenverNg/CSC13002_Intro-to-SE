@@ -174,21 +174,23 @@ tbody tr.hide td img {
 }
 
 .status.delivered {
-    background-color: #86e49d;
-    color: #006b21;
+    background-color: #E2F0C8;
+    color: #35392e;
 }
 
 .status.cancelled {
-    background-color: #d893a3;
-    color: #b30021;
+    background-color: #b9d6f3;
+    color: #30373e;
 }
 
 .status.pending {
-    background-color: #ebc474;
+    background-color: #ffdac1;
+    color: #756459;
 }
 
 .status.shipped {
-    background-color: #6fcaea;
+    background-color: #ff9aa2;
+    color: #804e53;
 }
 
 
