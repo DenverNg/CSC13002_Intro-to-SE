@@ -51,9 +51,45 @@
                     <span id="input-name-message" class="form-group__message"></span>
                 </div>
 
-                <button class="form-group__button next-button">Tiếp tục</button>
+                <button id="submit-btn" type="submit" class="form-group__button submit-button" name="action" value="confirm">Tiếp tục</button>
             </div>
         </form>
     </div>
+    <script>
+        Validator({
+            form: '#deposit-form',
+            errorSelector: '.form-group__message',
+            rules: [
+                Validator.isRequired('#MASO', 'Vui lòng nhập mã sổ'),
+                Validator.isRequired('#date', 'Vui lòng chọn ngày tạo sổ'),
+                Validator.isRequired('#SOTIEN', 'Vui lòng nhập số tiền gửi')
+            ],
+            onSubmit: function (formValues) {
+                // Perform your submission action here
+                console.log('Form submitted successfully!', formValues);
+            }
+        });
 
+        const submitButton = document.getElementById('submit-btn');
+
+        function checkFormValidity() {
+            const maSo = document.getElementById('MASO').value.trim();
+            const ngay = document.getElementById('date').value.trim();
+            const soTien = document.getElementById('SOTIEN').value.trim();
+
+            // Check if all fields are filled
+            const isFormValid = maSo !== ''   && ngay !== '' && soTien !== '';
+
+            // Enable or disable submit button based on form validity
+            submitButton.disabled = !isFormValid;
+        }
+
+        // Listen for input changes and validate the form
+        document.getElementById('MASO').addEventListener('input', checkFormValidity);
+        document.getElementById('date').addEventListener('input', checkFormValidity);
+        document.getElementById('SOTIEN').addEventListener('input', checkFormValidity);
+
+        // Initial form validation on page load
+        checkFormValidity();
+    </script>
 </body>

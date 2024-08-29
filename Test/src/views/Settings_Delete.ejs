@@ -86,7 +86,7 @@
                                             <button type="button" class="button-secondary red" onclick="blurTerm('<%=i%>')">
                                                 <i class="fas fa-times"></i>
                                             </button>
-                                            <button type="button" class="button-secondary green" onclick="undoBlur('<%=i%>')">
+                                            <button type="button" class="button-secondary green" style="display: none;" onclick="undoBlur('<%=i%>')">
                                                 <i class="fas fa-undo"></i>
                                             </button>
                                         </td>
@@ -96,8 +96,13 @@
                         </table>
                         <style>
                             .blurred {
-                            opacity: 0.5;  /* Makes the row semi-transparent */
-                            transition: opacity 0.5s ease; /* Smooth transition */
+                                opacity: 0.2;  /* Makes the row semi-transparent */
+                                transition: opacity 0.5s ease; /* Smooth transition */
+                            }
+                            .blurred .button-secondary.green,
+                            :not(.blurred) .button-secondary.red {
+                                opacity: 1; /* Make the active button fully visible */
+                                pointer-events: auto; /* Enable interactions for the active button */
                             }
                         </style>
                         <div class="Function">

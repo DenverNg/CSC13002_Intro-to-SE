@@ -18,7 +18,7 @@
 				<img src="/images/SEBank.png" alt="logo-hover" class="sidebar-img-default" />
 				<img src="/images/Logo.png" alt="logo-hover" class="sidebar-img-hover" />
 				<ul class="sidebar-links">
-					<li data-content="Dashboard">
+					<li data-content="Dashboard" >
 						<a href="/#">
 							<span class="material-icons" style="font-size: 35px">
 								home
@@ -29,7 +29,7 @@
 						<a href="/quan_ly_so#">
 							<span class="material-icons" style="font-size: 35px">
 								manage_search
-								</span>Quản lý sổ
+							</span>Quản lý sổ
 						</a>
 					</li>
 					<li>
@@ -42,7 +42,7 @@
 					<li>
 						<a href="/mat_khau#">
 							<span class="material-icons" style="font-size: 35px">
-							settings
+								settings
 							</span> Cài đặt
 						</a>
 					</li>
@@ -75,7 +75,7 @@
 										<th class="table__column--Customer-Name"> Khách hàng <span class="icon-arrow">&UpArrow;</span></th>
 										<th class="table__column--Customer-ID"> CMND <span class="icon-arrow">&UpArrow;</span></th>
 										<th class="table__column--Term-type"> Loại tiết kiệm <span class="icon-arrow">&UpArrow;</span></th>
-										<th style="padding-left: 40px;"> Số dư <span class="icon-arrow">&UpArrow;</span></th>
+										<th style="padding-left: 40px;"> Số dư (VNĐ) <span class="icon-arrow">&UpArrow;</span></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -102,7 +102,7 @@
 												<p class="status cancelled">Kỳ hạn <%=listBooks[i].LOAI%> tháng</p>
 												</td>
 											<% } %>
-											<td style="padding-left: 40px;"><%= listBooks[i].SODU %></td>
+											<td style="padding-left: 40px;"><%= listBooks[i].SODU.toLocaleString('de-DE') %></td>
 		
 										</tr>
 									<% } %>

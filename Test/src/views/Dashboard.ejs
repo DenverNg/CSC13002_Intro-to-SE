@@ -47,7 +47,7 @@
 			</ul>
 		</aside>
 
-		<div class="main">
+		<div class="main" style="margin: auto 0 auto 0;">
 			<!-- Dashboard -->
 			<div class="content" id="Dashboard">
 				<div class="topbar">
@@ -67,24 +67,6 @@
 						</div>
 						<div class="iconBx">
 							<ion-icon name="eye-outline"></ion-icon>
-						</div>
-					</div>
-					<div class="card">
-						<div>
-							<div class="numbers">0</div>
-							<div class="cardName">Sales</div>
-						</div>
-						<div class="iconBx">
-							<ion-icon name="cart-outline"></ion-icon>
-						</div>
-					</div>
-					<div class="card">
-						<div>
-							<div class="numbers">0</div>
-							<div class="cardName">Comments</div>
-						</div>
-						<div class="iconBx">
-							<ion-icon name="chatbubbles-outline"></ion-icon>
 						</div>
 					</div>
 					<div class="card">
@@ -117,50 +99,6 @@
 				<!-- Charts -->
 				<script>
 					document.addEventListener('DOMContentLoaded', () => {
-						// const listItems = document.querySelectorAll('.sidebar-links li');
-						// const contentSections = document.querySelectorAll('.content');
-
-						// if (listItems.length > 0) {
-						//   listItems[0].classList.add('active');
-						//   contentSections[0].classList.add('active');
-						//   // listItems.forEach(listItem => {
-						//   //   // listItem.addEventListener('click', () => {
-						//   //     listItems.forEach(item => item.classList.remove('active'));
-						//   //     listItem.classList.add('active');
-						//   //     const contentId = listItem.dataset.content;
-						//   //          const activeContent = document.getElementById(contentId);
-
-						//   //          if (activeContent) {
-						//   //            contentSections.forEach(section => section.classList.remove('active'));
-						//   //            activeContent.classList.add('active');
-						//   //          }
-						//   //   //});
-						//   // });
-						// } else {
-						//   console.error('No list items found with the class "sidebar-links li"');
-						// }
-						// Get the current URL path
-
-
-
-						const sidebar = document.querySelector('.sidebar');
-						const mainToggle = document.querySelector('.main');
-						const tabToggle = document.querySelector('.tab-pane');
-
-
-						sidebar.addEventListener('mouseover', () => {
-							mainToggle.classList.add('active');
-							//tabToggle.classList.add('active');
-
-						});
-
-						sidebar.addEventListener('mouseout', () => {
-							// tabToggle.classList.remove('active');
-							mainToggle.classList.remove('active');
-
-						});
-
-
 						/*--chart--*/
 						const earningData = <%= JSON.stringify(earningDataArr) %>;
 						const withdrawData = <%= JSON.stringify(withdrawDataArr) %>;
@@ -227,7 +165,6 @@
 							options: {
 							}
 						});
-
 					}); 
 				</script>
 			</div>
