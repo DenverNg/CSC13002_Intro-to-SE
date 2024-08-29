@@ -22,6 +22,10 @@ const {
   getAllType,
   getSoDu,
   getMaLoai,
+  getNumNewBooks,
+  getEarning_Week_Data,
+  getWithdraw_Week_Data,
+  statisticsTypeDeposit,
 } = require("../services/CRUD");
 const {
   getCurrentDate,
@@ -32,8 +36,21 @@ const {
 const { set, get } = require("express/lib/response");
 
 //Dashboard
-const getDashboard = (req, res) => {
-  res.render("Dashboard.ejs", { currentDate: getCurrentDate() });
+const getDashboard = async (req, res) => {
+  const earningData = await getEarning_Week_Data();
+  const withdrawData = await getWithdraw_Week_Data();
+  const earningDataArr = earningData.map((item) => parseInt(item.SOTIEN, 10));
+  const withdrawDataArr = withdrawData.map((item) => parseInt(item.SOTIEN, 10));
+
+  const listType = await statisticsTypeDeposit();
+  const numNewBooks = await getNumNewBooks();
+  res.render("Dashboard.ejs", {
+    currentDate: getCurrentDate(),
+    numNewBooks,
+    earningDataArr,
+    withdrawDataArr,
+    listType,
+  });
 };
 
 //Transaction

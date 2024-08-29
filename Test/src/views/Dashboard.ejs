@@ -1,123 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>SE Bank</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="/css/main.css">
-        <script src="/js/func.js"></script>
-		<link rel="stylesheet" href="/css/table.css">
-        <script src="/js/table.js"></script>
-        <!-- Linking Google Font Link for Icon -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-	  
-    <div class="container">
+
+<head>
+	<title>SE Bank</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="/css/main.css">
+	<!-- <script src="/js/func.js"></script> -->
+	<link rel="stylesheet" href="/css/table.css">
+	<script src="/js/table.js"></script>
+	<!-- Linking Google Font Link for Icon -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<div class="container">
 		<aside class="sidebar">
-        <img src="/images/SEBank.png" alt="logo-hover" class="sidebar-img-default" />
-        <img src="/images/Logo.png" alt="logo-hover" class="sidebar-img-hover" />
-        <ul class="sidebar-links">
-            <li data-content="Dashboard" class="active">
-                <a href="/#">
-                    <span class="material-icons" style="font-size: 35px">
-                        home
-                    </span> Trang chủ
-                </a>
-            </li>
-            <li data-content="Manage">
-                <a href="/quan_ly_so#">
-                    <span class="material-icons" style="font-size: 35px">
-                        manage_search
-                        </span>Quản lý sổ
-                </a>
-            </li>
-            <li>
-                <a href="/bao_cao_ngay#">
-                    <span class="material-icons" style="font-size: 35px">
-                        description
-                    </span> Báo cáo
-                </a>
-            </li>
-            <li>
-                <a href="/mat_khau#">
-                    <span class="material-icons" style="font-size: 35px">
-                    settings
-                    </span> Cài đặt
-                </a>
-            </li>
-        </ul>
+			<img src="/images/SEBank.png" alt="logo-hover" class="sidebar-img-default" />
+			<img src="/images/Logo.png" alt="logo-hover" class="sidebar-img-hover" />
+			<ul class="sidebar-links">
+				<li data-content="Dashboard" class="active">
+					<a href="/#">
+						<span class="material-icons" style="font-size: 35px">
+							home
+						</span> Trang chủ
+					</a>
+				</li>
+				<li data-content="Manage">
+					<a href="/quan_ly_so#">
+						<span class="material-icons" style="font-size: 35px">
+							manage_search
+						</span>Quản lý sổ
+					</a>
+				</li>
+				<li>
+					<a href="/bao_cao_ngay#">
+						<span class="material-icons" style="font-size: 35px">
+							description
+						</span> Báo cáo
+					</a>
+				</li>
+				<li>
+					<a href="/mat_khau#">
+						<span class="material-icons" style="font-size: 35px">
+							settings
+						</span> Cài đặt
+					</a>
+				</li>
+			</ul>
 		</aside>
 
-	  <div class = "main">
-       <!-- Dashboard -->
-		<div class="content" id="Dashboard">
-			<div class="topbar">
-				Trang chủ
-			</div>
-			<p class="date"><%= currentDate %></p>
-			<!-- cards -->
-			<div class="cardBox">
-				<div class="card">
-					<div>
-						<div class="numbers">1,504</div>
-						<div class="cardName">Daily Views</div>
+		<div class="main">
+			<!-- Dashboard -->
+			<div class="content" id="Dashboard">
+				<div class="topbar">
+					Trang chủ
+				</div>
+				<p class="date">
+					<%= currentDate %>
+				</p>
+				<!-- cards -->
+				<div class="cardBox">
+					<div class="card">
+						<div>
+							<div class="numbers">
+								<%= numNewBooks %>
+							</div>
+							<div class="cardName">Số sổ mới hôm nay</div>
+						</div>
+						<div class="iconBx">
+							<ion-icon name="eye-outline"></ion-icon>
+						</div>
 					</div>
-					<div class="iconBx">
-						<ion-icon name="eye-outline"></ion-icon>
+					<div class="card">
+						<div>
+							<div class="numbers">0</div>
+							<div class="cardName">Sales</div>
+						</div>
+						<div class="iconBx">
+							<ion-icon name="cart-outline"></ion-icon>
+						</div>
+					</div>
+					<div class="card">
+						<div>
+							<div class="numbers">0</div>
+							<div class="cardName">Comments</div>
+						</div>
+						<div class="iconBx">
+							<ion-icon name="chatbubbles-outline"></ion-icon>
+						</div>
+					</div>
+					<div class="card">
+						<div>
+							<div class="numbers">$999999</div>
+							<div class="cardName">Doanh thu</div>
+						</div>
+						<div class="iconBx">
+							<ion-icon name="cash-outline"></ion-icon>
+						</div>
 					</div>
 				</div>
-				<div class="card">
-					<div>
-						<div class="numbers">80</div>
-						<div class="cardName">Sales</div>
-					</div>
-					<div class="iconBx">
-						<ion-icon name="cart-outline"></ion-icon>
-					</div>
-				</div>
-				<div class="card">
-					<div>
-						<div class="numbers">284</div>
-						<div class="cardName">Comments</div>
-					</div>
-					<div class="iconBx">
-						<ion-icon name="chatbubbles-outline"></ion-icon>
-					</div>
-				</div>
-				<div class="card">
-					<div>
-						<div class="numbers">$7,842</div>
-						<div class="cardName">Earning</div>
-					</div>
-					<div class="iconBx">
-						<ion-icon name="cash-outline"></ion-icon>
-					</div>
-				</div>
-			</div>
 
 
-			<!-- Add Charts -->
-			<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-			<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	
-			<div class="graphBox">
-				<div class="box">
-					<canvas id="earning"></canvas>
+				<!-- Add Charts -->
+				<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+				<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+				<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+				<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+				<div class="graphBox">
+					<div class="box">
+						<canvas id="earning"></canvas>
+					</div>
+					<div class="box">
+						<canvas id="myChart"></canvas>
+					</div>
 				</div>
-				<div class="box">
-					<canvas id="myChart"></canvas>
-				</div>
+
+				<!-- Charts -->
+				<script>
+					document.addEventListener('DOMContentLoaded', () => {
+						// const listItems = document.querySelectorAll('.sidebar-links li');
+						// const contentSections = document.querySelectorAll('.content');
+
+						// if (listItems.length > 0) {
+						//   listItems[0].classList.add('active');
+						//   contentSections[0].classList.add('active');
+						//   // listItems.forEach(listItem => {
+						//   //   // listItem.addEventListener('click', () => {
+						//   //     listItems.forEach(item => item.classList.remove('active'));
+						//   //     listItem.classList.add('active');
+						//   //     const contentId = listItem.dataset.content;
+						//   //          const activeContent = document.getElementById(contentId);
+
+						//   //          if (activeContent) {
+						//   //            contentSections.forEach(section => section.classList.remove('active'));
+						//   //            activeContent.classList.add('active');
+						//   //          }
+						//   //   //});
+						//   // });
+						// } else {
+						//   console.error('No list items found with the class "sidebar-links li"');
+						// }
+						// Get the current URL path
+
+
+
+						const sidebar = document.querySelector('.sidebar');
+						const mainToggle = document.querySelector('.main');
+						const tabToggle = document.querySelector('.tab-pane');
+
+
+						sidebar.addEventListener('mouseover', () => {
+							mainToggle.classList.add('active');
+							//tabToggle.classList.add('active');
+
+						});
+
+						sidebar.addEventListener('mouseout', () => {
+							// tabToggle.classList.remove('active');
+							mainToggle.classList.remove('active');
+
+						});
+
+
+						/*--chart--*/
+						const earningData = <%= JSON.stringify(earningDataArr) %>;
+						const withdrawData = <%= JSON.stringify(withdrawDataArr) %>;
+						const listType = <% - JSON.stringify(listType) %>;
+
+						// Extract labels and data from listType
+						const labelsType = listType.map(item => item.KYHAN);
+						const dataType = listType.map(item => item.COUNT);
+
+						const ctx1 = document.getElementById('myChart').getContext('2d');
+						const ctx2 = document.getElementById('earning').getContext('2d');
+						const pieData = {
+							labels: labelsType,
+							datasets: [{
+								label: 'DepositeTerm',
+								data: dataType,
+								backgroundColor: [
+									'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+									'rgba(79,235,120, 1)'
+								]
+							}]
+						};
+
+						const earningChartData = {
+							labels: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+							datasets: [{
+								label: 'Số tiền gửi',
+								data: earningData,
+								backgroundColor: 'rgba(79,235,120, 1)',
+								borderColor: 'rgba(79,235,120, 1)',
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointHoverBackgroundColor: 'rgba(255, 206, 86, 1)',
+								pointHoverBorderColor: 'rgba(255, 206, 86, 1)',
+								lineTension: 0.05
+							},
+							{
+								label: 'Số tiền rút',
+								data: withdrawData,
+								backgroundColor: 'rgba(255, 99, 132, 1)',
+								borderColor: 'rgba(255, 99, 132, 1)',
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointHoverBackgroundColor: 'rgba(255, 206, 86, 1)',
+								pointHoverBorderColor: 'rgba(255, 206, 86, 1)',
+								lineTension: 0.05
+							}
+							]
+						};
+
+						const pieChart = new Chart(ctx1, {
+							type: 'doughnut',
+							data: pieData,
+							options: {
+								responsive: true
+							}
+						});
+
+						const earningChart = new Chart(ctx2, {
+							type: 'line',
+							data: earningChartData,
+							options: {
+							}
+						});
+
+					}); 
+				</script>
 			</div>
 		</div>
 	</div>
-	<!-- <script src="date.js"></script>
- 		<script>
-    		const currentDayDashboard = document.getElementById('Dashboard-date');
-			//const currentDayManage = document.getElementById('Manage-date');
-			console.log(getCurrentDate());
-    		currentDayDashboard.textContent = getCurrentDate();
-			//currentDayManage.textContent = getCurrentDate();
-  		</script> -->
-    </body>
+	</body>
+
 </html>
