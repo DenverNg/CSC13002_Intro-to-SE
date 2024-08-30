@@ -1,5 +1,12 @@
+.main--setup {
+    margin: auto 0 auto 0;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
 .content-group {
-    height: 660px;
+    /* height: 640px; */
     background-color: rgba(255, 255, 255, 1);
     max-width: 94.5%;
     margin: 0 auto 20px auto;
@@ -11,7 +18,6 @@
 }
 
 .button-group {
-    /* #7065d297 */
     border-top: 4px solid transparent; /* The same thickness as the stroke-width */
     border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="6"><line x1="0" y1="5" x2="50" y2="5" stroke="%237065D2" stroke-width="5" stroke-dasharray="50, 30"/></svg>') 10 repeat;
     width: 100%;
@@ -72,6 +78,7 @@ thead th {
 .table--no-margin {
     margin: unset;
     width: 100%;
+    height: 470px;
 }
 
 .table__column--No {
