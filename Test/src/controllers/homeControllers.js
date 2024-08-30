@@ -26,6 +26,7 @@ const {
   getEarning_Week_Data,
   getWithdraw_Week_Data,
   statisticsTypeDeposit,
+  getCEOpass,
 } = require("../services/CRUD");
 const {
   getCurrentDate,
@@ -193,8 +194,11 @@ const postMonthlyReports = async (req, res) => {
     res.status(400).send("Hành động không hợp lệ.");
   }
 };
-const getPassword = (req, res) => {
-  res.render("Password.ejs");
+const getPassword = async (req, res) => {
+  const hidden_pass = await getCEOpass();
+  res.render("Password.ejs", {
+    hidden_pass: hidden_pass,
+  });
 };
 
 const getSettings = async (req, res) => {

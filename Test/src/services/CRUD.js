@@ -1,5 +1,11 @@
 const connection = require("../config/database");
 
+const getCEOpass = async () => {
+  const [results, fields] = await connection.query(
+    "SELECT password FROM PASS"
+  );
+  return results[0].password;
+}
 const getAllBooks = async () => {
   const [results, fields] = await connection.query(
     "SELECT S.MASO, KH.HOTEN, S.LOAI, S.SODU, KH.CMND  FROM SOTIETKIEM S JOIN KHACHHANG KH ON S.MAKH = KH.MAKH WHERE S.TRANGTHAI = 1"
@@ -260,6 +266,7 @@ const statisticsTypeDeposit = async () => {
   return results;
 };
 module.exports = {
+  getCEOpass,
   getAllBooks,
   getDailyRP,
   getMonthlyRP,
