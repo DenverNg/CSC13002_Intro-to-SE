@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/general_setup.css">
     <link rel="stylesheet" href="/css/input.css">
     <link rel="stylesheet" href="/css/deposit.css">
+    <link rel="stylesheet" href="/css/form_button.css">
     <script src="/js/validator.js"></script>
 </head>
 
@@ -49,8 +50,10 @@
                     <label for="SOTIEN" class="form-group__title form-group__input__title inp-deposit__title">Nhập số
                         tiền gửi</label>
                     <span id="input-name-message" class="form-group__message"></span>
-                </div>
-
+                </div>   
+            </div>
+            <div class="verify__group1">
+                <button type="button" class="form-group__button cancel-button" onclick="window.history.back()">Hủy gửi</button>
                 <button id="submit-form-btn" type="submit" class="form-group__button submit-button">Tiếp tục</button>
             </div>
         </form>

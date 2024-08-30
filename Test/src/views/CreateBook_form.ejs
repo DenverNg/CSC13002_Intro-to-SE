@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="/css/general_setup.css">
         <link rel="stylesheet" href="/css/input.css">
         <link rel="stylesheet" href="/css/createbook.css">
+        <link rel="stylesheet" href="/css/form_button.css">
         <link rel="stylesheet" href="/css/dropdown_createbook.css">
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -84,11 +85,13 @@
                         <label for="SOTIEN" class="form-group__title form-group__input__title inp-createbook__title">Nhập số tiền gửi</label>
                         <span id="input-name-message" class="form-group__message"></span>
                     </div>
-                
-                <button id="submit-form-btn" type="submit" class="form-group__button submit-button">Tiếp tục</button>
-            </div>
-        </form>
-    </div>
+                </div>
+                <div class="verify__group1">
+                    <button type="button" class="form-group__button cancel-button" onclick="window.history.back()">Hủy tạo</button>
+                    <button id="submit-form-btn" type="submit" class="form-group__button submit-button">Tiếp tục</button>
+                </div>
+            </form>
+        </div>
 
         <script>
             Validator({
@@ -108,7 +111,7 @@
             });
 
             const submitButton = document.getElementById('submit-form-btn');
-
+            
                 function checkFormValidity() {
                     const tenKH = document.getElementById('TENKH').value.trim();
                     const diaChi = document.getElementById('DIACHI').value.trim();
