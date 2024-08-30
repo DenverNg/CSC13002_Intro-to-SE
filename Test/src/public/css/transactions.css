@@ -1,9 +1,9 @@
-.main--setup {
+/* .main--setup {
     margin: auto 0 auto 0;
     height: fit-content;
     display: flex;
     flex-direction: column;
-}
+} */
 
 .content-group {
     /* height: 640px; */
@@ -102,9 +102,9 @@ thead th {
     text-align: center;
 }
 
-.topbar--set-padding {
+/* .topbar--set-padding {
     padding-top: 30px;
-}
+} */
 
 .search-icon {
     position: absolute;
