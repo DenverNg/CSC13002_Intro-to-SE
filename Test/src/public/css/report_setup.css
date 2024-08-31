@@ -1,0 +1,55 @@
+.topbar-report {
+    width: 100%;
+    font-size: 48px;
+}
+
+.subheader {
+    width: 95%;
+}
+
+.tab-item {
+    width: 360px;
+    background-color: transparent;
+    border: unset;
+}
+
+.report-tab {
+    padding: 0 10px 0 10px;
+    text-decoration: none;
+    background-image: linear-gradient(to right ,#61248f,#9b4cbd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.form-group__input:focus+.form-group__title,
+.form-group__input:not(:placeholder-shown)+.form-group__title {
+    top: 19%;
+}
+
+.report-submit-button {
+    font-size: 20px;
+    padding: 0 20px 0 20px;
+    height: 48px;
+    margin: unset;
+    align-self: unset;
+}
+
+.Function {
+    width: 27%;
+    gap: unset;
+    justify-content: space-between;
+}
+
+.export-btn__label {
+    font-size: 17px;
+}
+
+.function-btn + .function-btn {
+    margin-left: unset;
+}
+
+.report-table {
+    max-height: 470px;
+    margin-bottom: auto;
+    overflow-x: hidden;
+}

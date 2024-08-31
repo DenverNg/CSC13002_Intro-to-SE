@@ -30,67 +30,31 @@
     align-self: flex-end;
 }
 
-.button__btn {
-    border: none;
-    background-color: transparent; 
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.button__btn + .button__btn {
-    margin-left: 150px;
-}
-
-.button__btn:hover{
-    transform: scale(1.25);
-    transition: all 0.3s;
-}
-
-.button__btn svg {
-    opacity: 0.73;
-    transition: opacity 0.3s ease;
-}
-
-.button__btn:hover svg {
-    opacity: 1;
-}
-
-.button__btn:hover .button__lable {
-    opacity: 1;
-}
-
-.button__lable {
-    font-size: 20px;
-    cursor: pointer;
-    /* background: linear-gradient(90deg, #8613adbf, #a00050be); */
-    /* -webkit-background-clip: text; */
-    color: #7065D2;
-    opacity: 0.73;
-}
-
 thead th {
     width: unset;
+}
+
+.table__header {
+    padding-top: unset;
+    padding-bottom: 20px;
 }
 
 .table--no-margin {
     margin: unset;
     width: 100%;
-    height: 470px;
+    height: 480px;
 }
 
 .table__column--No {
-    width: 9%;
+    width: 8%;
 }
 
 .table__column--Book-ID {
-    width: 14%;
+    width: 13%;
 }
 
 .table__column--Customer-Name {
-    width: 22%;
+    width: 25%;
 }
 
 .table__column--Customer-ID {
@@ -101,10 +65,6 @@ thead th {
     width: 20%;
     text-align: center;
 }
-
-/* .topbar--set-padding {
-    padding-top: 30px;
-} */
 
 .search-icon {
     position: absolute;

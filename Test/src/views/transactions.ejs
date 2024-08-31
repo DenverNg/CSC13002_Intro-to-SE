@@ -9,6 +9,7 @@
         <script src="/js/table.js"></script>
 		<link rel="stylesheet" href="/css/transactions.css">
 		<link rel="stylesheet" href="/css/page_setup.css">
+		<link rel="stylesheet" href="/css/function_buttons.css">
         <!-- Linking Google Font Link for Icon -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	</head>
@@ -76,7 +77,8 @@
 										<th class="table__column--Customer-Name"> Khách hàng <span class="icon-arrow">&UpArrow;</span></th>
 										<th class="table__column--Customer-ID"> CMND <span class="icon-arrow">&UpArrow;</span></th>
 										<th class="table__column--Term-type"> Loại tiết kiệm <span class="icon-arrow">&UpArrow;</span></th>
-										<th style="padding-left: 40px;"> Số dư (VNĐ) <span class="icon-arrow">&UpArrow;</span></th>
+										<th class="empty-column"></th>
+										<th> Số dư (VNĐ) <span class="icon-arrow">&UpArrow;</span></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -103,7 +105,8 @@
 												<p class="status cancelled">Kỳ hạn <%=listBooks[i].LOAI%> tháng</p>
 												</td>
 											<% } %>
-											<td style="padding-left: 40px;"><%= listBooks[i].SODU.toLocaleString('de-DE') %></td>
+											<td></td>
+											<td><%= listBooks[i].SODU.toLocaleString('de-DE') %></td>
 		
 										</tr>
 									<% } %>
@@ -112,19 +115,19 @@
 						</section>
 	
 						<div class="button-group">
-							<button id="new-book" class="button__btn" onclick="window.location.href='/taoso_form'">
+							<button id="new-book" class="function-btn" onclick="window.location.href='/taoso_form'">
 								<%- include('../public/images/card-add.svg') %>
-								<label for="new-book" class="button__lable">Tạo sổ mới</label>
+								<label for="new-book" class="function-label">Tạo sổ mới</label>
 							</button>
 	
-							<button id="deposit" class="button__btn" onclick="window.location.href='/guitien_form'">
+							<button id="deposit" class="function-btn" onclick="window.location.href='/guitien_form'">
 								<%- include('../public/images/money-recive.svg') %>
-								<label for="deposit" class="button__lable">Gửi thêm tiền</label>
+								<label for="deposit" class="function-label">Gửi thêm tiền</label>
 							</button>			
 	
-							<button id="withdraw" class="button__btn" onclick="window.location.href='/ruttien_form'">
+							<button id="withdraw" class="function-btn" onclick="window.location.href='/ruttien_form'">
 								<%- include('../public/images/money-send.svg') %>
-								<label for="withdraw" class="button__lable">Rút tiền</label>
+								<label for="withdraw" class="function-label">Rút tiền</label>
 							</button>				
 						</div>
 					</div>

@@ -18,7 +18,11 @@
         <!-- <link rel="stylesheet" href="/css/input_report.css">
         <script src="/js/input.js"></script> -->
         <link rel="stylesheet" href="/css/input.css">
-        <link rel="stylesheet" href="/css/createbook.css">
+        <link rel="stylesheet" href="/css/form_button.css">
+        <link rel="stylesheet" href="/css/function_buttons.css">
+        <link rel="stylesheet" href="/css/report_setup.css">
+        <link rel="stylesheet" href="/css/daily_report.css">
+        
        
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -67,18 +71,16 @@
                 <div class="content" id="Report">
                     <!-- Tabs -->
                     <div class="tabs">
-                        <div class="tab-item active">
-                            <a href="/bao_cao_ngay">
-                                <i class="tab-icon fas fa-code"></i>
-                                Báo cáo doanh số
-                            </a>
-                        </div>
-                        <div class="tab-item">
-                            <a href="/bao_cao_thang">
-                                <i class="tab-icon fas fa-cog"></i>
-                                Báo cáo đóng/mở
-                            </a>
-                        </div>
+                        <a id="daily-report-link" href="/bao_cao_ngay#" class="tab-item active" style="display: inline-block; text-decoration: none;">
+                            <i class="tab-icon fas fa-code"></i>
+                            <label for="daily-report-link" class="report-tab">Báo cáo doanh số</label>
+                        </a>
+                        <div class="line"></div>
+                        
+                        <a id="month-report-link" href="/bao_cao_thang#" class="tab-item" style="display: inline-block; text-decoration: none;">
+                            <i class="tab-icon fas fa-code"></i>
+                            <label for="month-report-link" class="report-tab">Báo cáo đóng/mở sổ</label>
+                        </a>
                         <div class="line"></div>
                     </div>
                     
@@ -89,37 +91,38 @@
                                 Báo Cáo Doanh Số Hoạt Động Ngày
                             </div>
                             <div class="subheader">
-                                <div class="EnterValue">
-                                    <form action="/bao_cao_ngay#" method="POST">
-                                        <div id="input-date" class="form-group inp-createbook">
-                                            <input id="date" class="form-group__input inp-createbook__input" type="date" name="NGAY" placeholder=" " value="<%= currentDate %>">
-                                            <label for="date" class="form-group__title form-group__input__title inp-createbook__title">Ngày báo cáo</label>
-                                            <span id="input-name-message" class="form-group__message"></span>
-                                        </div>
-                                        <button type="submit" class="form-group__button submit-button" name="action" value="confirm">Xem báo cáo</button>
-                                    </form>
-                                </div>
+                                <form action="/bao_cao_ngay#" method="POST" class="EnterValue">
+                                    <div id="input-date" class="form-group">
+                                        <input id="date" class="form-group__input report-input__inp" type="date" name="NGAY" placeholder=" " value="<%= currentDate %>">
+                                        <label for="date" class="form-group__title form-group__input__title">Ngày báo cáo</label>
+                                        <span id="input-name-message" class="form-group__message"></span>
+                                    </div>
+                                    <button type="submit" class="form-group__button submit-button report-submit-button" name="action" value="confirm">Xem báo cáo</button>
+                                </form>
                                 <div class="Function">
-                                    <div class="icon" id="download-daily">
-                                        <span class="material-symbols-outlined" style="font-size: 40px">download</span>
-                                        Tải báo cáo
-                                    </div>
-                                    <div class="icon" id="print-daily">
-                                        <span class="material-icons" style="font-size: 40px">print</span>
-                                        In báo cáo
-                                    </div>
+                                    <button id="download-daily" class="function-btn ">
+                                        <%- include('../public/images/download.svg') %>
+                                        <label for="new-book" class="function-label export-btn__label">Tải báo cáo</label>
+                                    </button>
+
+                                    <button id="print-daily" class="function-btn ">
+                                        <%- include('../public/images/print.svg') %>
+                                        <label for="new-book" class="function-label export-btn__label">In báo cáo</label>
+                                    </button>
+            
                                 </div>
                             </div>
             
                             
-                            <section class="table__body">
+                            <section class="table__body report-table">
                                 <table id="Daily-Report">
                                         <thead>
                                             <tr>
-                                                <th> STT </th>
-                                                <th> Loại tiết kiệm </th>
-                                                <th> Tổng thu </th>
-                                                <th> Tổng chi </th>
+                                                <th class="table__column--No"> STT </th>
+                                                <th class="table__column--Term-type"> Loại tiết kiệm </th>
+                                                <th class="empty-column"></th>
+                                                <th class="table__column--Total-income"> Tổng thu </th>
+                                                <th class="table__column--Total-outcome"> Tổng chi </th>
                                                 <th> Chênh lệch </th>
                                             </tr>
                                         </thead>
@@ -127,8 +130,26 @@
                                             <% for (let i = 0; i < listDailyRP.length; i++) { %>
                                                 <tr>
                                                     <td><%= i + 1 %></td>
-                                                    <td><%= listDailyRP[i].KYHAN %></td>
+                                                    <!-- <td><%= listDailyRP[i].KYHAN %></td> -->
+                                                    <% if (listDailyRP[i].KYHAN == 'Không kỳ hạn') { %>
+                                                        <td>
+                                                        <p class="status delivered">Không kỳ hạn</p>
+                                                        </td>
+                                                    <% } else if (listDailyRP[i].KYHAN == 'Kỳ hạn 3 tháng') { %>
+                                                        <td>
+                                                            <p class="status pending">Kỳ hạn 3 tháng</p>
+                                                        </td>
+                                                    <% } else if (listDailyRP[i].KYHAN == 'Kỳ hạn 6 tháng') { %>
+                                                        <td>
+                                                            <p class="status shipped">Kỳ hạn 6 tháng</p>
+                                                        </td>
+                                                    <% } else { %>
+                                                        <td>
+                                                        <p class="status cancelled">Kỳ hạn <%=listDailyRP[i].KYHAN%> tháng</p>
+                                                        </td>
+                                                    <% } %>
                                                     <!-- Convert values to numbers before formatting -->
+                                                    <td></td>
                                                     <td><%= Number(listDailyRP[i].TONGTHU).toLocaleString('de-DE') %></td>
                                                     <td><%= Number(listDailyRP[i].TONGCHI).toLocaleString('de-DE') %></td>
                                                     <% if (Number(listDailyRP[i].CHENHLECH) > 0) { %>
