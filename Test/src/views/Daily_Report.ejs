@@ -126,21 +126,22 @@
                                         <tbody>
                                             <% for (let i = 0; i < listDailyRP.length; i++) { %>
                                                 <tr>
-                                                    <td><%=i+1%></td>
-                                                    <td><%=listDailyRP[i].KYHAN%></td>
-                                                    <td><%= listDailyRP[i].TONGTHU %></td>
-                                                    <td><%= listDailyRP[i].TONGCHI %></td>
-                                                    <% if (listDailyRP[i].CHENHLECH > 0) { %>
+                                                    <td><%= i + 1 %></td>
+                                                    <td><%= listDailyRP[i].KYHAN %></td>
+                                                    <!-- Convert values to numbers before formatting -->
+                                                    <td><%= Number(listDailyRP[i].TONGTHU).toLocaleString('de-DE') %></td>
+                                                    <td><%= Number(listDailyRP[i].TONGCHI).toLocaleString('de-DE') %></td>
+                                                    <% if (Number(listDailyRP[i].CHENHLECH) > 0) { %>
                                                         <td>
-                                                            <p style="color: rgb(73, 155, 73);"><%=listDailyRP[i].CHENHLECH%></p>
+                                                            <p style="color: rgb(73, 155, 73);"><%= Number(listDailyRP[i].CHENHLECH).toLocaleString('de-DE') %></p>
                                                         </td>
-                                                    <% } else if (listDailyRP[i].CHENHLECH == 0) { %>
+                                                    <% } else if (Number(listDailyRP[i].CHENHLECH) == 0) { %>
                                                         <td>
-                                                            <p style="color: black;"><%=listDailyRP[i].CHENHLECH%></p>
+                                                            <p style="color: black;"><%= Number(listDailyRP[i].CHENHLECH).toLocaleString('de-DE') %></p>
                                                         </td>
                                                     <% } else { %>
                                                         <td>
-                                                            <p style="color: red;"><%=listDailyRP[i].CHENHLECH%></p>
+                                                            <p style="color: red;"><%= Number(listDailyRP[i].CHENHLECH).toLocaleString('de-DE') %></p>
                                                         </td>
                                                     <% } %>
                                                 </tr>
