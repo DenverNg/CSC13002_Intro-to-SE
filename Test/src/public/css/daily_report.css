@@ -1,0 +1,26 @@
+.EnterValue {
+    align-items: center;
+}
+
+.report-input__inp {
+    width: 300px;
+    margin: 20px 0 20px 0;
+}
+
+.table__column--No {
+    width: 5%;
+}
+
+.table__column--Term-type {
+    width: 18%;
+    text-align: center;
+}
+
+.table__column--Total-income {
+    width: 20%;
+}
+
+.table__column--Total-outcome {
+    width: 20%;
+}
+
