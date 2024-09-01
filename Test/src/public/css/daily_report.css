@@ -1,10 +1,6 @@
-.EnterValue {
-    align-items: center;
-}
-
 .report-input__inp {
     width: 300px;
-    margin: 20px 0 20px 0;
+    /* margin: 20px 0 20px 0; */
 }
 
 .table__column--No {
