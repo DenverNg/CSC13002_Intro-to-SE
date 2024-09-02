@@ -17,7 +17,7 @@ ky_han_options = ["Không kỳ hạn", "Kỳ hạn 3 tháng", "Kỳ hạn 6 thá
 def generate_random_date(ky_han):
     """Generate a random date based on the `ky_han` option."""
     if ky_han == "Không kỳ hạn":
-        start_date = datetime(2024, 8, 25)
+        start_date = datetime(2024, 8, 15)
         end_date = datetime(2024, 9, 5)
     elif ky_han == "Kỳ hạn 3 tháng":
         # Either February or May 2024

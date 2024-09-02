@@ -27,6 +27,8 @@ const {
   getWithdraw_Week_Data,
   statisticsTypeDeposit,
   getCEOpass,
+  countKhachHang,
+  calculateDoanhThu,
 } = require("../services/CRUD");
 const {
   getCurrentDate,
@@ -42,15 +44,18 @@ const getDashboard = async (req, res) => {
   const withdrawData = await getWithdraw_Week_Data();
   const earningDataArr = earningData.map((item) => parseInt(item.SOTIEN, 10));
   const withdrawDataArr = withdrawData.map((item) => parseInt(item.SOTIEN, 10));
-
+  const countNewCustomer = await countKhachHang();
   const listType = await statisticsTypeDeposit();
   const numNewBooks = await getNumNewBooks();
+  const doanhThu = await calculateDoanhThu(getDateForReport());
   res.render("Dashboard.ejs", {
     currentDate: getCurrentDate(),
     numNewBooks,
     earningDataArr,
     withdrawDataArr,
     listType,
+    countNewCustomer,
+    doanhThu,
   });
 };
 

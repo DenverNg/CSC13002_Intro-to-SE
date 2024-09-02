@@ -265,6 +265,25 @@ const statisticsTypeDeposit = async () => {
   );
   return results;
 };
+
+const countKhachHang = async () => {
+  const [results, fields] = await connection.query(
+    "SELECT COUNT(DISTINCT KH.MAKH) AS COUNT FROM KHACHHANG KH JOIN SOTIETKIEM S ON KH.MAKH = S.MAKH WHERE S.NGAYMOSO = CURDATE() AND KH.MAKH NOT IN (SELECT MAKH FROM SOTIETKIEM WHERE NGAYMOSO < CURDATE()) "
+  );
+  return results[0].COUNT;
+};
+
+const calculateDoanhThu = async (date) => {
+  const [results, fields] = await connection.query("CALL BAOCAO_NGAY(?)", [
+    date,
+  ]);
+  let doanhThu = 0;
+  for (let i = 0; i < results[0].length; i++) {
+    doanhThu += parseInt(results[0][i].CHENHLECH);
+  }
+  return doanhThu;
+};
+
 module.exports = {
   getCEOpass,
   getAllBooks,
@@ -276,6 +295,8 @@ module.exports = {
   getMininum,
   updateRateDeposit,
   updateMininum,
+  countKhachHang,
+  calculateDoanhThu,
 
   // CREATE BOOK
   getNextMaSo,
