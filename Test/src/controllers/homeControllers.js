@@ -40,8 +40,8 @@ const { set, get } = require("express/lib/response");
 
 //Dashboard
 const getDashboard = async (req, res) => {
-  const earningData = await getEarning_Week_Data();
-  const withdrawData = await getWithdraw_Week_Data();
+  const earningData = await getEarning_Week_Data(getDateForReport());
+  const withdrawData = await getWithdraw_Week_Data(getDateForReport());
   const earningDataArr = earningData.map((item) => parseInt(item.SOTIEN, 10));
   const withdrawDataArr = withdrawData.map((item) => parseInt(item.SOTIEN, 10));
   const countNewCustomer = await countKhachHang();
