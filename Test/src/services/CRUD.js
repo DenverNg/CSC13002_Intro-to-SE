@@ -13,7 +13,6 @@ const getAllBooks = async () => {
   return results;
 };
 const getDailyRP = async (date) => {
-  console.log(date);
   const [results, fields] = await connection.query("CALL BAOCAO_NGAY(?)", [
     date,
   ]);

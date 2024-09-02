@@ -210,24 +210,37 @@ body{
 
 /* charts */
 .graphBox {
-  position: relative;
-  width: 100%; 
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 30px;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    box-sizing: border-box;
+    /* Include padding and border in the width */
+    transition: grid-template-columns 0.3s ease;
+    /* Smooth transition */
 }
 
-.graphBox .box 
-{
-	position: relative;
-	background: #fff;
-	padding: 20px;
-	box-shadow: 0 7px 25px rgba(0,0,0,0.08);
-	border-radius: 20px;
-	display: flex;
-	justify-content: space-between;
-	cursor: pointer;
+.graphBox .box {
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    /* Center the chart */
+    align-items: center;
+    /* Center the chart */
+    overflow: hidden;
+    /* Prevent overflow */
+}
+
+/* Adjust grid columns when the sidebar is collapsed */
+.sidebar.collapsed~.main .graphBox {
+    grid-template-columns: 1fr;
+    /* Single column layout when sidebar is collapsed */
 }
 
 #myChart {

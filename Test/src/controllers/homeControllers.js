@@ -71,6 +71,7 @@ const getCreateBookForm = async (req, res) => {
     newMaSo: newMaSo,
     types: types,
     selectedType: selectedType,
+    currentDate: getDateForReport(),
   });
 };
 
@@ -142,7 +143,7 @@ const postDailyReports = async (req, res) => {
   const action = req.body.action;
   if (action === "confirm") {
     // Save data to the database
-    let date = req.body.date;
+    let date = req.body.NGAY;
     const results = await getDailyRP(date);
     res.render("Daily_Report.ejs", {
       listDailyRP: results,
@@ -212,7 +213,9 @@ const getSettings = async (req, res) => {
 };
 
 const getDepositForm = async (req, res) => {
-  res.render("Deposit_form.ejs");
+  res.render("Deposit_form.ejs", {
+    currentDate: getDateForReport(),
+  });
 };
 
 const postDepositForm = async (req, res) => {
@@ -250,7 +253,7 @@ const postDepositForm = async (req, res) => {
 };
 
 const getWithdrawForm = async (req, res) => {
-  res.render("Withdraw_form.ejs");
+  res.render("Withdraw_form.ejs",{currentDate: getDateForReport(),});
 };
 
 const postWithdrawForm = async (req, res) => {
