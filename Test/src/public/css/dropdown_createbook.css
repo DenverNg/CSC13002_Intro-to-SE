@@ -4,9 +4,10 @@
 }
 
 .wrapper {
-    width: 270px;
+    /* width: 270px; */
     position: relative;
     z-index: 1;
+    width: fit-content;
 }
 
 .options li,

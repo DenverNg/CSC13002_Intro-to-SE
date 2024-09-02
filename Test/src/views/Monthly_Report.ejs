@@ -16,12 +16,12 @@
 	<script src="/js/dropdown.js"></script>
 	<link rel="stylesheet" href="/css/tab.css">
 	<script src="/js/tab.js"></script>
-	<link rel="stylesheet" href="/css/input_report.css">
-	<script src="/js/input.js"></script>
+
 	<link rel="stylesheet" href="/css/input.css">
 	<link rel="stylesheet" href="/css/form_button.css">
 	<link rel="stylesheet" href="/css/function_buttons.css">
 	<link rel="stylesheet" href="/css/report_setup.css">
+	<link rel="stylesheet" href="/css/dropdown_createbook.css">
 	<link rel="stylesheet" href="/css/monthly_report.css">
 	
 	
@@ -74,18 +74,16 @@
 			<div class="content">
 				<!-- Tabs -->
 				<div class="tabs">
-					<div class="tab-item">
-						<a href="/bao_cao_ngay#">
-							<i class="tab-icon fas fa-code"></i>
-							Báo cáo doanh số
-						</a>
-					</div>
-					<div class="tab-item active">
-						<a href="/bao_cao_thang">
-							<i class="tab-icon fas fa-cog"></i>
-							Báo cáo đóng/mở
-						</a>
-					</div>
+					<a id="daily-report-link" href="/bao_cao_ngay#" class="tab-item" style="display: inline-block; text-decoration: none;">
+						<i class="tab-icon fas fa-code"></i>
+						<label for="daily-report-link" class="report-tab">Báo cáo doanh số</label>
+					</a>
+					<div class="line"></div>
+					
+					<a id="month-report-link" href="/bao_cao_thang#" class="tab-item active" style="display: inline-block; text-decoration: none;">
+						<i class="tab-icon fas fa-code"></i>
+						<label for="month-report-link" class="report-tab">Báo cáo đóng/mở sổ</label>
+					</a>
 					<div class="line"></div>
 				</div>
 
@@ -96,13 +94,10 @@
 							Báo Cáo Đóng/Mở Hàng Tháng
 						</div>
 						<div class="subheader">
-							<div class="EnterValue">
-								<form action="/bao_cao_thang" method="POST">
-								<div onclick="inputClicked({ id: 'input-date', inputType: 'month'})" id="input-date"
-									class="form-group">
-									<input id="date" name="date" class="form-group__input" type="month" value="<%= currentMonth %>" >
-									<div class="form-group__title">Nhập tháng báo cáo</div>
-									<!-- <span id="input-name-message" class="form-group__message"></span> -->
+							<form action="/bao_cao_thang#" method="POST" class="EnterValue">
+								<div id="input-date" class="form-group">
+									<input id="date" name="date" class="form-group__input report-input__inp" type="month" placeholder=" " value="<%= currentMonth %>">
+									<label for="date" class="form-group__title form-group__input__title">Tháng báo cáo</label>
 									<span id="selected-month" class="form-group__message"></span>
 								</div>
 								
@@ -110,6 +105,7 @@
 								<div class="wrapper">
 									<div class="select-btn">
 										<span id="selected-type">Chọn loại kỳ hạn</span>
+										<p class="select-createbook-btn__title">Loại kỳ hạn</p>
 										<i class="uil uil-angle-down"></i>
 									</div>
 									<div class="select-content">
@@ -126,27 +122,28 @@
 								
 								<input type="hidden" id="hidden-type" name="selectedType" value="<%= selectedType %>">
 
-								<button type="submit" class="form-group__button submit-button" name="action" value="confirm">Xem báo
-									cáo</button>
-								</form>
-							</div>
+								<button type="submit" class="form-group__button submit-button report-submit-button" name="action" value="confirm">Xem báo cáo</button>
+							</form>
+
 							<div class="Function">
-								<div class="icon" id="download-monthly">
-									<span class="material-symbols-outlined" style="font-size: 40px">download</span>
-									Tải báo cáo
-								</div>
-								<div class="icon" id="print-monthly">
-									<span class="material-icons" style="font-size: 40px">print</span>
-									In báo cáo
-								</div>
+								<button id="download-monthly" class="function-btn ">
+									<%- include('../public/images/download.svg') %>
+									<label for="new-book" class="function-label export-btn__label">Tải báo cáo</label>
+								</button>
+
+								<button id="print-monthly" class="function-btn ">
+									<%- include('../public/images/print.svg') %>
+									<label for="new-book" class="function-label export-btn__label">In báo cáo</label>
+								</button>
+		
 							</div>
 						</div>
 					
-					<section class="table__body">
+					<section class="table__body report-table">
 						<table id="Monthly-Report">
 							<thead>
 								<tr>
-									<th> STT </th>
+									<th style="width: 15%;"> STT </th>
 									<th> Ngày </th>
 									<th> Sổ mở </th>
 									<th> Sổ đóng </th>
