@@ -71,6 +71,7 @@ const getCreateBookForm = async (req, res) => {
     newMaSo: newMaSo,
     types: types,
     selectedType: selectedType,
+    currentDate: getDateForReport(),
   });
 };
 
@@ -212,7 +213,9 @@ const getSettings = async (req, res) => {
 };
 
 const getDepositForm = async (req, res) => {
-  res.render("Deposit_form.ejs");
+  res.render("Deposit_form.ejs", {
+    currentDate: getDateForReport(),
+  });
 };
 
 const postDepositForm = async (req, res) => {
@@ -250,7 +253,7 @@ const postDepositForm = async (req, res) => {
 };
 
 const getWithdrawForm = async (req, res) => {
-  res.render("Withdraw_form.ejs");
+  res.render("Withdraw_form.ejs",{currentDate: getDateForReport(),});
 };
 
 const postWithdrawForm = async (req, res) => {
