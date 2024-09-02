@@ -16,6 +16,7 @@
 .report-tab {
     padding: 0 10px 0 10px;
     text-decoration: none;
+    cursor: pointer;
     background-image: linear-gradient(to right ,#61248f,#9b4cbd);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

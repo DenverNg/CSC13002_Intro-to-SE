@@ -142,7 +142,7 @@ const postDailyReports = async (req, res) => {
   const action = req.body.action;
   if (action === "confirm") {
     // Save data to the database
-    let date = req.body.date;
+    let date = req.body.NGAY;
     const results = await getDailyRP(date);
     res.render("Daily_Report.ejs", {
       listDailyRP: results,
