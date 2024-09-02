@@ -41,7 +41,7 @@ def generate_sql_commands(file_path, max_deposits_per_account=3):
                             continue  # Skip if no valid date range for deposit
 
                         deposit_date = random_date(start_date, end_date).strftime('%Y-%m-%d')
-                        deposit_amount = random_deposit_amount(100000, 10000000)
+                        deposit_amount = random_deposit_amount(100000, 1000000)
 
                         sql_command = f"CALL LAPPHIEUGUI('{ma_so}', '{deposit_date}', {deposit_amount});\n"
                         sql_commands.append(sql_command)
