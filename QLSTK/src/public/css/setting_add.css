@@ -1,0 +1,12 @@
+thead th {
+    width: 20%;
+}
+
+.input-box {
+    width: fit-content;
+    align-self: center;
+}
+
+.input-box input {
+    padding: 5px 0;
+}

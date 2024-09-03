@@ -9,7 +9,12 @@
 		<link rel="stylesheet" href="/css/table.css">
         <script src="/js/table.js"></script>
         <script src="/js/func_Settings_Delete.js"></script>
+        <link rel="stylesheet" href="/css/page_setup.css">
+        <link rel="stylesheet" href="/css/transactions.css">
+        <link rel="stylesheet" href="/css/function_buttons.css">
         <link rel="stylesheet" href="/css/button.css">
+        <link rel="stylesheet" href="/css/setting.css">
+        <link rel="stylesheet" href="/css/setting_delete.css">
 
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -54,74 +59,101 @@
                 </ul>
             </aside>
 
-        <div class = "main">
+        <div class="main main--setup">
             <!-- Thay đổi về loại kỳ hạn -->
-            <div class="content" id="Manage">
+            <div class="content content--setup" id="Manage">
                 <div class="table__header">
                     <div>
-                        <div class="topbar">
-                        Cài đặt
+                        <div class="topbar topbar--set-padding">
+                            Cài đặt
                         </div>
-                        <p class="date"><%= currentDate %></p>
+                        <p class="date">
+                            <%= currentDate %>
+                        </p>
                     </div>
                 </div>
-                <section class="table__body">
-                    <form action="/cai_dat/xoa/xacnhan" method="post" class="form-verify">
+                <form action="/cai_dat/xoa/xacnhan" method="post" class="form-verify content-group">
+                    <section class="table__body table--no-margin">
                         <table>
                             <thead>
                                 <tr style="pointer-events: none;">
-                                    <th><img src="/images/card.png"> Tên kỳ hạn </th>
-									<th><img src="/images/time.png"> Thời gian đáo hạn </th>
-									<th><img src="/images/coin.png"> Lãi suất</th>
-                                    <th><img src="/images/star.png"> Thao tác </th>
+                                    <th>
+                                        <div class="column">
+                                            <%- include('../public/images/card-pos.svg') %>
+                                                <label class="column-name">Tên kỳ hạn</label>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="column">
+                                            <%- include('../public/images/time.svg') %>
+                                                <label class="column-name">Thời gian đáo hạn</label>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="column" style="margin-left: 15px;">
+                                            <%- include('../public/images/coin.svg') %>
+                                                <label class="column-name">Lãi suất</label>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="column" style="margin-left: 15px;">
+                                            <%- include('../public/images/coin.svg') %>
+                                                <label class="column-name">Thao tác</label>
+                                        </div>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <% for (let i = 0; i < listTerm.length; i++) { %>
                                     <tr id="term-<%=i%>">
-                                        <td><%=listTerm[i].KYHAN %></td>
-                                        <td><%=listTerm[i].MALOAI %> tháng</td>
-                                        <td><%=(listTerm[i].LAISUAT*100).toFixed(2) %>%</td>
                                         <td>
-                                            <input type="hidden" name="MALOAI[]" value="<%= listTerm[i].KYHAN %>" />
-                                            <button type="button" class="button-secondary red" onclick="blurTerm('<%=i%>')">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                            <button type="button" class="button-secondary green" style="display: none;" onclick="undoBlur('<%=i%>')">
-                                                <i class="fas fa-undo"></i>
-                                            </button>
+                                            <div class="column-value">
+                                                <%=listTerm[i].KYHAN %>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="column-value column-value1">
+                                                <%=listTerm[i].MALOAI %> tháng
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="column-value column-value2">
+                                                <%=(listTerm[i].LAISUAT*100).toFixed(2) %>%
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="column-value column-value2">
+                                                <input type="hidden" name="MALOAI[]" value="<%= listTerm[i].KYHAN %>" />
+                                                <button type="button" class="button-secondary red" onclick="blurTerm('<%=i%>')">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                                <button type="button" class="button-secondary green" style="display: none;" onclick="undoBlur('<%=i%>')">
+                                                    <i class="fas fa-undo"></i>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 <% } %>
                             </tbody>
                         </table>
-                        <style>
-                            .blurred {
-                                opacity: 0.2;  /* Makes the row semi-transparent */
-                                transition: opacity 0.5s ease; /* Smooth transition */
-                            }
-                            .blurred .button-secondary.green,
-                            :not(.blurred) .button-secondary.red {
-                                opacity: 1; /* Make the active button fully visible */
-                                pointer-events: auto; /* Enable interactions for the active button */
-                            }
-                        </style>
-                        <div class="Function">
-                            <button class="button red" name="action" value="confirm" onclick="submitDeleteForm()">
-                                <img src="/images/save.png">
-                                 Lưu xoá
+                        </section>
+                        <div class="button-group">
+                            <button id="save" class="function-btn" name="action" value="confirm" onclick="submitDeleteForm()">
+                                <%- include('../public/images/save.svg') %>
+                                    <label for="save" class="function-label red">Lưu xoá</label>
                             </button>
-                            <button type="button" class="button green" onclick="undoBlurAll()">
-                                <img src="/images/refresh.png">
-                                Reset
+                        
+                            <button id="reset" class="function-btn" type="button" onclick="undoBlurAll()">
+                                <%- include('../public/images/refresh.svg') %>
+                                    <label for="reset" class="function-label green">Reset</label>
                             </button>
-                            <button class="button purple" name="action" value="cancel">
-                                <img src="/images/close.png">
-                                Huỷ xoá
+                        
+                            <button id="cancel" class="function-btn" name="action" value="cancel">
+                                <%- include('../public/images/cancel.svg') %>
+                                    <label for="cancel" class="function-label">Huỷ xoá</label>
                             </button>
-                         </div>   
+                        </div>
                     </form>  
-                </section>
             </div>
                 
 

@@ -1,0 +1,14 @@
+.blurred {
+    opacity: 0.2;
+    /* Makes the row semi-transparent */
+    transition: opacity 0.5s ease;
+    /* Smooth transition */
+}
+
+.blurred .button-secondary.green,
+:not(.blurred) .button-secondary.red {
+    opacity: 1;
+    /* Make the active button fully visible */
+    pointer-events: auto;
+    /* Enable interactions for the active button */
+}

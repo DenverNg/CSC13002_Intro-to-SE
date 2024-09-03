@@ -330,8 +330,7 @@ BEGIN
             p_NGAY = PRT.NGAYRUT
          GROUP BY 
             S.LOAI
-        ) AS TONGCHI ON L.MALOAI = TONGCHI.LOAI
-    WHERE L.TRANGTHAI = 1;
+        ) AS TONGCHI ON L.MALOAI = TONGCHI.LOAI;
 END //
 
 DELIMITER ;
