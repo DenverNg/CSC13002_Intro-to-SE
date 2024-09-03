@@ -1,0 +1,106 @@
+body > div {
+    margin: auto;
+}
+
+#form {
+    margin: 20px 20px;
+    width: 500px;
+}
+
+.form-group {
+    display: flex;
+    position: relative;
+    max-width: 380px;
+    flex-flow: column;
+}
+
+.form-group:hover {
+    cursor: text;
+}
+
+.form-group + .form-group {
+    margin-top: 10px;
+}
+
+.form-group__input {
+    width: 380px;
+    height: 60px;
+    font-size: 28px;
+    font-weight: 500;
+    border: #7065D2 solid;
+    border-width: 1px;
+    border-radius: 10px;
+    color: #7065D2;
+    padding: 0 10px;
+    margin: 15px 0 25px;
+}
+
+.form-group__title {
+    font-size: 28px;
+    font-weight: 450;
+    border-radius: 50%;
+    padding: 2px 10px;
+    position: absolute;
+    top: calc(25% + 2px);
+    left: 0;
+    color: rgb(152, 143, 233);
+    background-image: none;
+}
+
+.form-group__title::selection {
+    background-color: transparent;
+}
+
+@keyframes inputTitleMoveUp {
+    to {
+        font-size: 17px;
+        top: calc(4%);
+        left: 15px;
+        background-image: linear-gradient(0, #FFFF,#EEECFF);
+    }
+}
+
+@keyframes inputTitleMoveDown {
+    to {
+        font-size: 28px;
+        top: calc(25% + 2px);
+        left: 0;
+        background-image: none;
+    }
+}
+
+.form-group__message {
+    font-size: 17px;
+    font-style: italic;
+    color: #dd0303;
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+}
+
+.form-group.invalid .form-group__input {
+    border-color: #c54560;
+    border-width: 1.5px;
+}
+
+.form-group.invalid .form-group__title {
+   color: #d1637a;
+}
+.form-group__button{
+    max-width: 300px;
+    height: 60px;
+    font-size: 25px;
+    font-weight: 500;
+    border: #7065D2 solid;
+    border-width: 1px;
+    border-radius: 10px;
+    color: #7065D2;
+    padding: 0 40px;
+    margin: 15px 0 25px 0;
+    background-color: #7065D2;
+    color: white;
+}
+
+.form-group__button + .form-group__button{
+    margin-left: 40px;
+}

@@ -1,0 +1,136 @@
+/* For Input form */
+
+.createbook {
+    width: 900px;
+    background-color: #EEECFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-left-radius: 30px 30px;
+    border-bottom-right-radius: 30px 30px;
+    border-top-left-radius: 10px 10px;
+    border-top-right-radius: 10px 10px;
+}
+
+#createbook__title {
+    width: 100%;
+    height: 50px;
+    color: #FFFF;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.6);
+    line-height: 50px;
+    padding-left: 50px;
+    background-image: linear-gradient(90deg, #31076d, #8613adbf, #a00050be);
+    border-top-left-radius: 10px 10px;
+    border-top-right-radius: 10px 10px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+#createbook__group0 {
+    margin-top: 40px;
+    width: 780px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#createbook__group3 {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+}
+
+#SOTIEN {
+    width: 780px;
+}
+
+.form-input {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inp-createbook {
+    max-width: 800px;
+}
+
+.inp-createbook__input {
+    width: 350px;
+    height: 50px;
+    font-size: 20px;
+    margin: 25px 0 25px;
+}
+
+.inp-createbook__title {
+    font-size: 20px;
+}
+
+.inp-createbook__input:focus+.inp-createbook__title,
+.inp-createbook__input:not(:placeholder-shown)+.inp-createbook__title {
+    font-size: 15px;
+}
+
+/* For Verify form */
+.form-verify {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.verify__buttons {
+    position: absolute;
+}
+
+.verify-row {
+    max-width: 90%;
+    width: 90%;
+    border-bottom: #7065d285 solid;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.verify-row+.verify-row {
+    margin-top: 15px;
+}
+
+.verify-createbook__title {
+    position: unset;
+    font-size: 20px;
+    font-weight: 400;
+    color: #7065D2;
+}
+
+.verify-createbook__value {
+    position: unset;
+    font-size: 25px;
+    font-weight: 500;
+    max-width: 70%;
+    text-align: right;
+    color: #7167CF;
+}
+
+.verify__group0 {
+    width: 90%;
+    background-color: #FFFF;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 20px 15px #FFFF;
+    align-items: center;
+    justify-self: end;
+}
+
+.verify__group1 {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-self: end;
+}

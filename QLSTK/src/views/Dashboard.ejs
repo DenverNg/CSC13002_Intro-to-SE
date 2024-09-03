@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel = "icon" href = "images/SEBank.png" type = "image/x-icon">
+	<title>SE Bank</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="/css/main.css">
+	<script src="/js/func.js"></script>
+	<link rel="stylesheet" href="/css/table.css">
+	<link rel="stylesheet" href="/css/page_setup.css">
+	<link rel="stylesheet" href="/css/dashboard.css">
+	<script src="/js/table.js"></script>
+	<!-- Linking Google Font Link for Icon -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+	<div class="container" style="width: 100%;">
+            <aside class="sidebar" style="z-index: 99">
+			<img src="/images/SEBank.png" alt="logo-hover" class="sidebar-img-default" />
+			<img src="/images/Logo.png" alt="logo-hover" class="sidebar-img-hover" />
+			<ul class="sidebar-links">
+				<li data-content="Dashboard" class="active">
+					<a href="/#">
+						<span class="material-icons" style="font-size: 35px">
+							home
+						</span> Trang chủ
+					</a>
+				</li>
+				<li data-content="Manage">
+					<a href="/quan_ly_so#">
+						<span class="material-icons" style="font-size: 35px">
+							manage_search
+						</span>Quản lý sổ
+					</a>
+				</li>
+				<li>
+					<a href="/bao_cao_ngay#">
+						<span class="material-icons" style="font-size: 35px">
+							description
+						</span> Báo cáo
+					</a>
+				</li>
+				<li>
+					<a href="/mat_khau#">
+						<span class="material-icons" style="font-size: 35px">
+							settings
+						</span> Cài đặt
+					</a>
+				</li>
+			</ul>
+		</aside>
+
+		<div class="main main--setup">
+			<!-- Dashboard -->
+			<div class="content content--setup" id="Dashboard">
+				<div class="topbar topbar--set-padding">
+					Trang chủ
+				</div>
+				<p class="date">
+					<%= currentDate %>
+				</p>
+				<!-- cards -->
+				<div class="cardBox cardBox--dashboard">
+					<div class="card card-style1">
+						<div>
+							<div class="numbers">
+								<%= numNewBooks %>
+							</div>
+							<div class="cardName">Số sổ mới hôm nay</div>
+						</div>
+						<div class="iconBx">
+							<span class="material-symbols-outlined card__icon">
+								add_notes
+								</span>
+						</div>
+					</div>
+					<div class="card card-style1">
+						<div>
+							<div class="numbers"> <%= countNewCustomer %></div>
+							<div class="cardName">Khách hàng mới hôm nay</div>
+						</div>
+						<div class="iconBx">
+							<span class="material-symbols-outlined card__icon">
+								account_box
+								</span>
+						</div>
+					</div>
+					<div class="card card-style2">
+						<div>
+							<div class="numbers"><%= doanhThu.toLocaleString('de-DE') %> VND</div>
+							<div class="cardName">Doanh thu hôm nay</div>
+						</div>
+						<div class="iconBx">
+							<span class="material-symbols-outlined card__icon">
+								payments
+								</span>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Add Charts -->
+				<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+				<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+				<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+				<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+				<div class="graphBox">
+					<div class="box">
+						<canvas id="earning"></canvas>
+					</div>
+					<div class="box">
+						<canvas id="myChart"></canvas>
+					</div>
+				</div>
+
+				<!-- Charts -->
+				<script>
+					document.addEventListener('DOMContentLoaded', () => {
+						/*--chart--*/
+						const earningData = <%= JSON.stringify(earningDataArr) %>;
+						const withdrawData = <%= JSON.stringify(withdrawDataArr) %>;
+						const listType = <%- JSON.stringify(listType) %>;
+
+						// Extract labels and data from listType
+						const labelsType = listType.map(item => item.KYHAN);
+						const dataType = listType.map(item => item.COUNT);
+
+						const ctx1 = document.getElementById('myChart').getContext('2d');
+						const ctx2 = document.getElementById('earning').getContext('2d');
+						const pieData = {
+							labels: labelsType,
+							datasets: [{
+								label: ' Số lượng sổ đã tạo:',
+								data: dataType,
+								backgroundColor: [
+									'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+									'rgba(79,235,120, 1)'
+								],
+								borderColor: [
+									'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+									'rgba(79,235,120, 1)'
+								],
+								borderWidth: 5,  // Adjust border width for a softer edge
+								hoverOffset: 30 
+							}]
+						};
+
+						const earningChartData = {
+							labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'],
+							datasets: [{
+								label: 'Số tiền gửi',
+								data: earningData,
+								backgroundColor: 'rgba(79,235,120, 1)',
+								borderColor: 'rgba(79,235,120, 1)',
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointHoverBackgroundColor: 'rgba(255, 206, 86, 1)',
+								pointHoverBorderColor: 'rgba(255, 206, 86, 1)',
+								lineTension: 0.3
+							},
+							{
+								label: 'Số tiền rút',
+								data: withdrawData,
+								backgroundColor: 'rgba(255, 99, 132, 1)',
+								borderColor: 'rgba(255, 99, 132, 1)',
+								pointRadius: 6,
+								pointHoverRadius: 8,
+								pointHoverBackgroundColor: 'rgba(255, 206, 86, 1)',
+								pointHoverBorderColor: 'rgba(255, 206, 86, 1)',
+								lineTension: 0.3
+							}
+							]
+						};
+
+						
+						const pieChart = new Chart(ctx1, {
+							type: 'doughnut',
+							data: pieData,
+							options: {
+								responsive: true,
+								plugins: {
+									title: {
+										display: true,
+										text: 'THỐNG KÊ LOẠI SỔ TIẾT KIỆM',
+										font: {
+											size: 18
+										},
+										padding: {
+											top: 10,
+											bottom: 20
+										}
+									},
+									legend: {
+										position: 'top',
+									}
+								},
+							}
+						});
+
+						const earningChart = new Chart(ctx2, {
+							type: 'line',
+							data: earningChartData,
+							options: {
+								responsive: true,
+								plugins: {
+									title: {
+										display: true,
+										text: 'THỐNG KÊ TIỀN GỬI/RÚT TRONG TUẦN',
+										font: {
+											size: 18
+										},
+										padding: {
+											top: 10,
+											bottom: 20
+										}
+									},
+									legend: {
+										position: 'top',
+									}
+								},
+								elements: {
+									line: {
+										borderWidth: 2  // Adjust line width for a cleaner look
+									},
+									point: {
+										radius: 6  // Adjust point radius for better visual
+									}
+								}
+							}
+						});
+						document.addEventListener('DOMContentLoaded', () => {
+							const sidebarToggleButton = document.querySelector('.sidebar-toggle');
+							const sidebar = document.querySelector('.sidebar');
+							const mainContent = document.querySelector('.main');
+
+							sidebarToggleButton.addEventListener('click', () => {
+								sidebar.classList.toggle('collapsed'); // Toggle sidebar width
+								mainContent.classList.toggle('expanded'); // Adjust main content margin
+
+								// Force a reflow to ensure proper layout updates
+								document.querySelector('.graphBox').style.display = 'none';
+								document.querySelector('.graphBox').offsetHeight; // Trigger reflow
+								document.querySelector('.graphBox').style.display = 'grid';
+							});
+						});
+
+
+
+					}); 
+				</script>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

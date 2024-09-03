@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="images/SEBank.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác nhận phiếu rút tiền</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/general_setup.css">
+    <link rel="stylesheet" href="/css/input.css">
+    <link rel="stylesheet" href="/css/deposit.css">
+    <link rel="stylesheet" href="/css/form_button.css">
+    <script src="/js/toast.js"></script>
+</head>
+
+<body>
+    <div id="toast"></div>
+    <div id="deposit-verify" class="deposit">
+        <div id="deposit__title">Phiểu rút tiền</div>
+        <form action="/ruttien_form/xacnhan" method="post" class="form-verify">
+            <div class="verify__group0">
+                <div id="LOAI">
+                    <input type="hidden" name="LOAI" value="<%= LOAI %>">
+                </div>
+                <div id="CHECKMASO">
+                    <input type="hidden" name="CHECKMASO" value="<%= CHECKMASO %>">
+                </div>
+                <div id="CHECKNGAYRUT">
+                    <input type="hidden" name="CHECKNGAYRUT" value="<%= CHECKNGAYRUT %>">
+                </div>
+                <div id="TIENTOITHIEU">
+                    <input type="hidden" name="TIENTOITHIEU" value="<%= TIENTOITHIEU %>">
+                </div>
+                <div id="CHECKDAOHAN">
+                    <input type="hidden" name="CHECKDAOHAN" value="<%= CHECKDAOHAN %>">
+                </div>
+                <div id="THOIGIANTOITHIEU">
+                    <input type="hidden" name="THOIGIANTOITHIEU" value="<%= THOIGIANTOITHIEU %>">
+                </div>
+                <div id="TIENLAIhidden">
+                    <input type="hidden" name="TIENLAIhidden" value="<%= TIENLAIhidden %>">
+                </div>
+                <div id="SODU">
+                    <input type="hidden" name="SODU" value="<%= SODU %>">
+                </div>
+                        
+
+                <div id="MASO" class="form-group verify-row">
+                    <div class="form-group__title verify-deposit__title">Mã sổ</div>
+                    <div class="form-group__title verify-deposit__value">
+                        <%= MASO %>
+                    </div>
+                    <input type="hidden" name="MASO" value="<%= MASO %>">
+                </div>
+
+                <div id="NGAY" class="form-group verify-row">
+                    <div class="form-group__title verify-deposit__title">Ngày rút</div>
+                    <div class="form-group__title verify-deposit__value">
+                        <%= NGAY %>
+                    </div>
+                    <input type="hidden" name="NGAY" value="<%= NGAY %>">
+                </div>
+
+                <div id="TENKH" class="form-group verify-row">
+                    <div class="form-group__title verify-deposit__title">Người rút</div>
+                    <div class="form-group__title verify-deposit__value">
+                        <%= TENKH %>
+                    </div>
+                    <input type="hidden" name="TENKH" value="<%= TENKH %>">
+                </div>
+
+                <div id="SOTIEN" class="form-group verify-row">
+                    <div class="form-group__title verify-deposit__title">Số tiền muốn rút</div>
+                    <div class="form-group__title verify-deposit__value">
+                        <%= SOTIEN %>
+                    </div>
+                    <input type="hidden" name="SOTIEN" id="sotien-input" value="<%= SOTIEN %>">
+                </div>
+
+                <div id="LAISUAT" class="form-group verify-row">
+                    <div class="form-group__title verify-deposit__title">Lãi suất</div>
+                    <div class="form-group__title verify-deposit__value">
+                        <%= LAISUAT %>
+                    </div>
+                    <input type="hidden" name="LAISUAT" value="<%= LAISUAT %>">
+                </div>
+
+                <div id="TIENLAI" class="form-group verify-row">
+                    <div class="form-group__title verify-deposit__title"> Số tiền lãi</div>
+                    <div class="form-group__title verify-deposit__value">
+                        <%= TIENLAI %>
+                    </div>
+                    <input type="hidden" name="TIENLAI" value="<%= TIENLAI %>">
+                </div>
+
+                <div id="THUCNHAN" class="form-group verify-row">
+                    <div class="form-group__title verify-deposit__title"> Số tiền thực nhận</div>
+                    <div class="form-group__title verify-deposit__value">
+                        <%= THUCNHAN %>
+                    </div>
+                    <input type="hidden" name="THUCNHAN" value="<%= THUCNHAN %>">
+                </div>
+
+            </div>
+
+            <div class="verify__group1">
+                <button type="button" class="form-group__button back-button" onclick="window.history.back()">Quay
+                    lại</button>
+                <button id="submit-btn" type="submit" class="form-group__button submit-button" name="action"
+                    value="confirm">Xác
+                    nhận</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const CHECKMASO = "<%= CHECKMASO %>"; // Get the CHECKMASO value from the server-side variable
+            const LOAI = "<%= LOAI %>"; // Get the LOAI value from the server-side variable
+            const SOTIEN = "<%=SOTIEN %>"; // Get the SOTIEN value from the server-side variable
+            const CHECKNGAYRUT = "<%= CHECKNGAYRUT %>";
+            const CHECKDAOHAN = "<%= CHECKDAOHAN %>";
+            const TIENLAIhidden = "<%= TIENLAIhidden %>";
+            const THOIGIANTOITHIEU = "<%= THOIGIANTOITHIEU %>";
+            const SODU = "<%= SODU %>";
+
+            const submit = document.getElementById('submit-btn');
+            const sotienRow = document.getElementById('SOTIEN');
+            const sotienValue = document.querySelector('#SOTIEN .verify-deposit__value');
+            const sotienTitle = document.querySelector('#SOTIEN .verify-deposit__title');
+            const sotienInput = document.getElementById('sotien-input');
+            let isValid = true;
+            let disabledToast = false;
+
+            if (parseInt(CHECKMASO) === -1) {
+                toast({
+                    title: 'Lỗi',
+                    desc: 'MÃ SỔ KHÔNG TỒN TẠI',
+                    type: 'error',
+                    duration: 3000
+                });
+                isValid = false;
+            }
+            else if (parseInt(CHECKMASO) === 0) {
+                toast({
+                    title: 'Lỗi',
+                    desc: 'SỔ ĐÃ ĐÓNG',
+                    type: 'error',
+                    duration: 3000
+                });
+                isValid = false;
+            }
+            if (CHECKNGAYRUT === 'ERROR') {
+                toast({
+                    title: 'Lỗi',
+                    desc: 'NGÀY RÚT KHÔNG HỢP LỆ (TỐI THIỂU ' + THOIGIANTOITHIEU + ' NGÀY)',
+                    type: 'error',
+                    duration: 3000
+                });
+                isValid = false;
+            }
+
+            if (CHECKDAOHAN === '0') {
+                toast({
+                    title: 'Lỗi',
+                    desc: 'CHƯA ĐẾN THỜI GIAN ĐÁO HẠN',
+                    type: 'error',
+                    duration: 3000
+                });
+                isValid = false;
+            }
+
+            else if (TIENLAIhidden === 'ERROR 0') {
+                toast({
+                    title: 'Lỗi',
+                    desc: 'SỔ TIẾT KIỆM KHÔNG KỲ HẠN: SỐ TIỀN RÚT ĐÃ VƯỢT QUÁ SỐ DƯ',
+                    type: 'error',
+                    duration: 3000
+                });
+                sotienValue.style.color = '#DE8023'; // Yellow text color
+                sotienTitle.style.color = '#DE8023'; // Yellow text color
+                sotienValue.textContent = SODU;
+                sotienInput.value = SODU;
+                disabledToast = true;
+            }
+            else if (TIENLAIhidden === 'ERROR 1') {
+                toast({
+                    title: 'Lỗi',
+                    desc: 'SỐ TIỀN RÚT KHÔNG HỢP LỆ. CHỈ ĐƯỢC RÚT TOÀN BỘ SỐ DƯ',
+                    type: 'error',
+                    duration: 3000
+                });
+                sotienValue.style.color = '#DE8023'; // Yellow text color
+                sotienTitle.style.color = '#DE8023'; // Yellow text color
+                sotienValue.textContent = SODU;
+                sotienInput.value = SODU;
+                disabledToast = true;
+            }
+            else if (TIENLAIhidden === 'ERROR 2') {
+                toast({
+                    title: 'Lỗi',
+                    desc: 'CHƯA ĐẾN THỜI GIAN ĐÁO HẠN',
+                    type: 'error',
+                    duration: 3000
+                });
+               isValid = false;
+            }
+
+
+            if (!isValid && !disabledToast) {
+                submit.disabled = true;
+            }
+            else if (!disabledToast) {
+                toast({
+                    title: 'Thành công',
+                    desc: 'TẤT CẢ THÔNG TIN ĐỀU HỢP LỆ',
+                    type: 'success',
+                    duration: 3000
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

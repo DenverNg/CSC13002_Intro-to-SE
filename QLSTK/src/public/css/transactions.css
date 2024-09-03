@@ -1,0 +1,78 @@
+/* .main--setup {
+    margin: auto 0 auto 0;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+} */
+
+.content-group {
+    /* height: 640px; */
+    background-color: rgba(255, 255, 255, 1);
+    max-width: 94.5%;
+    margin: 0 auto 20px auto;
+    border-radius: .6rem;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button-group {
+    border-top: 4px solid transparent; /* The same thickness as the stroke-width */
+    border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="6"><line x1="0" y1="5" x2="50" y2="5" stroke="%237065D2" stroke-width="5" stroke-dasharray="50, 30"/></svg>') 10 repeat;
+    width: 100%;
+    margin-top: auto;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: flex-end;
+}
+
+thead th {
+    width: unset;
+}
+
+.table__header {
+    padding-top: unset;
+    padding-bottom: 20px;
+}
+
+.table--no-margin {
+    margin: unset;
+    width: 100%;
+    height: 480px;
+}
+
+.table__column--No {
+    width: 8%;
+}
+
+.table__column--Book-ID {
+    width: 13%;
+}
+
+.table__column--Customer-Name {
+    width: 25%;
+}
+
+.table__column--Customer-ID {
+    width: 14%;
+}
+
+.table__column--Term-type {
+    width: 20%;
+    text-align: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1%;
+    top: 10%;
+}
+
+.search-content {
+    margin-left: 10px;
+    height: 100%;
+}
