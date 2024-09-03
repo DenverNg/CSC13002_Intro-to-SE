@@ -1,31 +1,9 @@
-.content--setup {
-    margin-bottom: 20px;
+table th {
+    padding: 10px 0 10px;
 }
 
 .button-group {
-    padding-top: 5px;
-    margin-bottom: 10px;
-}
-
-thead th {
-    width: 20%;
-}
-
-table td {
-    text-align: left !important;
-    padding: 15px 0 15px 0;
-}
-
-.table_name {
-    margin-top: unset;
-    margin-bottom: 10px;
-    margin-left: 4%;
-    font-size: 20px;
-}
-
-.table--no-margin {
-    height: fit-content;
-    max-height: 214.5px;
+    border-top: unset;
 }
 
 .column{
@@ -59,10 +37,10 @@ table td {
 }
 
 .function-label {
-    font-size: 16px;
+    margin-left: 10px;
+    font-weight: bold;
 }
 
 .red {
     color: #ef4f4f;
 }
-
