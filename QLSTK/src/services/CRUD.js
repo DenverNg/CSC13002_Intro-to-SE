@@ -284,6 +284,14 @@ const calculateDoanhThu = async (date) => {
   return doanhThu;
 };
 
+const checkOverlapMALOAI = async (MALOAI) => {
+  const [results, fields] = await connection.query(
+    "SELECT COUNT(*) AS COUNT FROM LOAI_SOTK WHERE MALOAI = ?",
+    [MALOAI]
+  );
+  return results[0].COUNT;
+};
+
 module.exports = {
   getCEOpass,
   getAllBooks,
@@ -297,6 +305,7 @@ module.exports = {
   updateMininum,
   countKhachHang,
   calculateDoanhThu,
+  checkOverlapMALOAI,
 
   // CREATE BOOK
   getNextMaSo,

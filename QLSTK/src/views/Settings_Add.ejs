@@ -9,13 +9,16 @@
 		<link rel="stylesheet" href="/css/table.css">
         <script src="/js/table.js"></script>
 		<link rel="stylesheet" href="/css/button.css">
-
+		<link rel="stylesheet" href="/css/input.css">
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+		<script src="/js/toast.js"></script>
+
 	</head>
 
 	<body>
+		<div id="toast"></div>
 		<div class="container">
 			<!--Có thể làm các phần tĩnh thành file riêng cho gọn-->
 			<aside class="sidebar">
@@ -66,6 +69,9 @@
 					</div>
 					<section class="table__body">
 						<form action="/cai_dat/them/xacnhan" method="post" class="form-verify">
+							<div id="overlapMaLoai">
+								<input type="hidden" name="overlapMaLoai" value="<%= overlapMaLoai %>">
+							</div>
 							<table>
 								<thead>
 									<tr style="pointer-events: none;">
@@ -115,23 +121,22 @@
 									Huỷ thêm
 								</button>
 							</div>
-							<div id="LAISUATTHAT" style="display: none;">
-								<input type="hidden" name="LAISUATTHAT" id="LAISUATTHAT" value = "0">
-							</div>
 						</form>
 					</section>
 				</div>
 			</div>
 		</div>
 		<script>
-			// JavaScript to update the hidden div with LAISUATTHAT value
-			document.getElementById('LAISUAT').addEventListener('input', function () {
-				var laisuat = parseFloat(this.value);
-				if (!isNaN(laisuat)) {
-					var laisuatthat = laisuat / 100;
-					document.getElementById('LAISUATTHAT').value = laisuatthat;
-				} else {
-					document.getElementById('LAISUATTHAT').value = '';
+			document.addEventListener("DOMContentLoaded", function () {
+				const overlapMaLoai = "<%=overlapMaLoai %>"; // Get the SOTIEN value from the server-side variable
+			
+				if (parseInt(overlapMaLoai) != 0) {
+					toast({
+						title: 'Lỗi',
+						desc: 'LOẠI KỲ HẠN ĐÃ TỒN TẠI TRONG HỆ THỐNG',
+						type: 'error',
+						duration: 3000
+					});
 				}
 			});
 		</script>

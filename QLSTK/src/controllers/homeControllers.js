@@ -29,6 +29,7 @@ const {
   getCEOpass,
   countKhachHang,
   calculateDoanhThu,
+  checkOverlapMALOAI,
 } = require("../services/CRUD");
 const {
   getCurrentDate,
@@ -348,16 +349,21 @@ const postWithdrawForm = async (req, res) => {
 const getAddTermDeposit = async (req, res) => {
   const resultsTerm = await getActiveTermDeposit();
   const resultMininum = await getMininum();
+  const overlapMaLoai = 0;
   res.render("Settings_Add.ejs", {
     listTerm: resultsTerm,
     listMininum: resultMininum,
     currentDate: getCurrentDate(),
+    overlapMaLoai: overlapMaLoai,
   });
 };
 
 const postAddTermDeposit = async (req, res) => {
   const action = req.body.action;
-  if (action === "confirm") {
+  const overlapMaLoai = await checkOverlapMALOAI(req.body.THOIGIANDAOHAN);
+  const resultsTerm = await getActiveTermDeposit();
+  const resultMininum = await getMininum();
+  if (action === "confirm" && overlapMaLoai == 0) {
     const { TENKYHAN, THOIGIANDAOHAN, LAISUAT } = req.body;
     const query =
       "INSERT INTO LOAI_SOTK(MALOAI, KYHAN, LAISUAT,TRANGTHAI)\
@@ -369,7 +375,15 @@ const postAddTermDeposit = async (req, res) => {
       console.error("Error executing query:", error);
       res.status(500).send("An error occurred while saving the data");
     }
-  } else if (action === "cancel") {
+  } else if (overlapMaLoai != 0 && action === "confirm") {
+    res.render("Settings_Add.ejs", {
+      listTerm: resultsTerm,
+      listMininum: resultMininum,
+      currentDate: getCurrentDate(),
+      overlapMaLoai: overlapMaLoai,
+    });
+  }
+  else if (action === "cancel") {
     res.redirect("/cai_dat");
   }
 };

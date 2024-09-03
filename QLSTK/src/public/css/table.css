@@ -197,6 +197,35 @@ tbody tr.hide td img {
     color: #804e53;
 }
 
+.status.type1 {
+    background-color: #7fccc6;
+    color: #518682;
+}
+
+.status.type2 {
+    background-color: #efdef5;
+    color: #9e7fa9;
+}
+
+.status.type3 {
+    background-color: #fce093;
+    color: #f1aa27;
+}
+
+.status.type4 {
+    background-color: #b5ead7;
+    color: #4d7768;
+}
+
+.status.type5 {
+    background-color: #c7ceea;
+    color: #51576d;
+}
+
+.status.type6 {
+    background-color: #ffc2d1;
+    color: #974358;
+}
 
 @media (max-width: 1000px) {
     td:not(:first-of-type) {

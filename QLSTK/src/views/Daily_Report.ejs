@@ -145,7 +145,7 @@
                                                         </td>
                                                     <% } else { %>
                                                         <td>
-                                                        <p class="status cancelled"><%=listDailyRP[i].KYHAN%></p>
+                                                        <p class="status cancelled">Kỳ hạn <%=listDailyRP[i].KYHAN%> tháng</p>
                                                         </td>
                                                     <% } %>
                                                     <!-- Convert values to numbers before formatting -->
@@ -189,16 +189,18 @@
             const currentDate = formatDate(new Date());
 
             const toPDF = function (customers_table) {
+                const dateInput = document.querySelector('#date').value;
+                const formattedDate = dateInput ? new Date(dateInput).toLocaleDateString('vi-VN') : formatDate(new Date());
                 const new_table = document.createElement("table");
 
                 // Loop through rows and cells
                 for (const row of customers_table.rows) {
                     const new_row = new_table.insertRow();
                     for (const cell of row.cells) {
-                        const new_cell = new_row.insertCell();
 
                         // Check if cell contains text (no icons)
-                        if (cell.textContent.trim() !== "") {
+                        if (cell.textContent.trim() !== "" && !cell.classList.contains('empty-column') ) {
+                            const new_cell = new_row.insertCell();
                             new_cell.textContent = cell.textContent;
                         }
                     }
@@ -214,7 +216,7 @@
                             <center>
                                 <img src="/images/Report-Header.png">
                                 <div class="header">Báo cáo doanh số hoạt động ngày</div>
-                                Ngày : ${currentDate}   
+                                Ngày : ${formattedDate}   
                                 <main class="table">${new_table.outerHTML}</main>
                                 <img src="/images/Report-Footer.png">
                             </center>
@@ -244,8 +246,11 @@
             }
             
             const excel_btn = document.querySelector('#download-daily');
-
+            const dateInput = document.querySelector('#date').value;
+            const formattedDate = dateInput ? new Date(dateInput).toLocaleDateString('vi-VN') : currentDate;
                 const toExcel = function (table, title) {
+                    
+
                     const workbook = XLSX.utils.book_new();
                     const ws_data = [];
 
@@ -253,20 +258,22 @@
                     ws_data.push([title]);
 
                     // Date row
-                    ws_data.push([`NGÀY: ${currentDate}`]);
+                    ws_data.push([`NGÀY: ${formattedDate}`]);
 
                     // Empty row
                     ws_data.push([]);
 
                     // Extract headers
-                    const headers = [...table.querySelectorAll('thead th')].map(th => th.textContent.trim());
+                    const headers = [...table.querySelectorAll('thead th')].map(th => th.textContent.trim()).filter(header => header !== '');
                     ws_data.push(headers);
 
                     // Extract rows
                     const rows = table.querySelectorAll('tbody tr');
                     rows.forEach(row => {
                         const rowData = [...row.querySelectorAll('td')].map(td => td.textContent.trim());
-                        ws_data.push(rowData);
+                        // Remove empty cells
+                        const filteredRowData = rowData.filter(cell => cell !== '');
+                        ws_data.push(filteredRowData);
                     });
 
                     const ws = XLSX.utils.aoa_to_sheet(ws_data);
@@ -352,7 +359,7 @@
                 excel_btn.onclick = () => {
                     const excel_data = toExcel(customers_table, "BÁO CÁO DOANH SỐ HOẠT ĐỘNG NGÀY");
 
-                    const fileName = `Daily_Report_${currentDate}.xlsx`;
+                    const fileName = `Daily_Report_${formattedDate}.xlsx`;
                     const blob = new Blob([s2ab(excel_data)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
                     const link = document.createElement('a');
                     link.href = URL.createObjectURL(blob);
