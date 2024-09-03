@@ -8,7 +8,12 @@
         <script src="/js/func.js"></script>
 		<link rel="stylesheet" href="/css/table.css">
         <script src="/js/table.js"></script>
-        <link rel="stylesheet" href="/css/button.css">
+        <link rel="stylesheet" href="/css/page_setup.css">
+		<link rel="stylesheet" href="/css/transactions.css">
+		<link rel="stylesheet" href="/css/function_buttons.css">
+		<link rel="stylesheet" href="/css/button.css">
+        <link rel="stylesheet" href="/css/setting.css">
+        <link rel="stylesheet" href="/css/setting_add.css">
 
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -53,25 +58,38 @@
 			</ul>
 			</aside>
 
-			<div class = "main">
+			<div class = "main main--setup">
 				<!-- Thay đổi về loại kỳ hạn -->
-				<div class="content" id="Settings">
+				<div class="content content--setup" id="Settings">
 					<div class="table__header">
 						<div>
-							<div class="topbar">
+							<div class="topbar topbar--set-padding">
 							Cài đặt
 							</div>
                             <p class="date"><%= currentDate %></p>
 						</div>
 					</div>
 					
-					<section class="table__body">
-                        <form action="/cai_dat/sua_min/xacnhan" method="post" class="form-verify">
+					<form action="/cai_dat/sua_min/xacnhan" method="post" class="form-verify content-group">
+						<section class="table__body table--no-margin" style="height: fit-content; overflow-x: hidden">
                             <table>
                                 <thead>
                                     <tr style="pointer-events: none;">
-                                        <th><img src="/images/card.png"> Tên đại lượng </th>
-                                        <th><img src="/images/star.png"> Giá trị </th>
+										<th>
+											<div class="column">
+												<%- include('../public/images/card-pos.svg') %>
+												<label class="column-name">Tên đại lượng</label>
+											</div>
+										</th>
+										<th>
+											<div class="column"></div>
+										</th>
+										<th>
+											<div class="column">
+												<%- include('../public/images/time.svg') %>
+												<label class="column-name">Giá trị</label>
+											</div>
+										</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,10 +100,11 @@
                                             <% }else if(listMininum[i].TEN == "THOIGIAN"){ %>
                                                 <td>Thời gian gửi tối thiểu</td>
                                             <% } %>
-                                            <td>
+											<td></td>
+                                            <td style="padding: 10px 0;">
                                                 <!-- Thêm trường ẩn để lưu mã định danh -->
                                                 <input type="hidden" name="TEN[]" value="<%=listMininum[i].TEN %>" />
-                                                <div class="input-box" style="width:250px">
+                                                <div class="input-box">
 													<input style="width:140px" type="text" name="GIATRI[]" value="<%=listMininum[i].GIATRI %>" />
 													<%if(i==0){ %>
                                                         <p>VND</p>
@@ -98,24 +117,25 @@
                                     <% } %>
                                 </tbody>
                             </table>
-                            <div class="Function">
-								<button class="button red" name="action" value="confirm">
-									<img src="/images/save.png">
-									Lưu thay đổi
-								</button>
-
-								<button class="button green" type="button"  onclick="window.location.href='/cai_dat/sua_min'">
-									<img src="/images/refresh.png">
-									Reset
-								</button>
-
-								<button class="button purple" name="action" value="cancel">
-									<img src="/images/close.png">
-									Huỷ thay đổi
-								</button>	
-							</div>
-                        </form>
-					</section>
+						</section>
+                            
+						<div class="button-group">
+							<button id="save" class="function-btn" name="action" value="confirm">
+								<%- include('../public/images/save.svg') %>
+								<label for="save" class="function-label red">Lưu thay đổi</label>
+							</button>
+	
+							<button id="reset" class="function-btn" type="button" onclick="window.location.href='/cai_dat/sua_min'">
+								<%- include('../public/images/refresh.svg') %>
+								<label for="reset" class="function-label green">Reset</label>
+							</button>			
+	
+							<button id="cancel" class="function-btn" name="action" value="cancel">
+								<%- include('../public/images/cancel.svg') %>
+								<label for="cancel" class="function-label">Huỷ thay đổi</label>
+							</button>				
+						</div>
+                    </form>
 				</div>
 			</div>
 		</div>
