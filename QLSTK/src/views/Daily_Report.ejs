@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="/css/function_buttons.css">
         <link rel="stylesheet" href="/css/report_setup.css">
         <link rel="stylesheet" href="/css/daily_report.css">
-        
+        <script src="/js/validator.js"></script>
        
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -145,7 +145,7 @@
                                                         </td>
                                                     <% } else { %>
                                                         <td>
-                                                        <p class="status cancelled">Kỳ hạn <%=listDailyRP[i].KYHAN%> tháng</p>
+                                                        <p class="status cancelled"><%=listDailyRP[i].KYHAN%></p>
                                                         </td>
                                                     <% } %>
                                                     <!-- Convert values to numbers before formatting -->
@@ -379,6 +379,34 @@
                     return buf;
                 }
         </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Thiết lập các biến cho form, input, thông báo lỗi, và nút submit
+                const dateInput = document.getElementById('date');
+                const errorMessageElement = document.getElementById('input-name-message');
+                const submitButton = document.querySelector('.report-submit-button');
+
+                function validateDateInput() {
+                    const dateValue = dateInput.value.trim();
+
+                    // Kiểm tra nếu trường 'NGAY' rỗng
+                    if (dateValue === '') {
+                        errorMessageElement.textContent = 'Vui lòng chọn ngày xem báo cáo';
+                        submitButton.disabled = true;  // Vô hiệu hóa nút submit khi không hợp lệ
+                    } else {
+                        errorMessageElement.textContent = ''; // Xóa thông báo lỗi khi hợp lệ
+                        submitButton.disabled = false;  // Kích hoạt nút submit khi hợp lệ
+                    }
+                }
+
+                // Lắng nghe sự kiện 'input' cho trường 'date' để kiểm tra tính hợp lệ mỗi khi giá trị thay đổi
+                dateInput.addEventListener('input', validateDateInput);
+
+                // Kiểm tra tính hợp lệ khi tải trang lần đầu
+                validateDateInput();
+            });
+        </script>
+
     </body>
 </html>
 

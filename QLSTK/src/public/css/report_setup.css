@@ -48,6 +48,16 @@
     background-color: rgb(101, 64, 250);
 }
 
+.report-submit-button:disabled {
+    font-size: 20px;
+    padding: 0 20px 0 20px;
+    height: 48px;
+    margin: unset;
+    align-self: unset;
+    background-color: #87968c;
+    color: not-allowed;
+}
+
 .Function {
     width: 25%;
     gap: unset;
