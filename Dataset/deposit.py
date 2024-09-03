@@ -11,7 +11,7 @@ def random_deposit_amount(min_amount, max_amount):
     return round(random.uniform(min_amount, max_amount) / 1000) * 1000
 
 def generate_sql_commands(file_path, max_deposits_per_account=3):
-    max_lines = 300  # Limit to the first 300 lines
+    max_lines = 100  # Limit to the first 300 lines
 
     sql_commands = []
     line_count = 0
@@ -36,7 +36,7 @@ def generate_sql_commands(file_path, max_deposits_per_account=3):
                     for _ in range(random.randint(1, max_deposits_per_account)):
                         # Deposit date must be after the account opening date
                         start_date = ngay_mo + timedelta(days=1)
-                        end_date = datetime(2024, 9, 5)  # Last possible deposit date
+                        end_date = datetime(2024, 9, 6)  # Last possible deposit date
                         if start_date > end_date:
                             continue  # Skip if no valid date range for deposit
 

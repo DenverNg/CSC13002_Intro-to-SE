@@ -50,3 +50,8 @@ table th {
 .red {
     color: #ef4f4f;
 }
+
+.table--no-margin {
+    height: unset;
+    max-height: 500px;
+}

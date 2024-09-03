@@ -24,12 +24,12 @@ def generate_withdraw_commands(file_path):
                 ngay_mo = datetime.strptime(match.group(3), '%Y-%m-%d')
                 balance = int(match.group(4))
 
-                # Collect first 300 accounts
-                if len(accounts) < 300:
+                # Collect first 100 accounts
+                if len(accounts) < 100:
                     accounts.append((ma_so, ky_han, ngay_mo, balance))
 
-    # Randomly select 50 unique accounts from the first 300
-    selected_accounts = random.sample(accounts, 70)
+    # Randomly select 30 unique accounts from the first 100
+    selected_accounts = random.sample(accounts, 30)
 
     for ma_so, ky_han, ngay_mo, balance in selected_accounts:
         if ky_han == 'Không kỳ hạn':
