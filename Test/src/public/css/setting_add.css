@@ -1,0 +1,8 @@
+thead th {
+    width: 20%;
+}
+
+.input-box {
+    width: fit-content;
+    align-self: center;
+}

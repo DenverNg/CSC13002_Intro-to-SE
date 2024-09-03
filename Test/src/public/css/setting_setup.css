@@ -36,6 +36,7 @@ table td {
 
 .column-name {
     margin-left: 10px;
+    font-size: unset;
 }
 
 .column-value {
