@@ -246,13 +246,13 @@ const getNumNewBooks = async () => {
 };
 const getEarning_Week_Data = async () => {
   const [results, fields] = await connection.query(
-    "CALL SOTIENGUI_TRONGTUAN()"
+    "CALL SOTIENGUI_TRONGTUAN()", []
   );
   return results[0];
 };
 const getWithdraw_Week_Data = async () => {
   const [results, fields] = await connection.query(
-    "CALL SOTIENRUT_TRONGTUAN()"
+    "CALL SOTIENRUT_TRONGTUAN();", []
   );
   return results[0];
 };

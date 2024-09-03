@@ -455,13 +455,20 @@
     `;
 
 
-				const new_window = window.open();
-				new_window.document.write(html_code);
-				new_window.document.close();
+				// Create an iframe
+				const iframe = document.createElement('iframe');
+				iframe.style.display = 'none'; // Hide the iframe
+
+				document.body.appendChild(iframe); // Add the iframe to the DOM
+
+				const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+				iframeDoc.open();
+				iframeDoc.write(html_code);
+				iframeDoc.close(); // Ensure the document is ready for printing
 
 				setTimeout(() => {
-					new_window.print();
-					new_window.close();
+					iframe.contentWindow.print();
+					document.body.removeChild(iframe); // Remove the iframe after printing
 				}, 400);
 			};
 

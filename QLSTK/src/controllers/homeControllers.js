@@ -361,7 +361,7 @@ const postAddTermDeposit = async (req, res) => {
     const { TENKYHAN, THOIGIANDAOHAN, LAISUAT } = req.body;
     const query =
       "INSERT INTO LOAI_SOTK(MALOAI, KYHAN, LAISUAT,TRANGTHAI)\
-        VALUES (?,?,?,?)";
+        VALUES (?,?,?/100,?)";
     try {
       await connection.query(query, [THOIGIANDAOHAN, TENKYHAN, LAISUAT/100, 1]);
       res.redirect("/cai_dat");

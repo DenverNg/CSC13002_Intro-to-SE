@@ -115,10 +115,25 @@
 									Huỷ thêm
 								</button>
 							</div>
+							<div id="LAISUATTHAT" style="display: none;">
+								<input type="hidden" name="LAISUATTHAT" id="LAISUATTHAT" value = "0">
+							</div>
 						</form>
 					</section>
 				</div>
 			</div>
 		</div>
+		<script>
+			// JavaScript to update the hidden div with LAISUATTHAT value
+			document.getElementById('LAISUAT').addEventListener('input', function () {
+				var laisuat = parseFloat(this.value);
+				if (!isNaN(laisuat)) {
+					var laisuatthat = laisuat / 100;
+					document.getElementById('LAISUATTHAT').value = laisuatthat;
+				} else {
+					document.getElementById('LAISUATTHAT').value = '';
+				}
+			});
+		</script>
     </body>
 </html>

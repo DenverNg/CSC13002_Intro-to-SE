@@ -1,10 +1,10 @@
 {
-  "name": "test",
+  "name": "qlstk",
   "version": "1.0.0",
-  "main": "test.js",
+  "main": "qlstk.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/test.js"
+    "dev": "nodemon ./src/qlstk.js"
   },
   "keywords": [],
   "author": "",

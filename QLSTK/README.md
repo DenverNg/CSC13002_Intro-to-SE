@@ -7,7 +7,7 @@
 **Bước 2:** Pull code về: `git pull origin main`
 
 **Bước 3:** Tạo database MYSQL với docker
-- Vào folder Test/docker chạy câu lệnh: `docker compose -f mysql.yml -p nodejs-sql up -d` 
+- Vào folder QLSTK/docker chạy câu lệnh: `docker compose -f mysql.yml -p nodejs-sql up -d` 
     - `-f`: file name
     - `-p`: project name
     - `-d`: detach, run as background
@@ -27,6 +27,6 @@
 **Bước 5:** Khởi chạy docker
 
 
-**Bước 6:** Vào folder Test chạy câu lệnh: `npm run dev`. Truy cập đường link và trải nghiệm SEBank.
+**Bước 6:** Vào folder QLSTK chạy câu lệnh: `npm run dev`. Truy cập đường link và trải nghiệm SEBank.
 
 **Lưu ý:** Từ những lần chạy sau chỉ cần chạy bước 5 và bước 6
