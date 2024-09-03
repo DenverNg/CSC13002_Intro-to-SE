@@ -8,10 +8,15 @@
         <script src="/js/func.js"></script>
 		<link rel="stylesheet" href="/css/table.css">
         <script src="/js/table.js"></script>
+		<link rel="stylesheet" href="/css/page_setup.css">
+		<link rel="stylesheet" href="/css/transactions.css">
+		<link rel="stylesheet" href="/css/function_buttons.css">
 		<link rel="stylesheet" href="/css/button.css">
+		<link rel="stylesheet" href="/css/setting_setup.css">
+		
         <!-- Linking Google Font Link for Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	</head>
 
 	<body>
@@ -52,86 +57,126 @@
 			</ul>
 			</aside>
 
-			<div class = "main">
+			<div class = "main main--setup">
 				<!-- Thay đổi về loại kỳ hạn -->
-				<div class="content" id="Settings">
-					<div class="table__header">
+				<div class="content content--setup" id="Settings">
+					<div class="table__header" style="padding-top: 0;">
 						<div>
-							<div class="topbar">
+							<div class="topbar topbar--set-padding">
 							Cài đặt
 							</div>
 							<p class="date"><%= currentDate %></p>
 						</div>
 					</div>
-
-					<div class="table_name">
-						Thay đổi về loại kỳ hạn
-					</div>
-					<section class="table__body">
-						<table>
-							<thead>
-								<tr style="pointer-events: none;">
-									<th><img src="/images/card.png"> Tên kỳ hạn </th>
-									<th><img src="/images/time.png"> Thời gian đáo hạn </th>
-									<th><img src="/images/coin.png"> Lãi suất</th>
-								</tr>
-							</thead>
-							<tbody>
-								<% for (let i = 0; i < listTerm.length; i++) { %>
-									<tr>
-										<td><%=listTerm[i].KYHAN %></td>
-										<td><%=listTerm[i].MALOAI %> tháng</td>
-										<td><%=(listTerm[i].LAISUAT*100).toFixed(2) %>%</td>
-									</tr>
-								<% } %>
-							</tbody>
-						</table>
-						<div class="Function">
-							<button class="button red" onclick="window.location.href='/cai_dat/xoa'">
-								<img src="/images/card-delete.png">
-								Xoá loại kỳ hạn
-							</button>
-							<button class="button green" onclick="window.location.href='/cai_dat/them'">
-								<img src="/images/card-add.png">
-								Thêm loại kỳ hạn
-							</button>
-							<button class="button purple" onclick="window.location.href='/cai_dat/sua'">
-								<img src="/images/edit.png">
-								Chỉnh sửa giá trị
-							</button>
+					<div id="table-term" class="table__container">
+						<div class="table_name">
+							Thay đổi về loại kỳ hạn
 						</div>
-					</section>
-					<div class="table_name">
-						Thay đổi về đại lượng tối thiểu
-					</div>
-					<section class="table__body">
-						<table>
-							<thead>
-								<tr style="pointer-events: none;">
-									<th><img src="/images/card.png"> Tên đại lượng </th>
-									<th><img src="/images/star.png"> Giá trị </th>
-								</tr>
-							</thead>
-							<tbody>
-								<% for (let i = 0; i < listMininum.length; i++) { %>
-									<tr>
-										<%if(listMininum[i].TEN == "SOTIENGUI"){ %>
-											<td>Số tiền gửi tối thiểu</td>
-										<% }else if(listMininum[i].TEN == "THOIGIAN"){ %>
-											<td>Thời gian gửi tối thiểu</td>
+						<div class="content-group" style="margin-bottom: 18px;">
+							<section class="table__body table--no-margin">
+								<table>
+									<thead>
+										<tr style="pointer-events: none;">
+											<th>
+												<div class="column">
+													<%- include('../public/images/card-pos.svg') %>
+													<label class="column-name">Tên kỳ hạn</label>
+												</div>
+											</th>
+											<th>
+												<div class="column">
+													<%- include('../public/images/time.svg') %>
+													<label class="column-name">Thời gian đáo hạn</label>
+												</div>
+											</th>
+											<th>
+												<div class="column" style="margin-left: 15px;">
+													<%- include('../public/images/coin.svg') %>
+													<label class="column-name">Lãi suất</label>
+												</div>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% for (let i = 0; i < listTerm.length; i++) { %>
+											<tr>
+												<td><div class="column-value"><%=listTerm[i].KYHAN %></div></td>
+												<td><div class="column-value column-value1"><%=listTerm[i].MALOAI %> tháng</div></td>
+												<td><div class="column-value column-value2"><%=(listTerm[i].LAISUAT*100).toFixed(2) %>%</div></td>
+											</tr>
 										<% } %>
-										<td><%=listMininum[i].GIATRI %></td>
-									</tr>					
-								<% } %>
-							</tbody>
-						</table>
-						<div class="Function" style=" justify-content:flex-end;width:70%">
-							<button class="button purple" onclick="window.location.href='/cai_dat/sua_min'">
-								<img src="/images/edit.png">
-								Chỉnh sửa giá trị
-							</button>
+									</tbody>
+								</table>
+							</section>
+							<div class="button-group">
+								<button id="remove-term" class="function-btn" onclick="window.location.href='/cai_dat/xoa'">
+									<%- include('../public/images/card-remove-setting.svg') %>
+									<label for="remove-term" class="function-label red">Xoá loại kỳ hạn</label>
+								</button>
+		
+								<button id="add-term" class="function-btn" onclick="window.location.href='/cai_dat/them'">
+									<%- include('../public/images/card-add-setting.svg') %>
+									<label for="add-term" class="function-label green">Thêm loại kỳ hạn</label>
+								</button>			
+		
+								<button id="modify-term" class="function-btn" onclick="window.location.href='/cai_dat/sua'">
+									<%- include('../public/images/edit.svg') %>
+									<label for="modify-term" class="function-label purple">Chỉnh sửa giá trị</label>
+								</button>				
+							</div>
 						</div>
-					</section>
+					</div>
+
+					<div id="table-min-value" class="table__container">
+						<div class="table_name">
+							Thay đổi về đại lượng tối thiểu
+						</div>
+						<div class="content-group">
+							<section class="table__body table--no-margin">
+								<table>
+									<thead>
+										<tr style="pointer-events: none;">
+											<th>
+												<div class="column" style="margin-left: 25px;">
+													<%- include('../public/images/card-pos.svg') %>
+													<label class="column-name">Tên đại lượng</label>
+												</div>
+											</th>
+											<th>
+												<div class="column"></div>
+											</th>
+											<th>
+												<div class="column">
+													<%- include('../public/images/time.svg') %>
+													<label class="column-name">Giá trị</label>
+												</div>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% for (let i = 0; i < listMininum.length; i++) { %>
+											<tr>
+												<%if(listMininum[i].TEN == "SOTIENGUI"){ %>
+													<td><div class="column-value">Số tiền gửi tối thiểu</div></td>
+												<% }else if(listMininum[i].TEN == "THOIGIAN"){ %>
+													<td><div class="column-value">Thời gian gửi tối thiểu</div></td>
+												<% } %>
+												<td></td>
+												<td><div class="column-value column-value3"><%=listMininum[i].GIATRI %></div></td>
+											</tr>					
+										<% } %>
+									</tbody>
+								</table>
+							</section>
+
+							<div class="button-group">		
+								<button id="modify-min" class="function-btn" onclick="window.location.href='/cai_dat/sua_min'">
+									<%- include('../public/images/edit.svg') %>
+									<label for="modify-min" class="function-label purple">Chỉnh sửa giá trị</label>
+								</button>				
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
