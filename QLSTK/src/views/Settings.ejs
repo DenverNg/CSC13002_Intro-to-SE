@@ -120,7 +120,12 @@
 										<% }else if(listMininum[i].TEN == "THOIGIAN"){ %>
 											<td>Thời gian gửi tối thiểu</td>
 										<% } %>
-										<td><%=listMininum[i].GIATRI %></td>
+										<%if(listMininum[i].TEN == "SOTIENGUI"){ %>
+											<td><%=listMininum[i].GIATRI %> VNĐ</td>
+										<% }else if(listMininum[i].TEN == "THOIGIAN"){ %>
+											<td><%=listMininum[i].GIATRI %> ngày</td>
+										<% } %>
+										
 									</tr>					
 								<% } %>
 							</tbody>
