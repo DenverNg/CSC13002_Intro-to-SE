@@ -84,7 +84,7 @@ Make sure you have Node.js, Docker and DBeaver to run this project:
   - *User name:* `root`
   - *Password:* `123456`
 
-3. **Install packages**"
+3. **Install packages**:
 Run these command to install packages for this project:
 ```bash
 npm i ejs
@@ -239,6 +239,7 @@ The menu bar expands when the mouse hovers over it and collapses when the mouse 
   <div align="center">
     <img src="images/user_verify.png" alt="User Verify" >
 </div>
+
 - After entering the correct password, the user will be directed to the main settings interface. The settings interface is divided into two tables:
   <div align="center">
     <img src="images/setting.png" alt="Setting" >
