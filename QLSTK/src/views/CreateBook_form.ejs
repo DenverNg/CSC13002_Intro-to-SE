@@ -99,6 +99,7 @@
                 form: '#createbook-form',
                 errorSelector: '.form-group__message',
                 rules: [
+                    Validator.isRequired('#TENKH', 'Vui lòng nhập tên khách hàng'),
                     Validator.isRequired('#MASO', 'Vui lòng nhập mã sổ'),
                     Validator.isRequired('#DIACHI', 'Vui lòng nhập địa chỉ'),
                     Validator.isRequired('#CMND', 'Vui lòng nhập chứng minh nhân dân'),
